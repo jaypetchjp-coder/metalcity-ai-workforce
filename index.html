@@ -3,664 +3,872 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metal City AI Workforce — PlixPlan</title>
+<title>Metal City 89 — PlixPlan AI Proposal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=SUSE:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --mid:#0d1117;--mid2:#161b22;--e:#00f5ff;--g:#ffd60a;--l:#b8f36b;
-  --pk:#ff7bb8;--gr:#8b949e;--grs:#c9d1d9;--wh:#f5f7fb;
+  --bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;
+  --e:#00f5ff;--g:#ffd60a;--l:#b8f36b;--pk:#ff7bb8;
+  --gr:#8b949e;--grs:#c9d1d9;--wh:#f5f7fb;
   --bd:rgba(255,255,255,0.08);--ba:rgba(0,245,255,0.18)
 }
 html{scroll-behavior:smooth}
-body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;background:var(--mid);color:var(--wh);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;background:var(--bg);color:var(--wh);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .gbg{background-image:linear-gradient(rgba(255,255,255,0.03)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03)1px,transparent 1px);background-size:32px 32px}
-.gl{background:rgba(255,255,255,0.04);border:1px solid var(--bd);backdrop-filter:blur(12px)}
-.gls{background:rgba(22,27,34,0.72);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px)}
+.gl{background:rgba(255,255,255,0.04);border:1px solid var(--bd)}
+.gls{background:rgba(22,27,34,0.8);border:1px solid rgba(255,255,255,0.1)}
 .glt{background:linear-gradient(135deg,rgba(0,245,255,0.06),rgba(184,243,107,0.04));border:1px solid var(--ba)}
 .sdiv{height:1px;background:linear-gradient(to right,transparent,var(--bd),transparent)}
 .sw{max-width:1100px;margin:0 auto;padding:0 40px}
-.fu{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.fu{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .fu.vis{opacity:1;transform:none}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,17,23,0.9);border-bottom:1px solid var(--bd);backdrop-filter:blur(16px)}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,17,23,0.95);border-bottom:1px solid var(--bd);backdrop-filter:blur(16px)}
+.nav-top{padding:12px 40px;display:flex;align-items:center;justify-content:space-between}
 .nlogo{font-family:'SUSE',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--e);text-transform:uppercase}
-.nbadge{font-size:10px;font-weight:600;letter-spacing:.1em;background:rgba(0,245,255,0.08);color:var(--e);border:1px solid rgba(0,245,255,0.22);padding:4px 14px;border-radius:20px;text-transform:uppercase}
+.nclient{font-size:11px;color:var(--gr);letter-spacing:.06em}
 
-/* CHAPTER LABEL */
-.ch-label{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.ch-num{font-family:'SUSE',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gr)}
-.ch-line{flex:1;height:1px;background:var(--bd);max-width:48px}
+/* ── TAB BAR ── */
+.tab-bar{display:flex;border-top:1px solid var(--bd);padding:0 40px}
+.tab-btn{padding:11px 24px;font-family:'IBM Plex Sans Thai',sans-serif;font-size:12px;font-weight:500;color:var(--gr);background:none;border:none;cursor:pointer;position:relative;transition:color .2s;letter-spacing:.03em;white-space:nowrap}
+.tab-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--e);opacity:0;transition:opacity .2s}
+.tab-btn.active{color:var(--wh)}
+.tab-btn.active::after{opacity:1}
+.tab-btn:hover{color:var(--grs)}
+.tab-btn[data-tab="1"].active::after{background:var(--e)}
+.tab-btn[data-tab="2"].active::after{background:var(--g)}
+.tab-btn[data-tab="3"].active::after{background:var(--l)}
 
-/* SECTION TITLE SYSTEM */
-.s-eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:14px}
+/* ── TAB PANELS ── */
+.tab-panel{display:none;padding-top:88px} /* nav height */
+.tab-panel.active{display:block}
+
+/* ────────────────────────────────────────
+   SHARED COMPONENTS
+──────────────────────────────────────── */
+.sec{padding:80px 0}
+.sec-sm{padding:56px 0}
+.ch-lbl{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.ch-n{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gr)}
+.ch-line{flex:1;height:1px;background:var(--bd);max-width:40px}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:12px}
 .ec{color:var(--e)}.gc{color:var(--g)}.lc{color:var(--l)}
-.s-title{font-family:'SUSE',sans-serif;font-size:42px;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--wh);margin-bottom:14px}
-.s-title .e{color:var(--e)}.s-title .g{color:var(--g)}.s-title .l{color:var(--l)}
-.s-sub{font-size:15px;color:var(--gr);line-height:1.75;max-width:560px}
+.h1{font-family:'SUSE',sans-serif;font-size:42px;font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.h2{font-family:'SUSE',sans-serif;font-size:32px;font-weight:800;line-height:1.15;letter-spacing:-.015em;margin-bottom:12px}
+.h3{font-family:'SUSE',sans-serif;font-size:20px;font-weight:700;line-height:1.25;margin-bottom:8px}
+.e{color:var(--e)}.g{color:var(--g)}.l{color:var(--l)}
+.body-text{font-size:14px;color:var(--gr);line-height:1.75}
+.lead{font-size:16px;color:var(--grs);line-height:1.75;max-width:600px}
+.badge{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;border-radius:3px;display:inline-block}
+.badge-e{background:rgba(0,245,255,0.1);color:var(--e);border:1px solid rgba(0,245,255,0.2)}
+.badge-g{background:rgba(255,214,10,0.1);color:var(--g);border:1px solid rgba(255,214,10,0.2)}
+.badge-l{background:rgba(184,243,107,0.1);color:var(--l);border:1px solid rgba(184,243,107,0.2)}
+.card{border:1px solid var(--bd);background:rgba(22,27,34,0.5)}
+.card-e{border-color:rgba(0,245,255,0.2);background:rgba(0,245,255,0.04)}
+.card-g{border-color:rgba(255,214,10,0.2);background:rgba(255,214,10,0.04)}
+.card-l{border-color:rgba(184,243,107,0.2);background:rgba(184,243,107,0.04)}
+.top-bar{height:2px;width:100%}
+.top-e{background:var(--e)}.top-g{background:var(--g)}.top-l{background:var(--l)}
+.dot-e{width:5px;height:5px;border-radius:50%;background:var(--e);flex-shrink:0}
+.dot-g{width:5px;height:5px;border-radius:50%;background:var(--g);flex-shrink:0}
+.dot-l{width:5px;height:5px;border-radius:50%;background:var(--l);flex-shrink:0}
+.check-e{color:var(--e);font-weight:700;flex-shrink:0}
+.check-g{color:var(--g);font-weight:700;flex-shrink:0}
+.check-l{color:var(--l);font-weight:700;flex-shrink:0}
+.row{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--grs);padding:3px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
 
-/* ══ HERO / COVER ══ */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-10%;left:-5%;width:55%;height:70%;background:radial-gradient(circle,rgba(0,245,255,0.07),transparent 65%);filter:blur(60px);pointer-events:none;z-index:0}
-.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center}
-.hero-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--e);display:flex;align-items:center;gap:10px;margin-bottom:20px}
-.hero-tag::before{content:'';width:24px;height:1px;background:var(--e)}
-.hero-title{font-family:'SUSE',sans-serif;font-size:62px;font-weight:800;line-height:1.0;letter-spacing:-.025em;margin-bottom:10px}
-.hero-title .e{color:var(--e);display:block}
-.hero-title .dim{font-size:17px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,0.35);display:block;margin-top:10px;font-family:'IBM Plex Sans Thai',sans-serif}
-.hero-desc{font-size:15px;color:var(--grs);line-height:1.8;max-width:500px;margin:22px 0 36px}
-.hero-desc strong{color:var(--e)}
-.btn-e{font-family:'SUSE',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;background:var(--e);color:var(--mid);padding:12px 28px;border:none;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;display:inline-block}
-.btn-e:hover{background:#3ff8ff}
+/* ────────────────────────────────────────
+   TAB 1 — AI TRANSFORMATION FOR STEEL RETAIL
+──────────────────────────────────────── */
 
-/* hero right — definition box */
-.def-box{padding:32px 28px;position:relative;overflow:hidden}
-.def-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--e),var(--l))}
-.def-not{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:16px}
-.def-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}
-.def-row:last-child{border-bottom:none}
-.def-x{font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through}
-.def-yes{margin-top:20px;padding:16px 18px;background:rgba(0,245,255,0.06);border-left:2px solid var(--e)}
-.def-yes-lbl{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:6px}
-.def-yes-txt{font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh);line-height:1.4}
+/* Hero T1 */
+.t1-hero{min-height:88vh;display:flex;align-items:center;padding:60px 0;position:relative;overflow:hidden}
+.t1-hero::before{content:'';position:absolute;top:-10%;left:-5%;width:55%;height:70%;background:radial-gradient(circle,rgba(0,245,255,0.07),transparent 65%);filter:blur(60px);pointer-events:none}
+.t1-hero-inner{display:grid;grid-template-columns:1fr 320px;gap:60px;align-items:center;position:relative;z-index:1}
+.t1-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--e);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.t1-tag::before{content:'';width:24px;height:1px;background:var(--e)}
+.t1-title{font-family:'SUSE',sans-serif;font-size:58px;font-weight:800;line-height:1.0;letter-spacing:-.025em;margin-bottom:12px}
+.t1-sub{font-size:14px;color:var(--grs);line-height:1.75;max-width:480px;margin-bottom:28px}
+.t1-right{display:flex;flex-direction:column;gap:12px}
+.t1-kpi{padding:20px 22px;position:relative;overflow:hidden}
+.t1-kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.t1-kpi.c1::before{background:var(--e)}
+.t1-kpi.c2::before{background:var(--g)}
+.t1-kpi.c3::before{background:var(--l)}
+.t1-kpi-n{font-family:'SUSE',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.c1 .t1-kpi-n{color:var(--e)}.c2 .t1-kpi-n{color:var(--g)}.c3 .t1-kpi-n{color:var(--l)}
+.t1-kpi-txt{font-size:13px;color:var(--grs)}
 
-/* ══ PROBLEM SECTION ══ */
-.prob-s{padding:100px 0}
-.prob-intro{font-size:16px;color:var(--grs);line-height:1.8;max-width:640px;margin-bottom:52px;padding-left:20px;border-left:2px solid var(--e)}
-.prob-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
-.prob-card{padding:40px 32px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:border-color .25s}
-.prob-card:not(:first-child){border-left:none}
-.prob-card:hover{border-color:rgba(0,245,255,0.3)}
-.prob-card.g:hover{border-color:rgba(255,214,10,0.3)}
-.prob-card.l:hover{border-color:rgba(184,243,107,0.3)}
-.prob-top{position:absolute;top:0;left:0;right:0;height:3px}
-.prob-card .prob-top{background:var(--e)}
-.prob-card.g .prob-top{background:var(--g)}
-.prob-card.l .prob-top{background:var(--l)}
-.prob-n{font-family:'SUSE',sans-serif;font-size:60px;font-weight:800;line-height:1;opacity:.15;margin-bottom:16px}
-.prob-card .prob-n{color:var(--e)}
-.prob-card.g .prob-n{color:var(--g)}
-.prob-card.l .prob-n{color:var(--l)}
-.prob-headline{font-family:'SUSE',sans-serif;font-size:20px;font-weight:800;color:var(--wh);margin-bottom:14px;line-height:1.25}
-.prob-card .prob-headline{}
-.prob-card.g .prob-headline{color:var(--g)}
-.prob-card.l .prob-headline{color:var(--l)}
-.prob-body{font-size:13.5px;color:var(--gr);line-height:1.7;margin-bottom:20px}
-.prob-example{padding:14px 16px;font-size:12.5px;color:var(--grs);line-height:1.65;font-style:italic}
-.prob-card .prob-example{background:rgba(0,245,255,0.04);border-left:2px solid rgba(0,245,255,0.3)}
-.prob-card.g .prob-example{background:rgba(255,214,10,0.04);border-left:2px solid rgba(255,214,10,0.3)}
-.prob-card.l .prob-example{background:rgba(184,243,107,0.04);border-left:2px solid rgba(184,243,107,0.3)}
+/* T1 Problem cards */
+.t1-prob{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:32px}
+.t1-pc{padding:22px 18px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:border-color .2s}
+.t1-pc:hover{border-color:var(--ba)}
+.t1-pc-top{height:2px;background:var(--e);position:absolute;top:0;left:0;right:0}
+.t1-pc-n{font-family:'SUSE',sans-serif;font-size:36px;font-weight:800;color:var(--e);opacity:.2;line-height:1;margin-bottom:10px}
+.t1-pc-name{font-family:'SUSE',sans-serif;font-size:14px;font-weight:700;color:var(--wh);margin-bottom:6px}
+.t1-pc-desc{font-size:12px;color:var(--gr);line-height:1.6}
 
-/* ══ BIG IDEA ══ */
-.idea-s{padding:100px 0}
-.idea-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.idea-left{}
-.idea-quote{font-family:'SUSE',sans-serif;font-size:26px;font-weight:800;color:var(--wh);line-height:1.4;margin-bottom:24px}
-.idea-quote span{color:var(--e)}
-.idea-body{font-size:14px;color:var(--gr);line-height:1.8}
-.idea-right{display:flex;flex-direction:column;gap:14px}
-.idea-card{padding:20px 22px;border:1px solid var(--bd);position:relative;overflow:hidden;display:flex;align-items:flex-start;gap:16px}
-.idea-card::before{content:'';position:absolute;left:0;top:0;width:3px;height:100%}
-.idea-card.c1::before{background:var(--e)}
-.idea-card.c2::before{background:var(--g)}
-.idea-card.c3::before{background:var(--l)}
-.idea-icon{font-size:22px;flex-shrink:0;margin-top:2px}
-.idea-txt-head{font-family:'SUSE',sans-serif;font-size:15px;font-weight:700;color:var(--wh);margin-bottom:4px}
-.idea-txt-body{font-size:12.5px;color:var(--gr);line-height:1.6}
+/* T1 AI Model */
+.t1-model{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.t1-agent{padding:22px 18px;border:1px solid var(--bd);position:relative;overflow:hidden}
+.t1-agent::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--e)}
+.t1-agent.g::before{background:var(--g)}
+.t1-agent.l::before{background:var(--l)}
+.t1-agent.pk::before{background:var(--pk)}
+.t1-agent.gr::before{background:var(--gr)}
+.t1-agent.wh::before{background:var(--grs)}
+.t1-agent-name{font-family:'SUSE',sans-serif;font-size:15px;font-weight:800;color:var(--wh);margin-bottom:4px}
+.t1-agent-role{font-size:11px;color:var(--gr);margin-bottom:10px}
+.t1-agent-items{display:flex;flex-direction:column;gap:4px}
+.t1-agent-item{font-size:11.5px;color:var(--grs)}
 
-/* ══ AGENTS ══ */
-.agents-s{padding:80px 0}
-.ag-card{display:grid;grid-template-columns:240px 1fr 340px;border:1px solid var(--bd);overflow:hidden;margin-bottom:24px;transition:border-color .2s}
-.ag-card:hover{border-color:rgba(0,245,255,0.25)}
-.ag-card.gd:hover{border-color:rgba(255,214,10,0.25)}
-.ag-card.lm:hover{border-color:rgba(184,243,107,0.25)}
-.ag-l{padding:36px 28px;display:flex;flex-direction:column;justify-content:space-between}
-.ag-badge{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;border-radius:3px;display:inline-block;margin-bottom:16px}
-.ag-card .ag-badge{background:rgba(0,245,255,0.1);color:var(--e);border:1px solid rgba(0,245,255,0.2)}
-.ag-card.gd .ag-badge{background:rgba(255,214,10,0.1);color:var(--g);border:1px solid rgba(255,214,10,0.2)}
-.ag-card.lm .ag-badge{background:rgba(184,243,107,0.1);color:var(--l);border:1px solid rgba(184,243,107,0.2)}
-.ag-name{font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);line-height:1.2;margin-bottom:5px}
-.ag-role{font-size:12px;color:var(--gr);font-style:italic;margin-bottom:24px}
-.ag-rl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-.ag-card .ag-rl{color:var(--e)}.ag-card.gd .ag-rl{color:var(--g)}.ag-card.lm .ag-rl{color:var(--l)}
-.ag-result{display:flex;gap:8px;font-size:12.5px;color:var(--grs);padding:3px 0;align-items:flex-start}
-.ag-dot{width:4px;height:4px;border-radius:50%;flex-shrink:0;margin-top:8px}
-.ag-card .ag-dot{background:var(--e)}.ag-card.gd .ag-dot{background:var(--g)}.ag-card.lm .ag-dot{background:var(--l)}
-.ag-m{padding:36px 28px;border-left:1px solid var(--bd)}
-.ag-cl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
-.ag-card .ag-cl{color:var(--e)}.ag-card.gd .ag-cl{color:var(--g)}.ag-card.lm .ag-cl{color:var(--l)}
-.ag-caps{display:flex;flex-direction:column;gap:8px}
-.ag-cap{padding:9px 13px;border:1px solid var(--bd);font-size:13px;color:var(--grs)}
-.ag-cap.hl{font-weight:600}
-.ag-card .ag-cap.hl{color:var(--e);background:rgba(0,245,255,0.04);border-color:rgba(0,245,255,0.18)}
-.ag-card.gd .ag-cap.hl{color:var(--g);background:rgba(255,214,10,0.04);border-color:rgba(255,214,10,0.18)}
-.ag-card.lm .ag-cap.hl{color:var(--l);background:rgba(184,243,107,0.04);border-color:rgba(184,243,107,0.18)}
-.ag-r{padding:20px 18px;border-left:1px solid var(--bd);background:rgba(0,0,0,0.2)}
-.mk-lbl{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-.ag-card .mk-lbl{color:var(--e)}.ag-card.gd .mk-lbl{color:var(--g)}.ag-card.lm .mk-lbl{color:var(--l)}
+/* T1 Timeline */
+.t1-timeline{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+.t1-month{border:1px solid var(--bd);overflow:hidden}
+.t1-month-head{padding:16px 18px;border-bottom:1px solid var(--bd)}
+.t1-month-tag{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.t1-month-name{font-family:'SUSE',sans-serif;font-size:17px;font-weight:800}
+.t1-month-sub{font-size:11px;color:var(--gr);font-style:italic;margin-top:2px}
+.t1-month-body{padding:16px 18px;display:flex;flex-direction:column;gap:6px}
 
-/* MOCKUP COMPONENTS */
-.mk-device{background:var(--mid2);border:1px solid var(--bd);border-radius:8px;overflow:hidden}
-.mk-bar{padding:9px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd)}
-.mk-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
-.mk-nm{font-size:11.5px;font-weight:600;color:var(--wh)}
-.mk-st{font-size:10px;color:var(--gr)}
-.mk-online{width:6px;height:6px;border-radius:50%;background:#1a7f37;margin-left:auto}
-.mk-body{padding:12px;display:flex;flex-direction:column;gap:7px;min-height:200px}
-.msg{max-width:86%;padding:8px 12px;border-radius:7px;font-size:11.5px;line-height:1.5}
-.msg.u{align-self:flex-end;background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.18);color:var(--grs)}
-.msg.u.g{background:rgba(255,214,10,0.08);border-color:rgba(255,214,10,0.18)}
-.msg.u.l{background:rgba(184,243,107,0.08);border-color:rgba(184,243,107,0.18)}
+/* T1 Metrics */
+.t1-metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.t1-metric{padding:18px 16px;border:1px solid var(--bd);position:relative;overflow:hidden}
+.t1-metric::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--e)}
+.t1-metric-name{font-family:'SUSE',sans-serif;font-size:14px;font-weight:700;color:var(--wh);margin-bottom:8px}
+.t1-metric-items{display:flex;flex-direction:column;gap:4px}
+.t1-metric-item{font-size:11.5px;color:var(--gr)}
+
+/* ────────────────────────────────────────
+   TAB 2 — COMMERCIAL PRICING PROPOSAL
+──────────────────────────────────────── */
+.t2-hero{min-height:88vh;display:flex;align-items:center;padding:60px 0;position:relative;overflow:hidden}
+.t2-hero::before{content:'';position:absolute;top:-10%;right:-5%;width:55%;height:70%;background:radial-gradient(circle,rgba(255,214,10,0.06),transparent 65%);filter:blur(60px);pointer-events:none}
+.t2-hero-inner{display:grid;grid-template-columns:1fr 340px;gap:60px;align-items:center;position:relative;z-index:1}
+
+/* Pricing cards */
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px}
+.pkg{border:1px solid var(--bd);overflow:hidden;transition:transform .2s,border-color .2s}
+.pkg:hover{transform:translateY(-3px)}
+.pkg.rec{border:2px solid var(--g)}
+.pkg-rec-bar{background:var(--g);color:var(--bg);text-align:center;padding:5px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.pkg-head{padding:22px 20px 14px;border-bottom:1px solid var(--bd)}
+.pkg-tier{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.pkg.s .pkg-tier{color:var(--e)}.pkg.g .pkg-tier,.pkg.rec .pkg-tier{color:var(--g)}.pkg.t .pkg-tier{color:var(--l)}
+.pkg-name{font-family:'SUSE',sans-serif;font-size:19px;font-weight:800;color:var(--wh);margin-bottom:6px;line-height:1.2}
+.pkg-tag{font-size:11px;color:var(--gr);font-style:italic}
+.pkg-price-area{padding:18px 20px;border-bottom:1px solid var(--bd)}
+.pkg-price{font-family:'SUSE',sans-serif;font-size:32px;font-weight:800;line-height:1}
+.pkg.s .pkg-price{color:var(--e)}.pkg.g .pkg-price,.pkg.rec .pkg-price{color:var(--g)}.pkg.t .pkg-price{color:var(--l)}
+.pkg-unit{font-size:12px;color:var(--gr);margin-top:3px}
+.pkg-retainer{font-size:11px;color:var(--gr);margin-top:6px;padding-top:6px;border-top:1px solid var(--bd)}
+.pkg-body{padding:18px 20px;display:flex;flex-direction:column;gap:7px}
+
+/* Scope */
+.scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bd);overflow:hidden}
+.scope-col{padding:28px 28px}
+.scope-col:first-child{border-right:1px solid var(--bd)}
+.scope-title{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+.scope-col:first-child .scope-title{color:var(--e)}
+.scope-col:last-child .scope-title{color:var(--gr)}
+
+/* Timeline T2 */
+.t2-timeline{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
+
+/* Payment */
+.pay-table{border:1px solid var(--bd);overflow:hidden}
+.pay-header{display:grid;grid-template-columns:1fr 80px 140px 1fr;padding:12px 20px;background:rgba(255,255,255,0.03);border-bottom:1px solid var(--bd)}
+.pay-col-hd{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr)}
+.pay-row{display:grid;grid-template-columns:1fr 80px 140px 1fr;padding:16px 20px;border-bottom:1px solid var(--bd);align-items:center}
+.pay-row:last-child{border-bottom:none}
+.pay-milestone{font-size:13px;font-weight:600;color:var(--wh)}
+.pay-pct{font-family:'SUSE',sans-serif;font-size:16px;font-weight:800;color:var(--g)}
+.pay-amount{font-family:'SUSE',sans-serif;font-size:18px;font-weight:800;color:var(--wh)}
+.pay-trigger{font-size:12px;color:var(--gr)}
+
+/* Addons */
+.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.addon-item{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border:1px solid var(--bd)}
+.addon-name{font-size:13px;color:var(--grs)}
+.addon-price{font-size:12px;color:var(--g);font-weight:600;text-align:right;white-space:nowrap;padding-left:12px}
+
+/* Closing offer */
+.offer-box{padding:40px;text-align:center;position:relative;overflow:hidden}
+.offer-box::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(255,214,10,0.1),transparent 65%);filter:blur(40px);pointer-events:none}
+
+/* ────────────────────────────────────────
+   TAB 3 — AI WORKFORCE
+──────────────────────────────────────── */
+.t3-hero{min-height:88vh;display:flex;align-items:center;padding:60px 0;position:relative;overflow:hidden}
+.t3-hero::before{content:'';position:absolute;top:-10%;left:-5%;width:55%;height:70%;background:radial-gradient(circle,rgba(184,243,107,0.06),transparent 65%);filter:blur(60px);pointer-events:none}
+.t3-hero-inner{display:grid;grid-template-columns:1fr 300px;gap:60px;align-items:center;position:relative;z-index:1}
+
+/* Problem cards T3 */
+.t3-prob{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.t3-pc{padding:36px 28px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:border-color .2s}
+.t3-pc:not(:first-child){border-left:none}
+.t3-pc-top{height:3px;position:absolute;top:0;left:0;right:0}
+.t3-pc.c1 .t3-pc-top{background:var(--e)}
+.t3-pc.c2 .t3-pc-top{background:var(--g)}
+.t3-pc.c3 .t3-pc-top{background:var(--l)}
+.t3-pc-n{font-family:'SUSE',sans-serif;font-size:56px;font-weight:800;line-height:1;opacity:.18;margin-bottom:14px}
+.t3-pc.c1 .t3-pc-n{color:var(--e)}.t3-pc.c2 .t3-pc-n{color:var(--g)}.t3-pc.c3 .t3-pc-n{color:var(--l)}
+.t3-pc.c1 .t3-headline{color:var(--wh)}.t3-pc.c2 .t3-headline{color:var(--g)}.t3-pc.c3 .t3-headline{color:var(--l)}
+.t3-headline{font-family:'SUSE',sans-serif;font-size:20px;font-weight:800;margin-bottom:12px;line-height:1.25}
+.t3-body{font-size:13.5px;color:var(--gr);line-height:1.7;margin-bottom:16px}
+.t3-quote{padding:12px 14px;font-size:12px;color:var(--grs);line-height:1.6;font-style:italic}
+.t3-pc.c1 .t3-quote{background:rgba(0,245,255,0.04);border-left:2px solid rgba(0,245,255,0.3)}
+.t3-pc.c2 .t3-quote{background:rgba(255,214,10,0.04);border-left:2px solid rgba(255,214,10,0.3)}
+.t3-pc.c3 .t3-quote{background:rgba(184,243,107,0.04);border-left:2px solid rgba(184,243,107,0.3)}
+
+/* Agents T3 */
+.t3-ag{display:grid;grid-template-columns:220px 1fr 320px;border:1px solid var(--bd);overflow:hidden;margin-bottom:20px;transition:border-color .2s}
+.t3-ag:hover{border-color:rgba(0,245,255,0.22)}.t3-ag.gd:hover{border-color:rgba(255,214,10,0.22)}.t3-ag.lm:hover{border-color:rgba(184,243,107,0.22)}
+.t3-al{padding:30px 24px;display:flex;flex-direction:column;justify-content:space-between}
+.t3-am{padding:30px 24px;border-left:1px solid var(--bd)}
+.t3-ar{padding:18px 16px;border-left:1px solid var(--bd);background:rgba(0,0,0,0.2)}
+
+/* Mockup */
+.mk{background:var(--bg2);border:1px solid var(--bd);border-radius:7px;overflow:hidden}
+.mk-bar{padding:8px 12px;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--bd)}
+.mk-av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+.mk-nm{font-size:11px;font-weight:600;color:var(--wh)}
+.mk-st{font-size:9.5px;color:var(--gr)}
+.mk-on{width:5px;height:5px;border-radius:50%;background:#1a7f37;margin-left:auto}
+.mk-body{padding:10px;display:flex;flex-direction:column;gap:6px;min-height:180px}
+.msg{max-width:88%;padding:7px 11px;border-radius:6px;font-size:11px;line-height:1.5}
+.msg.u{align-self:flex-end;background:rgba(0,245,255,0.09);border:1px solid rgba(0,245,255,0.16);color:var(--grs)}
+.msg.u.g{background:rgba(255,214,10,0.07);border-color:rgba(255,214,10,0.16)}
+.msg.u.l{background:rgba(184,243,107,0.07);border-color:rgba(184,243,107,0.16)}
 .msg.ai{align-self:flex-start;background:rgba(22,27,34,0.95);border:1px solid var(--bd);color:var(--grs)}
-.msg-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.msg.ai .msg-lbl{color:var(--e)}
-.msg.ai.gd .msg-lbl{color:var(--g)}
-.msg.ai.lm .msg-lbl{color:var(--l)}
-.msg-ref{font-size:10px;color:var(--gr);margin-top:5px;padding-top:5px;border-top:1px solid var(--bd)}
-.mk-inp-row{padding:8px 12px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:8px}
-.mk-inp{flex:1;background:rgba(0,0,0,0.3);border:1px solid var(--bd);border-radius:4px;padding:6px 10px;font-size:10.5px;color:var(--gr);font-family:inherit}
-.mk-send{width:28px;height:28px;border:none;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px}
-.ag-card .mk-send{background:var(--e);color:var(--mid)}
-.ag-card.gd .mk-send{background:var(--g);color:var(--mid)}
-.ag-card.lm .mk-send{background:var(--l);color:var(--mid)}
+.msg-lbl{font-size:8.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.t3-ag .msg-lbl{color:var(--e)}.t3-ag.gd .msg-lbl{color:var(--g)}.t3-ag.lm .msg-lbl{color:var(--l)}
+.msg-ref{font-size:9.5px;color:var(--gr);margin-top:4px;padding-top:4px;border-top:1px solid var(--bd)}
+.mk-inp-row{padding:7px 10px;border-top:1px solid var(--bd);display:flex;gap:7px}
+.mk-inp{flex:1;background:rgba(0,0,0,0.3);border:1px solid var(--bd);border-radius:3px;padding:5px 9px;font-size:10px;color:var(--gr);font-family:inherit}
+.mk-send{width:26px;height:26px;border:none;border-radius:3px;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.t3-ag .mk-send{background:var(--e);color:var(--bg)}.t3-ag.gd .mk-send{background:var(--g);color:var(--bg)}.t3-ag.lm .mk-send{background:var(--l);color:var(--bg)}
 /* LINE */
-.ln-top{background:#075e54;padding:9px 14px;display:flex;align-items:center;gap:8px}
-.ln-av{width:26px;height:26px;border-radius:50%;background:#06c755;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
-.ln-nm{font-size:11.5px;font-weight:600;color:#fff}
-.ln-st{font-size:10px;color:rgba(255,255,255,0.65)}
-.ln-body{background:#e5ddd5;padding:10px;display:flex;flex-direction:column;gap:6px;min-height:200px}
-.lmsg{max-width:82%;padding:7px 11px;border-radius:6px;font-size:11px;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
-.lmsg.u{align-self:flex-end;background:#dcf8c6;color:#222}
-.lmsg.ai{align-self:flex-start;background:#fff;color:#222}
-.ln-lbl{font-size:9px;font-weight:700;color:#06c755;text-transform:uppercase;margin-bottom:2px}
-.ln-doc{background:#075e54;color:#fff;padding:6px 10px;border-radius:5px;font-size:10px;margin-top:4px;display:flex;align-items:flex-start;gap:6px}
-.ln-inp-bar{background:#f0f0f0;padding:7px 10px;display:flex;align-items:center;gap:8px}
-.ln-inp{flex:1;background:#fff;border:none;border-radius:20px;padding:5px 12px;font-size:10.5px;color:#333;font-family:inherit}
-.ln-snd{width:27px;height:27px;background:#06c755;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:11px}
-/* DASHBOARD */
-.db-bar{padding:9px 14px;background:var(--mid2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px}
-.db-icon{width:24px;height:24px;border-radius:5px;background:rgba(184,243,107,0.12);border:1px solid rgba(184,243,107,0.25);display:flex;align-items:center;justify-content:center;font-size:11px}
-.db-title{font-size:11.5px;font-weight:700;color:var(--wh)}
-.db-body{padding:10px;display:flex;flex-direction:column;gap:6px}
-.db-q{align-self:flex-end;background:rgba(184,243,107,0.08);border:1px solid rgba(184,243,107,0.18);color:var(--grs);padding:7px 11px;border-radius:6px;font-size:11px;max-width:88%}
-.db-ans{align-self:flex-start;background:rgba(22,27,34,0.95);border:1px solid var(--bd);padding:10px 12px;border-radius:6px;font-size:11px;max-width:96%;line-height:1.55;color:var(--grs)}
-.db-kpi{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
-.db-k{padding:6px 8px;background:rgba(184,243,107,0.06);border:1px solid rgba(184,243,107,0.12);border-radius:4px}
-.db-kl{font-size:8.5px;color:var(--gr);text-transform:uppercase;letter-spacing:.06em}
-.db-kv{font-family:'SUSE',sans-serif;font-size:15px;font-weight:800;color:var(--l)}
+.ln-top{background:#075e54;padding:8px 12px;display:flex;align-items:center;gap:7px}
+.ln-av{width:24px;height:24px;border-radius:50%;background:#06c755;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff}
+.ln-nm{font-size:11px;font-weight:600;color:#fff}
+.ln-st{font-size:9.5px;color:rgba(255,255,255,.65)}
+.ln-body{background:#e5ddd5;padding:10px;display:flex;flex-direction:column;gap:5px;min-height:180px}
+.lm{max-width:84%;padding:6px 10px;border-radius:5px;font-size:11px;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.lm.u{align-self:flex-end;background:#dcf8c6;color:#222}
+.lm.ai{align-self:flex-start;background:#fff;color:#222}
+.ln-lbl{font-size:8.5px;font-weight:700;color:#06c755;text-transform:uppercase;margin-bottom:2px}
+.ln-doc{background:#075e54;color:#fff;padding:5px 9px;border-radius:4px;font-size:10px;margin-top:3px}
+.ln-inp-bar{background:#f0f0f0;padding:6px 9px;display:flex;gap:7px}
+.ln-inp{flex:1;background:#fff;border:none;border-radius:18px;padding:5px 11px;font-size:10px;color:#333;font-family:inherit}
+.ln-snd{width:25px;height:25px;background:#06c755;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:10px}
+/* DB */
+.db-bar{padding:8px 12px;background:var(--bg2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:7px}
+.db-icon{width:22px;height:22px;border-radius:4px;background:rgba(184,243,107,0.1);border:1px solid rgba(184,243,107,0.22);display:flex;align-items:center;justify-content:center;font-size:10px}
+.db-title{font-size:11px;font-weight:700;color:var(--wh)}
+.db-body{padding:9px;display:flex;flex-direction:column;gap:5px}
+.db-q{align-self:flex-end;background:rgba(184,243,107,0.07);border:1px solid rgba(184,243,107,0.16);color:var(--grs);padding:6px 10px;border-radius:5px;font-size:11px;max-width:90%}
+.db-ans{align-self:flex-start;background:rgba(22,27,34,0.95);border:1px solid var(--bd);padding:9px 11px;border-radius:5px;font-size:11px;max-width:97%;line-height:1.5;color:var(--grs)}
+.db-kpi{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:5px}
+.db-k{padding:5px 7px;background:rgba(184,243,107,0.05);border:1px solid rgba(184,243,107,0.1);border-radius:3px}
+.db-kl{font-size:8px;color:var(--gr);text-transform:uppercase;letter-spacing:.06em}
+.db-kv{font-family:'SUSE',sans-serif;font-size:13px;font-weight:800;color:var(--l)}
 
-/* ══ HOW WE WORK ══ */
-.how-s{padding:100px 0}
-.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+/* How T3 */
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
 .how-steps{display:flex;flex-direction:column;gap:0}
-.how-step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--bd);position:relative}
+.how-step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--bd)}
 .how-step:last-child{border-bottom:none}
-.how-step-n{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'SUSE',sans-serif;font-size:14px;font-weight:800;flex-shrink:0;border:1px solid}
-.s1 .how-step-n{background:rgba(0,245,255,0.08);border-color:rgba(0,245,255,0.25);color:var(--e)}
-.s2 .how-step-n{background:rgba(255,214,10,0.08);border-color:rgba(255,214,10,0.25);color:var(--g)}
-.s3 .how-step-n{background:rgba(184,243,107,0.08);border-color:rgba(184,243,107,0.25);color:var(--l)}
-.how-step-head{font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh);margin-bottom:6px}
-.how-step-body{font-size:13px;color:var(--gr);line-height:1.65}
-.how-right{padding:36px 32px}
-.how-why-head{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:18px}
-.how-quote{font-family:'SUSE',sans-serif;font-size:18px;font-weight:700;color:var(--wh);line-height:1.5;margin-bottom:20px}
-.how-quote span{color:var(--e)}
-.how-body{font-size:13.5px;color:var(--gr);line-height:1.75}
-.disc-box{margin-top:28px;padding:20px 22px;border:1px solid rgba(0,245,255,0.2);background:rgba(0,245,255,0.04)}
-.disc-tag{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:8px}
-.disc-name{font-family:'SUSE',sans-serif;font-size:18px;font-weight:800;color:var(--wh);margin-bottom:6px}
-.disc-body{font-size:12.5px;color:var(--gr);line-height:1.65}
-.disc-items{display:flex;flex-direction:column;gap:6px;margin-top:14px}
-.disc-item{font-size:12.5px;color:var(--grs);display:flex;gap:8px;align-items:flex-start}
-.disc-dot{color:var(--e);flex-shrink:0}
+.hs-n{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'SUSE',sans-serif;font-size:13px;font-weight:800;flex-shrink:0;border:1px solid}
+.hs1 .hs-n{background:rgba(0,245,255,0.07);border-color:rgba(0,245,255,0.25);color:var(--e)}
+.hs2 .hs-n{background:rgba(255,214,10,0.07);border-color:rgba(255,214,10,0.25);color:var(--g)}
+.hs3 .hs-n{background:rgba(184,243,107,0.07);border-color:rgba(184,243,107,0.25);color:var(--l)}
+.hs-head{font-family:'SUSE',sans-serif;font-size:15px;font-weight:700;color:var(--wh);margin-bottom:5px}
+.hs-body{font-size:13px;color:var(--gr);line-height:1.65}
 
-/* ══ NEXT STEP ══ */
-.next-s{padding:120px 0;text-align:center;position:relative;overflow:hidden}
-.next-s::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,245,255,0.09),transparent 65%);filter:blur(50px);pointer-events:none}
-.next-title{font-family:'SUSE',sans-serif;font-size:56px;font-weight:800;line-height:1.05;letter-spacing:-.025em;margin-bottom:16px}
-.next-title span{color:var(--e)}
-.next-sub{font-size:16px;color:var(--grs);max-width:440px;margin:0 auto 48px;line-height:1.75}
-.next-box{display:inline-block;padding:32px 40px;border:1px solid rgba(0,245,255,0.2);background:rgba(0,245,255,0.04);margin-bottom:36px;text-align:left;max-width:480px;width:100%}
-.next-box-tag{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--e);margin-bottom:12px}
-.next-box-name{font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);margin-bottom:10px}
-.next-box-body{font-size:13px;color:var(--gr);line-height:1.7;margin-bottom:18px}
-.next-items{display:flex;flex-direction:column;gap:8px}
-.next-item{display:flex;gap:10px;font-size:13px;color:var(--grs);align-items:flex-start}
-.next-item-dot{color:var(--e);flex-shrink:0;font-weight:700}
+/* Next step T3 */
+.next-s{padding:100px 0;text-align:center;position:relative;overflow:hidden}
+.next-s::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(184,243,107,0.07),transparent 65%);filter:blur(50px);pointer-events:none}
 
 /* FOOTER */
-footer{border-top:1px solid var(--bd);padding:22px 40px;display:flex;align-items:center;justify-content:space-between}
-.flo{font-family:'SUSE',sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;color:var(--e);text-transform:uppercase}
-.fcp{font-size:11px;color:var(--gr);letter-spacing:.05em}
+footer{border-top:1px solid var(--bd);padding:20px 40px;display:flex;align-items:center;justify-content:space-between}
+.flo{font-family:'SUSE',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--e);text-transform:uppercase}
+.fcp{font-size:11px;color:var(--gr);letter-spacing:.04em}
 
 @media(max-width:768px){
-  nav{padding:12px 20px}
-  .hero{padding:100px 20px 60px}
-  .hero-inner{grid-template-columns:1fr;gap:36px}
-  .hero-title{font-size:42px}
-  .sw{padding:0 20px}
-  .prob-grid,.idea-grid,.how-grid{grid-template-columns:1fr}
-  .prob-card:not(:first-child){border-left:1px solid var(--bd);border-top:none}
-  .ag-card{grid-template-columns:1fr}
-  .ag-r,.ag-m{border-left:none;border-top:1px solid var(--bd)}
-  .s-title{font-size:30px}
-  .next-title{font-size:38px}
-  footer{flex-direction:column;gap:10px;text-align:center}
+  nav .nav-top{padding:10px 16px}
+  .tab-bar{padding:0 16px;overflow-x:auto}
+  .tab-btn{padding:10px 16px;font-size:11px}
+  .tab-panel{padding-top:82px}
+  .sw{padding:0 16px}
+  .t1-hero-inner,.t2-hero-inner,.t3-hero-inner,.how-grid,.grid2,.grid3{grid-template-columns:1fr}
+  .t1-prob,.t1-model,.t1-timeline,.t1-metrics,.t2-timeline,.t3-prob,.pkg-grid,.addon-grid{grid-template-columns:1fr}
+  .t3-ag{grid-template-columns:1fr}
+  .t3-am,.t3-ar{border-left:none;border-top:1px solid var(--bd)}
+  .t3-pc:not(:first-child){border-left:1px solid var(--bd);border-top:none}
+  .scope-grid{grid-template-columns:1fr}
+  .scope-col:first-child{border-right:none;border-bottom:1px solid var(--bd)}
+  .t1-title,.h1{font-size:34px}
+  footer{flex-direction:column;gap:8px;text-align:center}
 }
 </style>
 </head>
 <body>
 
+<!-- ═══ NAV + TAB BAR ═══ -->
 <nav>
-  <div class="nlogo">PlixPlan</div>
-  <div class="nbadge">Metal City · AI Workforce</div>
+  <div class="nav-top">
+    <div class="nlogo">PlixPlan</div>
+    <div class="nclient">Metal City 89 · AI Proposal 2025 · Confidential</div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="1">01 · AI Transformation</button>
+    <button class="tab-btn" data-tab="2">02 · Commercial Proposal</button>
+    <button class="tab-btn" data-tab="3">03 · AI Workforce</button>
+  </div>
 </nav>
 
-<!-- ══════════════════════════════════════════
-     HERO
-══════════════════════════════════════════ -->
-<section class="hero gbg">
-  <div class="hero-inner">
-    <div>
-      <div class="hero-tag">Metal City 89 &amp; Link Ajia</div>
-      <h1 class="hero-title">
-        METAL CITY<br>
-        <span class="e">AI WORKFORCE</span>
-        <span class="dim">Building The Next Generation Construction Supply Chain</span>
-      </h1>
-      <p class="hero-desc">
-        ไม่ใช่ Chatbot &nbsp;·&nbsp; ไม่ใช่ Software &nbsp;·&nbsp; ไม่ใช่ Dashboard<br>
-        แต่เป็น <strong>พนักงานดิจิทัล</strong> ที่ทำงานร่วมกับทีมของคุณ
-      </p>
-      <a href="#problem" class="btn-e">เริ่มต้น</a>
-    </div>
-    <div class="def-box gls">
-      <div class="def-not">AI Workforce ≠</div>
-      <div class="def-row"><span class="def-x">Chatbot ที่ตอบสคริปต์</span></div>
-      <div class="def-row"><span class="def-x">Software ที่ต้องเรียนใหม่</span></div>
-      <div class="def-row"><span class="def-x">Dashboard ที่ไม่มีใครเปิด</span></div>
-      <div class="def-yes">
-        <div class="def-yes-lbl">AI Workforce คือ</div>
-        <div class="def-yes-txt">ทีมงานดิจิทัลที่รู้เรื่องธุรกิจของคุณ และทำงานได้จริง 24 ชั่วโมง</div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
+<!-- ═══════════════════════════════════════════
+     TAB 1 — AI TRANSFORMATION FOR STEEL RETAIL
+════════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-1">
 
-<!-- ══════════════════════════════════════════
-     CHAPTER 1 — YOUR PROBLEM
-══════════════════════════════════════════ -->
-<section class="prob-s" id="problem">
-  <div class="sw">
-    <div class="ch-label fu">
-      <span class="ch-num">Chapter 01</span>
-      <div class="ch-line"></div>
-    </div>
-    <div class="fu">
-      <span class="s-eyebrow ec">สิ่งที่เราเห็นจากธุรกิจของคุณ</span>
-      <h2 class="s-title">3 ปัญหาที่กำลัง<span class="e">ฉุดการเติบโต</span></h2>
-      <p class="s-sub" style="margin-bottom:48px">ธุรกิจที่เติบโตดีมักเจอจุดเดียวกัน — ระบบตามไม่ทันคน และคนก็เริ่มตามไม่ทันธุรกิจ</p>
-    </div>
-    <div class="prob-grid fu">
-
-      <!-- P1: คนเป็นคอขวด -->
-      <div class="prob-card">
-        <div class="prob-top"></div>
-        <div class="prob-n">01</div>
-        <div class="prob-headline">คนเป็น<br>คอขวด</div>
-        <p class="prob-body">องค์ความรู้สำคัญอยู่กับพนักงานเฉพาะคน ไม่ว่าจะเป็นราคาสินค้า สเปก วิธีติดตั้ง หรือข้อมูลลูกค้า — ถ้าคนนั้นไม่อยู่ งานหยุด</p>
-        <div class="prob-example">"ต้องรอพี่คนนั้นกลับมาก่อน เขารู้เรื่องนี้คนเดียว"</div>
-      </div>
-
-      <!-- P2: โอกาสหลุดมือ -->
-      <div class="prob-card g">
-        <div class="prob-top"></div>
-        <div class="prob-n">02</div>
-        <div class="prob-headline">โอกาส<br>หลุดมือ</div>
-        <p class="prob-body">ลูกค้าถามมา แต่ทีมขายยุ่ง ออกใบเสนอราคาช้า หรือต้องรอข้อมูลจากหลายคน — คู่แข่งปิดได้ก่อนเสมอ</p>
-        <div class="prob-example">"ลูกค้าขอใบเสนอราคา รอนาน สุดท้ายไปซื้อที่อื่น"</div>
-      </div>
-
-      <!-- P3: เจ้าของลงมาทำเอง -->
-      <div class="prob-card l">
-        <div class="prob-top"></div>
-        <div class="prob-n">03</div>
-        <div class="prob-headline">เจ้าของ<br>ลงมาทำเอง</div>
-        <p class="prob-body">ผู้บริหารต้องตอบคำถามประจำวัน ตรวจสอบยอดขาย รวบรวมข้อมูลจากหลายระบบ — แทนที่จะโฟกัสที่การเติบโต</p>
-        <div class="prob-example">"วันนี้ยอดเป็นเท่าไรแล้ว ลูกหนี้มีใครบ้าง"</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
-
-<!-- ══════════════════════════════════════════
-     CHAPTER 2 — THE BIG IDEA
-══════════════════════════════════════════ -->
-<section class="idea-s" id="idea">
-  <div class="sw">
-    <div class="ch-label fu">
-      <span class="ch-num">Chapter 02</span>
-      <div class="ch-line"></div>
-    </div>
-    <div class="idea-grid">
-      <div class="fu">
-        <span class="s-eyebrow ec">วิธีแก้ปัญหา</span>
-        <h2 class="s-title">แทนการ<br>เพิ่ม<span class="e">จำนวนคน</span></h2>
-        <p class="idea-quote" style="margin-top:24px">สร้าง <span>AI Workforce</span> — ทีมงานดิจิทัลที่ทำงานร่วมกับคนปัจจุบัน</p>
-        <p class="idea-body">เราไม่ได้มาแทนที่ทีมงาน แต่มาช่วยให้ทีมงานทำงานได้มากขึ้น โดยไม่เพิ่มภาระ — AI จะรับงานซ้ำๆ ที่กินเวลา เพื่อให้คนได้โฟกัสกับงานที่สร้างมูลค่าจริง</p>
-      </div>
-      <div class="idea-right fu">
-        <div class="idea-card c1 gls">
-          <div class="idea-icon">🧠</div>
-          <div>
-            <div class="idea-txt-head">Knowledge Agent</div>
-            <div class="idea-txt-body">AI ผู้เชี่ยวชาญประจำองค์กร — รู้ทุกอย่างเกี่ยวกับสินค้า ราคา SOP และลูกค้า พร้อมตอบทันที</div>
-          </div>
-        </div>
-        <div class="idea-card c2 gls">
-          <div class="idea-icon">💬</div>
-          <div>
-            <div class="idea-txt-head">Sales Agent</div>
-            <div class="idea-txt-body">AI ผู้ช่วยฝ่ายขาย — ตอบลูกค้า 24 ชั่วโมง เช็คสต็อก และออกใบเสนอราคาผ่าน LINE ได้เลย</div>
-          </div>
-        </div>
-        <div class="idea-card c3 gls">
-          <div class="idea-icon">📊</div>
-          <div>
-            <div class="idea-txt-head">Executive Agent</div>
-            <div class="idea-txt-body">AI สำหรับเจ้าของ — สรุปยอดขาย ลูกหนี้ และ Insight ธุรกิจ ถามได้ทันทีบนมือถือ</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
-
-<!-- ══════════════════════════════════════════
-     CHAPTER 3 — MEET YOUR TEAM
-══════════════════════════════════════════ -->
-<section class="agents-s" id="agents">
-  <div class="sw">
-    <div class="ch-label fu">
-      <span class="ch-num">Chapter 03</span>
-      <div class="ch-line"></div>
-    </div>
-    <div class="fu" style="margin-bottom:48px">
-      <span class="s-eyebrow ec">พบกับทีม AI ของคุณ</span>
-      <h2 class="s-title">3 <span class="e">พนักงาน AI</span> ที่จะเข้ามาทำงานกับคุณ</h2>
-    </div>
-
-    <!-- AGENT 1 -->
-    <div class="ag-card fu">
-      <div class="ag-l gls">
+  <!-- Hero -->
+  <section class="t1-hero gbg">
+    <div class="sw">
+      <div class="t1-hero-inner">
         <div>
-          <div class="ag-badge">Agent #1</div>
-          <div class="ag-name">Knowledge Agent</div>
-          <div class="ag-role">AI ผู้เชี่ยวชาญประจำองค์กร</div>
-        </div>
-        <div>
-          <div class="ag-rl">ผลลัพธ์</div>
-          <div class="ag-result"><div class="ag-dot"></div>ลดเวลาค้นหาข้อมูล</div>
-          <div class="ag-result"><div class="ag-dot"></div>ลดการพึ่งพาพนักงานหลัก</div>
-          <div class="ag-result"><div class="ag-dot"></div>เพิ่มความเร็วในการเรียนรู้งาน</div>
-        </div>
-      </div>
-      <div class="ag-m">
-        <div class="ag-cl">ตอบคำถามได้เรื่อง</div>
-        <div class="ag-caps">
-          <div class="ag-cap">ข้อมูลสินค้าและสเปก</div>
-          <div class="ag-cap">ราคาและโปรโมชั่น</div>
-          <div class="ag-cap">SOP &amp; วิธีติดตั้ง</div>
-          <div class="ag-cap">ข้อมูลลูกค้า</div>
-          <div class="ag-cap hl">ประวัติการขายและการแก้ปัญหา</div>
-        </div>
-      </div>
-      <div class="ag-r">
-        <div class="mk-lbl">ตัวอย่างการใช้งาน</div>
-        <div class="mk-device">
-          <div class="mk-bar">
-            <div class="mk-av" style="background:rgba(0,245,255,0.12);color:var(--e)">AI</div>
-            <div><div class="mk-nm">Metal City AI</div><div class="mk-st">Knowledge Agent</div></div>
-            <div class="mk-online"></div>
+          <div class="t1-tag">Pitch Deck · Steel Retail</div>
+          <h1 class="t1-title">AI Transformation<br><span class="e">for Steel Retail</span></h1>
+          <p class="t1-sub">เปลี่ยนร้านเหล็กจาก "ขายของตามวัน" เป็นระบบที่รู้ราคา รู้สต็อก รู้ลูกค้า และรู้กำไรก่อนตัดสินใจ</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span class="badge badge-e">Sales Speed</span>
+            <span class="badge badge-g">Margin Control</span>
+            <span class="badge" style="background:rgba(184,243,107,0.1);color:var(--l);border:1px solid rgba(184,243,107,0.2)">Stock Intelligence</span>
           </div>
-          <div class="mk-body">
-            <div class="msg u">สมาร์ทบอร์ด 16 มม. ใช้โครงห่างเท่าไร?</div>
-            <div class="msg ai">
-              <div class="msg-lbl">Knowledge Agent</div>
-              โครงเหล็กห่าง <strong style="color:var(--e)">60 ซม.</strong> แนวตั้ง และ <strong style="color:var(--e)">120 ซม.</strong> แนวนอน สำหรับผนังทั่วไป
-              <div class="msg-ref">📄 คู่มือติดตั้ง SB-16 · หน้า 12</div>
-            </div>
-            <div class="msg u">ถ้าเป็นห้องน้ำล่ะ?</div>
-            <div class="msg ai">
-              <div class="msg-lbl">Knowledge Agent</div>
-              แนะนำ <strong style="color:var(--e)">สมาร์ทบอร์ดกันน้ำ</strong> และลดระยะโครงเป็น 40 ซม.
-            </div>
+        </div>
+        <div class="t1-right">
+          <div class="t1-kpi gl c1">
+            <div class="t1-kpi-n">ตอบราคาเร็วกว่า</div>
+            <div class="t1-kpi-txt">ลูกค้าถามราคาแล้วได้คำตอบเร็วขึ้น ลดโอกาสหลุดไปคู่แข่ง</div>
           </div>
-          <div class="mk-inp-row">
-            <input class="mk-inp" placeholder="ถามข้อมูลสินค้า SOP หรือลูกค้า..." readonly>
-            <button class="mk-send">↑</button>
+          <div class="t1-kpi gl c2">
+            <div class="t1-kpi-n">รู้กำไรต่อบิล</div>
+            <div class="t1-kpi-txt">ขายได้ แต่ต้องรู้ด้วยว่ากำไรเหลือจริงเท่าไหร่</div>
+          </div>
+          <div class="t1-kpi gl c3">
+            <div class="t1-kpi-n">ลดสต็อกจม</div>
+            <div class="t1-kpi-txt">ของขายดีไม่ขาด ของขายช้าไม่จมเงินในโกดัง</div>
           </div>
         </div>
       </div>
     </div>
+  </section>
+  <div class="sdiv"></div>
 
-    <!-- AGENT 2 -->
-    <div class="ag-card gd fu">
-      <div class="ag-l gls">
-        <div>
-          <div class="ag-badge">Agent #2</div>
-          <div class="ag-name">Sales Agent</div>
-          <div class="ag-role">AI ผู้ช่วยฝ่ายขาย · ผ่าน LINE</div>
-        </div>
-        <div>
-          <div class="ag-rl">ผลลัพธ์</div>
-          <div class="ag-result"><div class="ag-dot"></div>ตอบลูกค้าได้เร็วขึ้น</div>
-          <div class="ag-result"><div class="ag-dot"></div>เพิ่มโอกาสปิดการขาย</div>
-          <div class="ag-result"><div class="ag-dot"></div>ลดภาระทีมขาย</div>
-        </div>
+  <!-- Problems -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">ปัญหาจริงของร้านเหล็ก</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:32px">
+        <h2 class="h1">5 ปัญหาที่ทำให้<span class="e">กำไรหาย</span></h2>
+        <p class="lead">ถ้าไม่แก้ระบบหลังบ้าน AI จะกลายเป็นแค่บอทตอบแชท ไม่ใช่เครื่องมือบริหาร</p>
       </div>
-      <div class="ag-m">
-        <div class="ag-cl">สามารถ</div>
-        <div class="ag-caps">
-          <div class="ag-cap">ตอบลูกค้า 24 ชั่วโมง</div>
-          <div class="ag-cap">เช็คราคาและสต็อก</div>
-          <div class="ag-cap">แนะนำสินค้า</div>
-          <div class="ag-cap hl">สร้างใบเสนอราคาส่งทันที</div>
-        </div>
+      <div class="t1-prob fu">
+        <div class="t1-pc"><div class="t1-pc-top"></div><div class="t1-pc-n">01</div><div class="t1-pc-name">ราคาเปลี่ยน</div><div class="t1-pc-desc">ต้นทุนเหล็กขึ้นลง แต่เซลล์ยังใช้ราคาจำ</div></div>
+        <div class="t1-pc"><div class="t1-pc-top"></div><div class="t1-pc-n">02</div><div class="t1-pc-name">ใบเสนอราคาช้า</div><div class="t1-pc-desc">ลูกค้าถามหลายร้าน ใครตอบก่อนมีโอกาสปิดก่อน</div></div>
+        <div class="t1-pc"><div class="t1-pc-top"></div><div class="t1-pc-n">03</div><div class="t1-pc-name">สต็อกไม่แม่น</div><div class="t1-pc-desc">ของขายดีขาด ของขายช้าเงินจมในโกดัง</div></div>
+        <div class="t1-pc"><div class="t1-pc-top"></div><div class="t1-pc-n">04</div><div class="t1-pc-name">เครดิตเสี่ยง</div><div class="t1-pc-desc">ขายได้เยอะ แต่เงินไม่กลับเข้าร้าน</div></div>
+        <div class="t1-pc"><div class="t1-pc-top"></div><div class="t1-pc-n">05</div><div class="t1-pc-name">ข้อมูลกระจาย</div><div class="t1-pc-desc">แชทอยู่ในเพจ ราคาอยู่ในสมุด ลูกค้าอยู่ในหัวคน</div></div>
       </div>
-      <div class="ag-r">
-        <div class="mk-lbl">ตัวอย่างบน LINE</div>
-        <div class="mk-device">
-          <div class="ln-top">
-            <div class="ln-av">MC</div>
-            <div><div class="ln-nm">Metal City 89</div><div class="ln-st">Online · ตอบทันที</div></div>
-          </div>
-          <div class="ln-body">
-            <div class="lmsg u">เหล็กกล่อง 2×4 มีของไหมครับ</div>
-            <div class="lmsg ai">
-              <div class="ln-lbl">Sales Agent</div>
-              มีครับ <strong>126 เส้น</strong> พร้อมส่ง<br>ราคา <strong>820 บาท/เส้น</strong>
-            </div>
-            <div class="lmsg u">ขอใบเสนอราคา 50 เส้นหน่อยครับ</div>
-            <div class="lmsg ai">
-              <div class="ln-lbl">Sales Agent</div>
-              ได้เลยครับ
-              <div class="ln-doc">📄 QT-2025-0847<br>เหล็กกล่อง 2×4 × 50 เส้น<br><strong>รวม 41,000 บาท</strong></div>
-            </div>
-          </div>
-          <div class="ln-inp-bar">
-            <input class="ln-inp" placeholder="พิมพ์ข้อความ..." readonly>
-            <button class="ln-snd">↑</button>
-          </div>
+      <div class="fu" style="padding:16px 20px;background:rgba(0,245,255,0.04);border-left:2px solid var(--e)">
+        <p style="font-size:14px;color:var(--grs)">เจ้าของร้านต้องการ <strong style="color:var(--e)">"ระบบเตือนก่อนเสียหาย"</strong> ไม่ใช่รายงานย้อนหลังตอนปลายเดือน</p>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- AI Operating Model -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">AI Operating Model</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:32px">
+        <h2 class="h1">6 AI Agents — <span class="e">ทีมผู้ช่วยบริหาร</span></h2>
+        <p class="lead">วาง AI เป็นทีมผู้ช่วยบริหาร ไม่ใช่เครื่องมือแยกชิ้น</p>
+      </div>
+      <div class="t1-model fu">
+        <div class="t1-agent"><div class="t1-agent-name">Sales Agent</div><div class="t1-agent-role">รับแชท · คัดลูกค้า</div><div class="t1-agent-items"><div class="t1-agent-item">· รับ inquiry อัตโนมัติ</div><div class="t1-agent-item">· คัดกรองความพร้อมซื้อ</div></div></div>
+        <div class="t1-agent g"><div class="t1-agent-name">Quote Agent</div><div class="t1-agent-role">ออกใบเสนอราคา</div><div class="t1-agent-items"><div class="t1-agent-item">· เช็กราคา / ค่าส่ง</div><div class="t1-agent-item">· Draft quotation</div></div></div>
+        <div class="t1-agent l"><div class="t1-agent-name">Stock Agent</div><div class="t1-agent-role">เตือนของใกล้หมด</div><div class="t1-agent-items"><div class="t1-agent-item">· แจ้งเตือนสต็อกต่ำ</div><div class="t1-agent-item">· วิเคราะห์ Dead Stock</div></div></div>
+        <div class="t1-agent pk"><div class="t1-agent-name">Pricing Agent</div><div class="t1-agent-role">คุม margin · ราคาขั้นต่ำ</div><div class="t1-agent-items"><div class="t1-agent-item">· ป้องกันขายต่ำ margin</div><div class="t1-agent-item">· แยกราคาตามลูกค้า</div></div></div>
+        <div class="t1-agent gr"><div class="t1-agent-name">Credit Agent</div><div class="t1-agent-role">เตือนยอดค้าง</div><div class="t1-agent-items"><div class="t1-agent-item">· แจ้งเตือนเกินกำหนด</div><div class="t1-agent-item">· คุมวงเงินเครดิต</div></div></div>
+        <div class="t1-agent wh"><div class="t1-agent-name">Owner Agent</div><div class="t1-agent-role">สรุปทุกเช้า</div><div class="t1-agent-items"><div class="t1-agent-item">· Daily brief เจ้าของ</div><div class="t1-agent-item">· ตัดสินใจเร็วขึ้น</div></div></div>
+      </div>
+      <div class="fu" style="padding:14px 20px;border:1px solid var(--bd);background:rgba(255,255,255,0.02)">
+        <p style="font-size:12px;color:var(--gr);text-align:center;letter-spacing:.04em">ข้อมูลกลางที่ทุก Agent ใช้ร่วมกัน &nbsp;·&nbsp; Product Master &nbsp;·&nbsp; Price List &nbsp;·&nbsp; Stock &nbsp;·&nbsp; Customer &nbsp;·&nbsp; Sales &nbsp;·&nbsp; Payment</p>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- 90 Day Plan -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">90-Day Pilot Plan</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:28px">
+        <h2 class="h1">เริ่มเล็ก <span class="e">เห็นผลเร็ว</span> ต่อยอดได้</h2>
+      </div>
+      <div class="t1-timeline fu">
+        <div class="t1-month card">
+          <div class="t1-month-head"><div class="t1-month-tag ec">Month 1</div><div class="t1-month-name e">Data Foundation</div><div class="t1-month-sub">สร้างฐานข้อมูล</div></div>
+          <div class="t1-month-body"><div class="row"><div class="dot-e"></div>สินค้า Top 100</div><div class="row"><div class="dot-e"></div>ราคา 3 ระดับ</div><div class="row"><div class="dot-e"></div>ลูกค้า / สต็อก / ฟอร์มออเดอร์</div></div>
+        </div>
+        <div class="t1-month card">
+          <div class="t1-month-head"><div class="t1-month-tag gc">Month 2</div><div class="t1-month-name g">Sales Automation</div><div class="t1-month-sub">ระบบขายอัตโนมัติ</div></div>
+          <div class="t1-month-body"><div class="row"><div class="dot-g"></div>AI ตอบแชท</div><div class="row"><div class="dot-g"></div>Lead Summary</div><div class="row"><div class="dot-g"></div>Quotation Draft + PDF</div></div>
+        </div>
+        <div class="t1-month card">
+          <div class="t1-month-head"><div class="t1-month-tag lc">Month 3</div><div class="t1-month-name l">Owner Dashboard</div><div class="t1-month-sub">ภาพรวมสำหรับเจ้าของ</div></div>
+          <div class="t1-month-body"><div class="row"><div class="dot-l"></div>ยอดขายรายวัน</div><div class="row"><div class="dot-l"></div>กำไรขั้นต้น</div><div class="row"><div class="dot-l"></div>สต็อก / เครดิต / ลูกค้าที่ต้องตาม</div></div>
         </div>
       </div>
     </div>
+  </section>
+  <div class="sdiv"></div>
 
-    <!-- AGENT 3 -->
-    <div class="ag-card lm fu">
-      <div class="ag-l gls">
-        <div>
-          <div class="ag-badge">Agent #3</div>
-          <div class="ag-name">Executive Agent</div>
-          <div class="ag-role">AI สำหรับเจ้าของ · บนมือถือ</div>
-        </div>
-        <div>
-          <div class="ag-rl">ผลลัพธ์</div>
-          <div class="ag-result"><div class="ag-dot"></div>ตัดสินใจเร็วขึ้น</div>
-          <div class="ag-result"><div class="ag-dot"></div>เห็นภาพธุรกิจชัดขึ้น</div>
-          <div class="ag-result"><div class="ag-dot"></div>ไม่ต้องรวบรวมข้อมูลเอง</div>
-        </div>
+  <!-- Metrics -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">วัดผลแบบเจ้าของร้าน</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:28px">
+        <h2 class="h1">ไม่วัดว่าใช้ AI กี่ตัว<br><span class="e">แต่วัดว่าธุรกิจดีขึ้นไหม</span></h2>
       </div>
-      <div class="ag-m">
-        <div class="ag-cl">สรุปข้อมูลได้</div>
-        <div class="ag-caps">
-          <div class="ag-cap">ยอดขายและออเดอร์</div>
-          <div class="ag-cap">ลูกค้าหลักและลูกหนี้</div>
-          <div class="ag-cap">สินค้าขายดีและค้างสต็อก</div>
-          <div class="ag-cap hl">Insight และสัญญาณเตือน</div>
-        </div>
+      <div class="t1-metrics fu">
+        <div class="t1-metric"><div class="t1-metric-name">Speed</div><div class="t1-metric-items"><div class="t1-metric-item">เวลาตอบลูกค้า</div><div class="t1-metric-item">เวลาออกใบเสนอราคา</div></div></div>
+        <div class="t1-metric"><div class="t1-metric-name">Sales</div><div class="t1-metric-items"><div class="t1-metric-item">จำนวนใบเสนอราคา</div><div class="t1-metric-item">อัตราปิดการขาย</div></div></div>
+        <div class="t1-metric"><div class="t1-metric-name">Margin</div><div class="t1-metric-items"><div class="t1-metric-item">กำไรต่อบิล</div><div class="t1-metric-item">ส่วนลดที่เกินกรอบ</div></div></div>
+        <div class="t1-metric"><div class="t1-metric-name">Stock</div><div class="t1-metric-items"><div class="t1-metric-item">ของขาด / Dead Stock</div><div class="t1-metric-item">Stock Turnover</div></div></div>
+        <div class="t1-metric"><div class="t1-metric-name">Cash</div><div class="t1-metric-items"><div class="t1-metric-item">ยอดค้าง / Days Overdue</div><div class="t1-metric-item">เครดิตเสี่ยง</div></div></div>
       </div>
-      <div class="ag-r">
-        <div class="mk-lbl">ตัวอย่างบนมือถือ</div>
-        <div class="mk-device">
-          <div class="db-bar">
-            <div class="db-icon">📊</div>
-            <div class="db-title">Metal City Executive</div>
-            <div class="mk-online" style="background:var(--l);margin-left:auto"></div>
-          </div>
-          <div class="db-body">
-            <div class="db-q">ยอดขายสัปดาห์นี้เป็นอย่างไร</div>
-            <div class="db-ans">
-              <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--l);margin-bottom:8px">Executive Agent</div>
-              สัปดาห์นี้ <strong style="color:var(--l)">฿ 2.4M</strong> เพิ่ม 12% จากสัปดาห์ก่อน
-              <div class="db-kpi">
-                <div class="db-k"><div class="db-kl">ยอดขาย</div><div class="db-kv">2.4M</div></div>
-                <div class="db-k"><div class="db-kl">ออเดอร์</div><div class="db-kv">38</div></div>
-                <div class="db-k"><div class="db-kl">ลูกหนี้</div><div class="db-kv" style="color:var(--g)">890K</div></div>
-                <div class="db-k"><div class="db-kl">สต็อกต่ำ</div><div class="db-kv" style="color:var(--pk)">5 SKU</div></div>
-              </div>
-              <div style="font-size:11px;color:var(--gr);margin-top:8px">⚠️ เหล็กกล่อง 2×4 เหลือ 18 เส้น — ควรสั่งเพิ่ม</div>
-            </div>
-          </div>
-          <div class="mk-inp-row">
-            <input class="mk-inp" placeholder="ถามข้อมูลธุรกิจ ยอดขาย หรือ insight..." readonly>
-            <button class="mk-send" style="background:var(--l)">↑</button>
-          </div>
-        </div>
+      <div class="fu" style="margin-top:20px;padding:20px 24px;border:1px solid rgba(0,245,255,0.2);background:rgba(0,245,255,0.04)">
+        <p style="font-size:14px;color:var(--grs);text-align:center">เป้าหมายเชิงบริหาร &nbsp;·&nbsp; <strong style="color:var(--e)">เห็นปัญหาก่อน · ตัดสินใจเร็วขึ้น · ลดการพึ่งพาความจำคน · คุมกำไรต่อบิลได้จริง</strong></p>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-<div class="sdiv"></div>
+</div><!-- /tab-1 -->
 
-<!-- ══════════════════════════════════════════
-     CHAPTER 4 — HOW WE WORK
-══════════════════════════════════════════ -->
-<section class="how-s" id="how">
-  <div class="sw">
-    <div class="ch-label fu">
-      <span class="ch-num">Chapter 04</span>
-      <div class="ch-line"></div>
-    </div>
-    <div class="how-grid">
-      <div class="fu">
-        <span class="s-eyebrow ec">วิธีที่เราทำงานร่วมกัน</span>
-        <h2 class="s-title" style="margin-bottom:36px">เราเริ่มจาก<br><span class="e">เข้าใจธุรกิจ</span><br>ก่อนสร้าง AI</h2>
-        <div class="how-steps">
-          <div class="how-step s1">
-            <div class="how-step-n">1</div>
+<!-- ═══════════════════════════════════════════
+     TAB 2 — COMMERCIAL PRICING PROPOSAL
+════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-2">
+
+  <!-- Hero -->
+  <section class="t2-hero gbg">
+    <div class="sw">
+      <div class="t2-hero-inner">
+        <div>
+          <div class="t1-tag" style="color:var(--g)">Commercial Proposal · Metal City 89</div>
+          <h1 class="t1-title">AI Pricing<br><span class="g">Proposal</span></h1>
+          <p class="t1-sub">ราคาเสนอสำหรับวางระบบ AI ช่วยขาย ช่วยบริหาร และยกระดับความรู้ทีมงานร้านเหล็ก</p>
+          <div style="display:flex;gap:12px;align-items:baseline;margin-top:8px">
             <div>
-              <div class="how-step-head">AI Discovery &amp; Blueprint</div>
-              <div class="how-step-body">สัมภาษณ์ทีมงาน วิเคราะห์ workflow ค้นหา pain point จริง แล้วออกแบบ AI ที่ตอบโจทย์ธุรกิจโดยเฉพาะ — ไม่ใช่ AI ทั่วไป</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:4px">Setup Fee (Recommended)</div>
+              <div style="font-family:'SUSE',sans-serif;font-size:42px;font-weight:800;color:var(--g);line-height:1">350,000 <span style="font-size:18px;color:var(--gr)">บาท</span></div>
             </div>
-          </div>
-          <div class="how-step s2">
-            <div class="how-step-n">2</div>
-            <div>
-              <div class="how-step-head">AI Workforce Starter</div>
-              <div class="how-step-body">สร้าง Knowledge Agent + Sales Agent พร้อม LINE OA Integration อบรมทีมงาน และ support จนถึง Go-Live</div>
-            </div>
-          </div>
-          <div class="how-step s3">
-            <div class="how-step-n">3</div>
-            <div>
-              <div class="how-step-head">Executive Intelligence</div>
-              <div class="how-step-body">สร้าง Executive Agent + Dashboard สำหรับเจ้าของ เห็นภาพธุรกิจ Real-Time ตัดสินใจได้เร็วขึ้น</div>
+            <div style="padding-left:24px;border-left:1px solid var(--bd)">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:4px">Monthly Retainer</div>
+              <div style="font-family:'SUSE',sans-serif;font-size:28px;font-weight:800;color:var(--grs);line-height:1">45,000 <span style="font-size:14px;color:var(--gr)">บาท/เดือน</span></div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="fu">
-        <div class="how-right gls">
-          <div class="how-why-head">ทำไมต้องเริ่มจาก Discovery</div>
-          <div class="how-quote">AI ที่ดีไม่ใช่การ<span>ติดตั้งเครื่องมือ</span><br>แต่คือการออกแบบ<span>วิธีทำงานใหม่</span></div>
-          <div class="how-body">ธุรกิจวัสดุก่อสร้างแต่ละเจ้ามีกระบวนการและลูกค้าที่ต่างกัน — AI ที่ทำงานได้จริงต้องเข้าใจธุรกิจของคุณโดยเฉพาะ ไม่ใช่ copy มาจากที่อื่น</div>
-          <div class="disc-box">
-            <div class="disc-tag">เริ่มต้นด้วย</div>
-            <div class="disc-name">AI Discovery &amp; Blueprint</div>
-            <div class="disc-body">ทำความเข้าใจธุรกิจของคุณก่อน แล้วค่อยออกแบบ AI ที่เหมาะสม</div>
-            <div class="disc-items">
-              <div class="disc-item"><span class="disc-dot">›</span>Business &amp; Process Discovery</div>
-              <div class="disc-item"><span class="disc-dot">›</span>Pain Point &amp; Opportunity Analysis</div>
-              <div class="disc-item"><span class="disc-dot">›</span>AI Workforce Blueprint</div>
-              <div class="disc-item"><span class="disc-dot">›</span>Implementation Roadmap</div>
-            </div>
-          </div>
+        <div class="gls" style="padding:24px 22px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);margin-bottom:14px">Positioning</div>
+          <div style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh);line-height:1.5;margin-bottom:16px">ไม่ขาย <span style="text-decoration:line-through;color:var(--gr)">"Chatbot"</span><br>แต่ขาย <span style="color:var(--g)">"AI Operating System เบื้องต้นของร้านเหล็ก"</span></div>
+          <div style="font-size:12.5px;color:var(--gr);line-height:1.7">แพ็กเกจแนะนำสำหรับร้านเหล็ก SME ที่ต้องการเริ่มจริง ไม่ใหญ่เกินไป และไม่เล็กจนเห็นผลไม่ชัด</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<div class="sdiv"></div>
+  </section>
+  <div class="sdiv"></div>
 
-<!-- ══════════════════════════════════════════
-     CHAPTER 5 — NEXT STEP
-══════════════════════════════════════════ -->
-<section class="next-s" id="next">
-  <div class="sw" style="position:relative;z-index:1">
-    <div class="fu">
-      <div class="ch-label" style="justify-content:center">
-        <span class="ch-num">Chapter 05</span>
-        <div class="ch-line"></div>
+  <!-- 3 Packages -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">ราคาเสนอ 3 ระดับ</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:28px">
+        <h2 class="h1">เลือกตาม<span class="g">ความพร้อม</span></h2>
+        <p class="lead">ข้อเสนอหลักคือ Growth Package — เหมาะสุดสำหรับ Metal City 89</p>
       </div>
-      <h2 class="next-title">ขั้นต่อไป<br><span>ง่ายมาก</span></h2>
-      <p class="next-sub">เริ่มต้นด้วยการทำความเข้าใจธุรกิจของคุณก่อน — แล้วค่อยตัดสินใจ</p>
-    </div>
-    <div class="fu" style="display:flex;justify-content:center">
-      <div class="next-box">
-        <div class="next-box-tag">First Step</div>
-        <div class="next-box-name">AI Discovery &amp; Blueprint</div>
-        <div class="next-box-body">นัดคุยเพื่อทำความเข้าใจธุรกิจของคุณ วิเคราะห์ pain point จริง และออกแบบ AI Workforce ที่เหมาะสม</div>
-        <div class="next-items">
-          <div class="next-item"><span class="next-item-dot">✓</span>ไม่ต้องตัดสินใจอะไรตอนนี้</div>
-          <div class="next-item"><span class="next-item-dot">✓</span>ได้ Blueprint ก่อนลงทุน</div>
-          <div class="next-item"><span class="next-item-dot">✓</span>รู้ชัดว่า AI จะช่วยธุรกิจได้จริงแค่ไหน</div>
+      <div class="pkg-grid fu">
+        <div class="pkg s card">
+          <div class="pkg-head"><div class="pkg-tier">Starter · AI Sales Foundation</div><div class="pkg-name">เริ่มเร็ว คุมงบ</div><div class="pkg-tag">สำหรับธุรกิจที่ต้องการ Quick Win</div></div>
+          <div class="pkg-price-area"><div class="pkg-price">180,000</div><div class="pkg-unit">บาท · Setup Fee</div><div class="pkg-retainer">+ 25,000 บาท/เดือน Retainer</div></div>
+          <div class="pkg-body"><div class="row"><div class="check-e">✓</div>AI ตอบคำถาม FAQ สินค้า</div><div class="row"><div class="check-e">✓</div>Sales Script</div><div class="row"><div class="check-e">✓</div>Quotation Template</div></div>
+        </div>
+        <div class="pkg g rec">
+          <div class="pkg-rec-bar">★ Recommended · เหมาะสุดสำหรับ Metal City 89</div>
+          <div class="pkg-head"><div class="pkg-tier">Growth · Recommended Pilot</div><div class="pkg-name">ครบระบบขาย ความรู้ Dashboard</div><div class="pkg-tag">90-Day Pilot Plan</div></div>
+          <div class="pkg-price-area"><div class="pkg-price">350,000</div><div class="pkg-unit">บาท · Setup Fee</div><div class="pkg-retainer">+ 45,000 บาท/เดือน Retainer</div></div>
+          <div class="pkg-body"><div class="row"><div class="check-g">✓</div>AI Sales + AI Quotation</div><div class="row"><div class="check-g">✓</div>Knowledge Base + SOP</div><div class="row"><div class="check-g">✓</div>Management Dashboard</div><div class="row"><div class="check-g">✓</div>Training + Monthly Review</div></div>
+        </div>
+        <div class="pkg t card">
+          <div class="pkg-head"><div class="pkg-tier">Transformation · Full AI OS</div><div class="pkg-name">ขยายระบบจริงจัง</div><div class="pkg-tag">สำหรับองค์กรที่พร้อมเต็มที่</div></div>
+          <div class="pkg-price-area"><div class="pkg-price">650,000</div><div class="pkg-unit">บาท · Setup Fee</div><div class="pkg-retainer">+ 80,000 บาท/เดือน Retainer</div></div>
+          <div class="pkg-body"><div class="row"><div class="check-l">✓</div>CRM / Stock AI / Pricing Control</div><div class="row"><div class="check-l">✓</div>Credit AI</div><div class="row"><div class="check-l">✓</div>Delivery + Monthly Report</div></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Growth Scope -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n gc">Growth Package · Scope</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:28px">
+        <h2 class="h1">สิ่งที่ Metal City 89<span class="g">จะได้รับ</span></h2>
+        <p class="lead">ไม่ใช่ไฟล์พรีเซนต์ แต่เป็นระบบและชุดเครื่องมือให้ทีมใช้งานจริง</p>
+      </div>
+      <div class="grid2 fu" style="margin-bottom:20px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="card" style="padding:18px 16px"><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:8px">01</div><div class="h3" style="font-size:14px">AI Sales Assistant</div><div style="font-size:12px;color:var(--gr);margin-top:4px">ตอบแชท คัด lead สรุปลูกค้าให้เซลล์</div></div>
+          <div class="card" style="padding:18px 16px"><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:8px">02</div><div class="h3" style="font-size:14px">AI Quotation Assistant</div><div style="font-size:12px;color:var(--gr);margin-top:4px">Draft ใบเสนอราคา ตรวจรายการ ค่าส่ง เงื่อนไข</div></div>
+          <div class="card" style="padding:18px 16px"><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:8px">03</div><div class="h3" style="font-size:14px">Product Knowledge Base</div><div style="font-size:12px;color:var(--gr);margin-top:4px">ฐานความรู้สินค้า คำถามลูกค้า วิธีอธิบาย</div></div>
+          <div class="card" style="padding:18px 16px"><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:8px">04</div><div class="h3" style="font-size:14px">AI SOP Builder</div><div style="font-size:12px;color:var(--gr);margin-top:4px">ถอดความรู้เจ้าของ-พนักงานเก่าเป็น SOP จริง</div></div>
+          <div class="card" style="padding:18px 16px"><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:8px">05</div><div class="h3" style="font-size:14px">Onboarding Coach</div><div style="font-size:12px;color:var(--gr);margin-top:4px">คู่มือ + quiz + checklist สอนพนักงานใหม่</div></div>
+          <div class="card" style="padding:18px 16px"><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:8px">06</div><div class="h3" style="font-size:14px">Management Dashboard</div><div style="font-size:12px;color:var(--gr);margin-top:4px">ยอดขาย ลูกค้า สต็อก เครดิต Real-Time</div></div>
+        </div>
+        <div class="scope-grid card" style="height:fit-content">
+          <div class="scope-col">
+            <div class="scope-title">System Deliverables</div>
+            <div style="display:flex;flex-direction:column;gap:7px"><div class="row"><div class="check-e">✓</div>AI Sales Assistant</div><div class="row"><div class="check-e">✓</div>AI Quotation Assistant</div><div class="row"><div class="check-e">✓</div>Product Knowledge Base</div><div class="row"><div class="check-e">✓</div>Sales Script Library</div><div class="row"><div class="check-e">✓</div>Basic Management Dashboard</div><div class="row"><div class="check-e">✓</div>Daily Owner Brief Template</div></div>
+          </div>
+          <div class="scope-col">
+            <div class="scope-title">People & Knowledge</div>
+            <div style="display:flex;flex-direction:column;gap:7px"><div class="row"><div class="check-g">✓</div>SOP 10–15 ชุด</div><div class="row"><div class="check-g">✓</div>Onboarding Module</div><div class="row"><div class="check-g">✓</div>FAQ สินค้า 80–120 ข้อ</div><div class="row"><div class="check-g">✓</div>Training พนักงาน 2 ครั้ง</div><div class="row"><div class="check-g">✓</div>Management Review 1 ครั้ง/เดือน</div><div class="row"><div class="check-g">✓</div>Improvement Plan รายเดือน</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Timeline T2 -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">แผนดำเนินงาน 90 วัน</span><div class="ch-line"></div></div>
+      <div class="t2-timeline fu">
+        <div class="t1-month card"><div class="t1-month-head"><div class="t1-month-tag ec">Month 1</div><div class="t1-month-name e">Knowledge & Data Foundation</div></div><div class="t1-month-body"><div class="row"><div class="dot-e"></div>เก็บข้อมูลสินค้า ราคา ลูกค้า</div><div class="row"><div class="dot-e"></div>สัมภาษณ์เจ้าของและทีมงาน</div><div class="row"><div class="dot-e"></div>สร้าง Product Knowledge + SOP ชุดแรก</div></div></div>
+        <div class="t1-month card"><div class="t1-month-head"><div class="t1-month-tag gc">Month 2</div><div class="t1-month-name g">AI Sales & Quotation</div></div><div class="t1-month-body"><div class="row"><div class="dot-g"></div>ตั้งค่า AI Sales Assistant</div><div class="row"><div class="dot-g"></div>ทำ Quotation Draft Flow</div><div class="row"><div class="dot-g"></div>ทดสอบกับเคสลูกค้าจริง</div></div></div>
+        <div class="t1-month card"><div class="t1-month-head"><div class="t1-month-tag lc">Month 3</div><div class="t1-month-name l">Dashboard & Training</div></div><div class="t1-month-body"><div class="row"><div class="dot-l"></div>ส่ง Dashboard เจ้าของ</div><div class="row"><div class="dot-l"></div>ทำ Daily Brief + Checklist</div><div class="row"><div class="dot-l"></div>Training ทีม + ปรับระบบก่อนส่งมอบ</div></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Payment Terms -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">เงื่อนไขการชำระเงิน</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:24px"><h2 class="h1">แบ่งจ่ายตาม<span class="g">Milestone</span></h2></div>
+      <div class="pay-table fu">
+        <div class="pay-header"><div class="pay-col-hd">Milestone</div><div class="pay-col-hd">%</div><div class="pay-col-hd">Amount</div><div class="pay-col-hd">Payment Trigger</div></div>
+        <div class="pay-row"><div class="pay-milestone">งวดที่ 1</div><div class="pay-pct">50%</div><div class="pay-amount">175,000 บาท</div><div class="pay-trigger">เมื่อเริ่มโครงการ</div></div>
+        <div class="pay-row"><div class="pay-milestone">งวดที่ 2</div><div class="pay-pct">30%</div><div class="pay-amount">105,000 บาท</div><div class="pay-trigger">หลังส่ง AI Sales + Quotation Draft</div></div>
+        <div class="pay-row"><div class="pay-milestone">งวดที่ 3</div><div class="pay-pct">20%</div><div class="pay-amount">70,000 บาท</div><div class="pay-trigger">หลังส่ง Dashboard + Training</div></div>
+      </div>
+      <div class="fu" style="margin-top:14px;padding:14px 20px;background:rgba(255,214,10,0.04);border:1px solid rgba(255,214,10,0.2)">
+        <p style="font-size:13px;color:var(--grs)">Retainer: <strong style="color:var(--g)">45,000 บาท/เดือน</strong> เริ่มหลัง Setup · ระยะเวลาแนะนำ <strong style="color:var(--g)">ขั้นต่ำ 6 เดือน</strong></p>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Add-ons + Scope Boundary -->
+  <section class="sec">
+    <div class="sw">
+      <div class="grid2 fu">
+        <div>
+          <div class="ch-lbl"><span class="ch-n">Optional Add-ons</span><div class="ch-line"></div></div>
+          <h2 class="h2" style="margin-bottom:20px">ต่อยอด<span class="g">หลัง Pilot นิ่ง</span></h2>
+          <div class="addon-grid">
+            <div class="addon-item card"><div class="addon-name">LINE OA / FB Messenger API</div><div class="addon-price">60K–120K</div></div>
+            <div class="addon-item card"><div class="addon-name">PDF อัตโนมัติเต็มรูปแบบ</div><div class="addon-price">80K–150K</div></div>
+            <div class="addon-item card"><div class="addon-name">Dashboard ขั้นสูง</div><div class="addon-price">80K–180K</div></div>
+            <div class="addon-item card"><div class="addon-name">Stock Forecast Model</div><div class="addon-price">150K–300K</div></div>
+            <div class="addon-item card"><div class="addon-name">Credit Scoring Model</div><div class="addon-price">120K–250K</div></div>
+            <div class="addon-item card"><div class="addon-name">AI Voice-to-SOP</div><div class="addon-price">80K–150K</div></div>
+            <div class="addon-item card"><div class="addon-name">Staff Training เพิ่มเติม</div><div class="addon-price">25K/ครั้ง</div></div>
+            <div class="addon-item card"><div class="addon-name">On-site Workshop</div><div class="addon-price">35K–60K</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="ch-lbl"><span class="ch-n">Scope Boundary</span><div class="ch-line"></div></div>
+          <h2 class="h2" style="margin-bottom:20px">ขอบเขต<span class="e">ชัดเจน</span></h2>
+          <div class="scope-grid card">
+            <div class="scope-col"><div class="scope-title">Included</div><div style="display:flex;flex-direction:column;gap:7px"><div class="row"><div class="check-e">✓</div>AI Assistant setup ตาม scope</div><div class="row"><div class="check-e">✓</div>Knowledge Base / SOP / Script</div><div class="row"><div class="check-e">✓</div>Quotation flow แบบ draft</div><div class="row"><div class="check-e">✓</div>Basic Dashboard</div><div class="row"><div class="check-e">✓</div>Training + Monthly Review</div></div></div>
+            <div class="scope-col"><div class="scope-title" style="color:var(--gr)">Not Included</div><div style="display:flex;flex-direction:column;gap:7px"><div class="row" style="color:var(--gr)"><span style="flex-shrink:0">×</span>ค่า software subscription / API</div><div class="row" style="color:var(--gr)"><span style="flex-shrink:0">×</span>ค่า server / hosting</div><div class="row" style="color:var(--gr)"><span style="flex-shrink:0">×</span>ERP / POS ภายนอก</div><div class="row" style="color:var(--gr)"><span style="flex-shrink:0">×</span>Integration กับระบบไม่มี API</div><div class="row" style="color:var(--gr)"><span style="flex-shrink:0">×</span>ค่าเดินทางนอกพื้นที่</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Closing Offer -->
+  <section class="sec">
+    <div class="sw">
+      <div class="offer-box card-g fu" style="position:relative;z-index:1">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:14px">Founder Pilot Offer · สำหรับ Metal City 89 เท่านั้น</div>
+        <div style="font-family:'SUSE',sans-serif;font-size:56px;font-weight:800;color:var(--g);line-height:1;margin-bottom:6px">290,000 <span style="font-size:22px;color:var(--gr)">บาท</span></div>
+        <div style="font-size:14px;color:var(--gr);margin-bottom:20px">Setup Fee จากราคาเต็ม 350,000 บาท</div>
+        <div style="font-size:16px;font-weight:600;color:var(--grs);margin-bottom:24px">+ 45,000 บาท/เดือน Retainer · ขั้นต่ำ 6 เดือน</div>
+        <div style="font-size:12.5px;color:var(--gr);max-width:480px;margin:0 auto 28px;line-height:1.7">เงื่อนไข: เริ่มโครงการภายใน 30 วัน และอนุญาตให้ใช้เป็น case study โดยไม่เปิดเผยตัวเลขภายใน</div>
+        <div style="padding:16px 20px;background:rgba(0,0,0,0.3);max-width:520px;margin:0 auto">
+          <p style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh);line-height:1.55">"AI ไม่ได้มาแทนคนในร้าน แต่มาช่วยให้ทุกคนทำงานด้วยความรู้ระดับเดียวกับคนที่เก่งที่สุด"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /tab-2 -->
+
+<!-- ═══════════════════════════════════════════
+     TAB 3 — AI WORKFORCE
+════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-3">
+
+  <!-- Hero -->
+  <section class="t3-hero gbg">
+    <div class="sw">
+      <div class="t3-hero-inner">
+        <div>
+          <div class="t1-tag" style="color:var(--l)">Metal City 89 &amp; Link Ajia</div>
+          <h1 class="t1-title">METAL CITY<br><span class="l">AI WORKFORCE</span></h1>
+          <p class="t1-sub">ไม่ใช่ Chatbot &nbsp;·&nbsp; ไม่ใช่ Software &nbsp;·&nbsp; ไม่ใช่ Dashboard<br>แต่เป็น <strong style="color:var(--l)">พนักงานดิจิทัล</strong> ที่ทำงานร่วมกับทีมของคุณ</p>
+        </div>
+        <div class="gls" style="padding:28px 24px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:14px">AI Workforce ≠</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
+            <div style="font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through">Chatbot ที่ตอบสคริปต์</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through">Software ที่ต้องเรียนใหม่</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through">Dashboard ที่ไม่มีใครเปิด</div>
+          </div>
+          <div style="padding:14px 16px;background:rgba(184,243,107,0.06);border-left:2px solid var(--l)">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:5px">AI Workforce คือ</div>
+            <div style="font-size:13.5px;font-weight:600;color:var(--wh);line-height:1.5">ทีมงานดิจิทัลที่รู้เรื่องธุรกิจ และทำงานได้จริง 24 ชั่วโมง</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Chapter 1: Problems -->
+  <section class="sec" id="t3-problem">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">Chapter 01 · สิ่งที่เราเห็น</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:32px">
+        <h2 class="h1">3 ปัญหาที่กำลัง<span class="l">ฉุดการเติบโต</span></h2>
+      </div>
+      <div class="t3-prob fu">
+        <div class="t3-pc c1"><div class="t3-pc-top"></div><div class="t3-pc-n">01</div><div class="t3-headline">คนเป็นคอขวด</div><div class="t3-body">องค์ความรู้สำคัญอยู่กับพนักงานเฉพาะคน — ถ้าคนนั้นไม่อยู่ งานหยุด</div><div class="t3-quote">"ต้องรอพี่คนนั้นกลับมาก่อน เขารู้เรื่องนี้คนเดียว"</div></div>
+        <div class="t3-pc c2"><div class="t3-pc-top"></div><div class="t3-pc-n">02</div><div class="t3-headline">โอกาสหลุดมือ</div><div class="t3-body">ลูกค้าถามมา แต่ทีมขายยุ่ง ออกใบเสนอราคาช้า — คู่แข่งปิดได้ก่อนเสมอ</div><div class="t3-quote">"ลูกค้าขอใบเสนอราคา รอนาน สุดท้ายไปซื้อที่อื่น"</div></div>
+        <div class="t3-pc c3"><div class="t3-pc-top"></div><div class="t3-pc-n">03</div><div class="t3-headline">เจ้าของลงมาทำเอง</div><div class="t3-body">ผู้บริหารต้องตอบคำถามประจำวัน แทนที่จะโฟกัสที่การเติบโต</div><div class="t3-quote">"วันนี้ยอดเป็นเท่าไรแล้ว ลูกหนี้มีใครบ้าง"</div></div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Chapter 2: Big Idea -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">Chapter 02 · วิธีแก้ปัญหา</span><div class="ch-line"></div></div>
+      <div class="grid2 fu" style="align-items:center;gap:48px">
+        <div>
+          <h2 class="h1" style="margin-bottom:20px">แทนการเพิ่ม<br><span class="l">จำนวนคน</span></h2>
+          <p style="font-size:16px;font-weight:700;color:var(--wh);line-height:1.5;margin-bottom:16px">สร้าง <span style="color:var(--l)">AI Workforce</span> — ทีมงานดิจิทัลที่ทำงานร่วมกับทีมปัจจุบัน</p>
+          <p class="body-text">AI จะรับงานซ้ำๆ ที่กินเวลา เพื่อให้คนได้โฟกัสกับงานที่สร้างมูลค่าจริง</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card" style="padding:18px 20px;display:flex;gap:14px;align-items:flex-start"><div style="font-size:20px;flex-shrink:0">🧠</div><div><div class="h3" style="font-size:14px;color:var(--e)">Knowledge Agent</div><div style="font-size:12.5px;color:var(--gr);margin-top:3px;line-height:1.55">รู้ทุกอย่างเกี่ยวกับสินค้า ราคา SOP ตอบทันที</div></div></div>
+          <div class="card" style="padding:18px 20px;display:flex;gap:14px;align-items:flex-start"><div style="font-size:20px;flex-shrink:0">💬</div><div><div class="h3" style="font-size:14px;color:var(--g)">Sales Agent</div><div style="font-size:12.5px;color:var(--gr);margin-top:3px;line-height:1.55">ตอบลูกค้า 24 ชั่วโมง เช็คสต็อก ออกใบเสนอราคาผ่าน LINE</div></div></div>
+          <div class="card" style="padding:18px 20px;display:flex;gap:14px;align-items:flex-start"><div style="font-size:20px;flex-shrink:0">📊</div><div><div class="h3" style="font-size:14px;color:var(--l)">Executive Agent</div><div style="font-size:12.5px;color:var(--gr);margin-top:3px;line-height:1.55">สรุปยอดขาย ลูกหนี้ Insight บนมือถือ ถามได้ทันที</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Chapter 3: Agents + Mockups -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">Chapter 03 · พบกับทีม AI</span><div class="ch-line"></div></div>
+      <div class="fu" style="margin-bottom:40px"><h2 class="h1">3 <span class="l">พนักงาน AI</span> ที่จะเข้ามาทำงานกับคุณ</h2></div>
+
+      <!-- Agent 1 -->
+      <div class="t3-ag fu">
+        <div class="t3-al gls">
+          <div><div class="badge badge-e" style="margin-bottom:14px">Agent #1</div><div class="h3">Knowledge Agent</div><div style="font-size:12px;color:var(--gr);font-style:italic;margin:4px 0 20px">AI ผู้เชี่ยวชาญประจำองค์กร</div></div>
+          <div><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:8px">ผลลัพธ์</div><div class="row"><div class="dot-e"></div>ลดเวลาค้นหาข้อมูล</div><div class="row"><div class="dot-e"></div>ลดการพึ่งพาพนักงานหลัก</div><div class="row"><div class="dot-e"></div>เพิ่มความเร็วในการเรียนรู้งาน</div></div>
+        </div>
+        <div class="t3-am">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:12px">ตอบคำถามได้เรื่อง</div>
+          <div style="display:flex;flex-direction:column;gap:7px"><div class="row"><div class="dot-e"></div>ข้อมูลสินค้าและสเปก</div><div class="row"><div class="dot-e"></div>ราคาและโปรโมชั่น</div><div class="row"><div class="dot-e"></div>SOP &amp; วิธีติดตั้ง</div><div class="row"><div class="dot-e"></div>ข้อมูลลูกค้า</div><div style="padding:8px 12px;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.18);font-size:13px;font-weight:600;color:var(--e)">ประวัติการขายและการแก้ปัญหา</div></div>
+        </div>
+        <div class="t3-ar">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:10px">ตัวอย่างการใช้งาน</div>
+          <div class="mk">
+            <div class="mk-bar"><div class="mk-av" style="background:rgba(0,245,255,0.12);color:var(--e)">AI</div><div><div class="mk-nm">Metal City AI</div><div class="mk-st">Knowledge Agent</div></div><div class="mk-on"></div></div>
+            <div class="mk-body">
+              <div class="msg u">สมาร์ทบอร์ด 16 มม. ใช้โครงห่างเท่าไร?</div>
+              <div class="msg ai"><div class="msg-lbl">Knowledge Agent</div>โครงเหล็กห่าง <strong style="color:var(--e)">60 ซม.</strong> แนวตั้ง และ <strong style="color:var(--e)">120 ซม.</strong> แนวนอน<div class="msg-ref">📄 คู่มือติดตั้ง SB-16 · หน้า 12</div></div>
+              <div class="msg u">ถ้าเป็นห้องน้ำล่ะ?</div>
+              <div class="msg ai"><div class="msg-lbl">Knowledge Agent</div>แนะนำ <strong style="color:var(--e)">สมาร์ทบอร์ดกันน้ำ</strong> ลดระยะโครงเป็น 40 ซม.</div>
+            </div>
+            <div class="mk-inp-row"><input class="mk-inp" placeholder="ถามข้อมูลสินค้า SOP..." readonly><button class="mk-send">↑</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent 2 -->
+      <div class="t3-ag gd fu">
+        <div class="t3-al gls">
+          <div><div class="badge badge-g" style="margin-bottom:14px">Agent #2</div><div class="h3">Sales Agent</div><div style="font-size:12px;color:var(--gr);font-style:italic;margin:4px 0 20px">AI ผู้ช่วยฝ่ายขาย · LINE</div></div>
+          <div><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:8px">ผลลัพธ์</div><div class="row"><div class="dot-g"></div>ตอบลูกค้าได้เร็วขึ้น</div><div class="row"><div class="dot-g"></div>เพิ่มโอกาสปิดการขาย</div><div class="row"><div class="dot-g"></div>ลดภาระทีมขาย</div></div>
+        </div>
+        <div class="t3-am">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:12px">สามารถ</div>
+          <div style="display:flex;flex-direction:column;gap:7px"><div class="row"><div class="dot-g"></div>ตอบลูกค้า 24 ชั่วโมง</div><div class="row"><div class="dot-g"></div>เช็คราคาและสต็อก</div><div class="row"><div class="dot-g"></div>แนะนำสินค้า</div><div style="padding:8px 12px;background:rgba(255,214,10,0.05);border:1px solid rgba(255,214,10,0.18);font-size:13px;font-weight:600;color:var(--g)">สร้างใบเสนอราคาส่งทันที</div></div>
+        </div>
+        <div class="t3-ar">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);margin-bottom:10px">ตัวอย่างบน LINE</div>
+          <div class="mk">
+            <div class="ln-top"><div class="ln-av">MC</div><div><div class="ln-nm">Metal City 89</div><div class="ln-st">Online · ตอบทันที</div></div></div>
+            <div class="ln-body">
+              <div class="lm u">เหล็กกล่อง 2×4 มีของไหมครับ</div>
+              <div class="lm ai"><div class="ln-lbl">Sales Agent</div>มีครับ <strong>126 เส้น</strong> พร้อมส่ง ราคา <strong>820 บาท/เส้น</strong></div>
+              <div class="lm u">ขอใบเสนอราคา 50 เส้น</div>
+              <div class="lm ai"><div class="ln-lbl">Sales Agent</div>ได้เลยครับ<div class="ln-doc">📄 QT-2025-0847 · เหล็กกล่อง 2×4 × 50 เส้น · <strong>41,000 บาท</strong></div></div>
+            </div>
+            <div class="ln-inp-bar"><input class="ln-inp" placeholder="พิมพ์ข้อความ..." readonly><button class="ln-snd">↑</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent 3 -->
+      <div class="t3-ag lm fu">
+        <div class="t3-al gls">
+          <div><div class="badge badge-l" style="margin-bottom:14px">Agent #3</div><div class="h3">Executive Agent</div><div style="font-size:12px;color:var(--gr);font-style:italic;margin:4px 0 20px">AI สำหรับเจ้าของ · มือถือ</div></div>
+          <div><div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:8px">ผลลัพธ์</div><div class="row"><div class="dot-l"></div>ตัดสินใจเร็วขึ้น</div><div class="row"><div class="dot-l"></div>เห็นภาพธุรกิจชัดขึ้น</div><div class="row"><div class="dot-l"></div>ไม่ต้องรวบรวมข้อมูลเอง</div></div>
+        </div>
+        <div class="t3-am">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:12px">สรุปข้อมูลได้</div>
+          <div style="display:flex;flex-direction:column;gap:7px"><div class="row"><div class="dot-l"></div>ยอดขายและออเดอร์</div><div class="row"><div class="dot-l"></div>ลูกค้าหลักและลูกหนี้</div><div class="row"><div class="dot-l"></div>สินค้าขายดีและค้างสต็อก</div><div style="padding:8px 12px;background:rgba(184,243,107,0.05);border:1px solid rgba(184,243,107,0.18);font-size:13px;font-weight:600;color:var(--l)">Insight และสัญญาณเตือน</div></div>
+        </div>
+        <div class="t3-ar">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--l);margin-bottom:10px">ตัวอย่างบนมือถือ</div>
+          <div class="mk">
+            <div class="db-bar"><div class="db-icon">📊</div><div class="db-title">Metal City Executive</div><div class="mk-on" style="background:var(--l);margin-left:auto"></div></div>
+            <div class="db-body">
+              <div class="db-q">ยอดขายสัปดาห์นี้เป็นอย่างไร</div>
+              <div class="db-ans"><div style="font-size:8.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--l);margin-bottom:6px">Executive Agent</div>สัปดาห์นี้ <strong style="color:var(--l)">฿ 2.4M</strong> เพิ่ม 12%<div class="db-kpi"><div class="db-k"><div class="db-kl">ยอดขาย</div><div class="db-kv">2.4M</div></div><div class="db-k"><div class="db-kl">ออเดอร์</div><div class="db-kv">38</div></div><div class="db-k"><div class="db-kl">ลูกหนี้</div><div class="db-kv" style="color:var(--g)">890K</div></div><div class="db-k"><div class="db-kl">สต็อกต่ำ</div><div class="db-kv" style="color:var(--pk)">5 SKU</div></div></div><div style="font-size:10.5px;color:var(--gr);margin-top:6px">⚠️ เหล็กกล่อง 2×4 เหลือ 18 เส้น</div></div>
+            </div>
+            <div class="mk-inp-row"><input class="mk-inp" placeholder="ถามข้อมูลธุรกิจ..." readonly><button class="mk-send" style="background:var(--l)">↑</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Chapter 4: How We Work -->
+  <section class="sec">
+    <div class="sw">
+      <div class="ch-lbl fu"><span class="ch-n">Chapter 04 · วิธีที่เราทำงาน</span><div class="ch-line"></div></div>
+      <div class="how-grid fu">
+        <div>
+          <h2 class="h1" style="margin-bottom:32px">เราเริ่มจาก<br><span class="l">เข้าใจธุรกิจ</span><br>ก่อนสร้าง AI</h2>
+          <div class="how-steps">
+            <div class="how-step hs1"><div class="hs-n">1</div><div><div class="hs-head">AI Discovery &amp; Blueprint</div><div class="hs-body">สัมภาษณ์ทีมงาน วิเคราะห์ workflow ค้นหา pain point จริง แล้วออกแบบ AI โดยเฉพาะ</div></div></div>
+            <div class="how-step hs2"><div class="hs-n">2</div><div><div class="hs-head">AI Workforce Starter</div><div class="hs-body">Knowledge Agent + Sales Agent พร้อม LINE OA Integration อบรมทีมงาน support จนถึง Go-Live</div></div></div>
+            <div class="how-step hs3"><div class="hs-n">3</div><div><div class="hs-head">Executive Intelligence</div><div class="hs-body">Executive Agent + Dashboard สำหรับเจ้าของ เห็นภาพธุรกิจ Real-Time ตัดสินใจได้เร็วขึ้น</div></div></div>
+          </div>
+        </div>
+        <div class="gls" style="padding:32px 28px">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--l);margin-bottom:16px">ทำไมต้องเริ่มจาก Discovery</div>
+          <div style="font-family:'SUSE',sans-serif;font-size:18px;font-weight:700;color:var(--wh);line-height:1.5;margin-bottom:16px">AI ที่ดีไม่ใช่การ<span style="color:var(--l)">ติดตั้งเครื่องมือ</span><br>แต่คือการออกแบบ<span style="color:var(--l)">วิธีทำงานใหม่</span></div>
+          <p class="body-text" style="margin-bottom:24px">ธุรกิจวัสดุก่อสร้างแต่ละเจ้ามีกระบวนการที่ต่างกัน — AI ที่ทำงานได้จริงต้องเข้าใจธุรกิจของคุณโดยเฉพาะ</p>
+          <div style="padding:18px 20px;border:1px solid rgba(184,243,107,0.2);background:rgba(184,243,107,0.04)">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--l);margin-bottom:8px">เริ่มต้นด้วย</div>
+            <div style="font-family:'SUSE',sans-serif;font-size:17px;font-weight:800;color:var(--wh);margin-bottom:8px">AI Discovery &amp; Blueprint</div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div class="row"><span style="color:var(--l)">›</span>Business &amp; Process Discovery</div><div class="row"><span style="color:var(--l)">›</span>Pain Point &amp; Opportunity Analysis</div><div class="row"><span style="color:var(--l)">›</span>AI Workforce Blueprint</div><div class="row"><span style="color:var(--l)">›</span>Implementation Roadmap</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="sdiv"></div>
+
+  <!-- Chapter 5: Next Step -->
+  <section class="next-s">
+    <div class="sw" style="position:relative;z-index:1">
+      <div class="fu">
+        <div class="ch-lbl" style="justify-content:center"><span class="ch-n">Chapter 05 · ขั้นต่อไป</span><div class="ch-line"></div></div>
+        <h2 class="h1" style="font-size:52px;text-align:center;margin-bottom:14px">ขั้นต่อไป<br><span class="l">ง่ายมาก</span></h2>
+        <p class="lead" style="text-align:center;margin:0 auto 40px">เริ่มต้นด้วยการทำความเข้าใจธุรกิจของคุณก่อน — แล้วค่อยตัดสินใจ</p>
+      </div>
+      <div class="fu" style="display:flex;justify-content:center">
+        <div style="padding:32px 36px;border:1px solid rgba(184,243,107,0.2);background:rgba(184,243,107,0.04);max-width:460px;width:100%;text-align:left">
+          <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--l);margin-bottom:10px">First Step</div>
+          <div style="font-family:'SUSE',sans-serif;font-size:20px;font-weight:800;color:var(--wh);margin-bottom:10px">AI Discovery &amp; Blueprint</div>
+          <p style="font-size:13px;color:var(--gr);line-height:1.7;margin-bottom:18px">นัดคุยเพื่อทำความเข้าใจธุรกิจของคุณ วิเคราะห์ pain point จริง และออกแบบ AI Workforce ที่เหมาะสม</p>
+          <div style="display:flex;flex-direction:column;gap:8px"><div class="row"><span style="color:var(--l);font-weight:700">✓</span>ไม่ต้องตัดสินใจอะไรตอนนี้</div><div class="row"><span style="color:var(--l);font-weight:700">✓</span>ได้ Blueprint ก่อนลงทุน</div><div class="row"><span style="color:var(--l);font-weight:700">✓</span>รู้ชัดว่า AI จะช่วยธุรกิจได้จริงแค่ไหน</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /tab-3 -->
 
 <footer>
   <div class="flo">PlixPlan × Metal City 89</div>
-  <div class="fcp">AI WORKFORCE PROPOSAL · 2025 · CONFIDENTIAL</div>
+  <div class="fcp">AI Proposal 2025 · Confidential</div>
 </footer>
 
 <script>
+// Tab switching
+const tabs=document.querySelectorAll('.tab-btn');
+const panels=document.querySelectorAll('.tab-panel');
+tabs.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t=btn.dataset.tab;
+    tabs.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+t).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    // re-trigger animations in the new panel
+    document.querySelectorAll('#tab-'+t+' .fu').forEach(el=>{
+      el.classList.remove('vis');
+      setTimeout(()=>ob.observe(el),50);
+    });
+  });
+});
+// Scroll animations
 const ob=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
-    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*70);ob.unobserve(e.target)}
-  })
-},{threshold:.08});
-document.querySelectorAll('.fu').forEach(el=>ob.observe(el));
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*60);ob.unobserve(e.target)}
+  });
+},{threshold:.07});
+document.querySelectorAll('#tab-1 .fu').forEach(el=>ob.observe(el));
 </script>
 </body>
 </html>

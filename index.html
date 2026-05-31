@@ -10,706 +10,489 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --mid:#0d1117;--mid-soft:#161b22;--e:#00f5ff;--g:#ffd60a;--l:#b8f36b;
-  --pk:#ff7bb8;--gr:#8b949e;--gr-s:#c9d1d9;--wh:#f5f7fb;
-  --bp:#0ea5bd;--bs:#f5b301;--bd:rgba(255,255,255,0.08);--ba:rgba(0,245,255,0.18)
+  --mid:#0d1117;--mid2:#161b22;--e:#00f5ff;--g:#ffd60a;--l:#b8f36b;
+  --pk:#ff7bb8;--gr:#8b949e;--grs:#c9d1d9;--wh:#f5f7fb;
+  --bd:rgba(255,255,255,0.08);--ba:rgba(0,245,255,0.18)
 }
 html{scroll-behavior:smooth}
 body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;background:var(--mid);color:var(--wh);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.gbg{background-image:linear-gradient(rgba(255,255,255,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04)1px,transparent 1px);background-size:32px 32px}
-.amb{position:relative;overflow:hidden}
-.amb::before{content:'';position:absolute;pointer-events:none;z-index:0;width:60%;height:70%;top:-15%;left:-10%;background:radial-gradient(circle,rgba(0,245,255,0.09),transparent 65%);filter:blur(60px)}
-.amb::after{content:'';position:absolute;pointer-events:none;z-index:0;width:50%;height:60%;bottom:-10%;right:-5%;background:radial-gradient(circle,rgba(184,243,107,0.07),transparent 65%);filter:blur(60px)}
+.gbg{background-image:linear-gradient(rgba(255,255,255,0.03)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03)1px,transparent 1px);background-size:32px 32px}
 .gl{background:rgba(255,255,255,0.04);border:1px solid var(--bd);backdrop-filter:blur(12px)}
-.gl-s{background:rgba(22,27,34,0.72);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px)}
-.gl-t{background:linear-gradient(135deg,rgba(0,245,255,0.06),rgba(184,243,107,0.04));border:1px solid var(--ba)}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,17,23,0.88);border-bottom:1px solid var(--bd);backdrop-filter:blur(16px)}
-.nlog{font-family:'SUSE',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--e);text-transform:uppercase}
-.nbadge{font-size:10px;font-weight:600;letter-spacing:.1em;background:rgba(0,245,255,0.1);color:var(--e);border:1px solid rgba(0,245,255,0.25);padding:4px 12px;border-radius:20px;text-transform:uppercase}
-.nlinks{display:flex;gap:24px}
-.nlinks a{font-size:12px;color:var(--gr);text-decoration:none;transition:color .2s}
-.nlinks a:hover{color:var(--e)}
-
-/* SECTION COMMON */
-.sw{max-width:1200px;margin:0 auto;padding:0 40px}
-.sh{text-align:center;margin-bottom:60px}
-.stag{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--e);display:block;margin-bottom:14px}
-.stag.g{color:var(--g)}.stag.l{color:var(--l)}
-.sttl{font-family:'SUSE',sans-serif;font-size:44px;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--wh);margin-bottom:14px}
-.sttl .e{color:var(--e)}.sttl .g{color:var(--g)}.sttl .l{color:var(--l)}
-.ssub{font-size:15px;color:var(--gr);max-width:560px;margin:0 auto}
+.gls{background:rgba(22,27,34,0.72);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px)}
+.glt{background:linear-gradient(135deg,rgba(0,245,255,0.06),rgba(184,243,107,0.04));border:1px solid var(--ba)}
 .sdiv{height:1px;background:linear-gradient(to right,transparent,var(--bd),transparent)}
-
-/* FADE */
-.fu{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.sw{max-width:1100px;margin:0 auto;padding:0 40px}
+.fu{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
 .fu.vis{opacity:1;transform:none}
 
-/* ══ HERO ══ */
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px 40px 80px}
-.hi{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
-.heb{font-size:10px;font-weight:600;letter-spacing:.18em;color:var(--e);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.heb::before{content:'';width:28px;height:1px;background:var(--e)}
-.htl{font-family:'SUSE',sans-serif;font-size:66px;font-weight:800;line-height:1.0;letter-spacing:-.025em;margin-bottom:8px;color:var(--wh)}
-.htl .e{color:var(--e);display:block}
-.htl .sub{font-size:18px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,0.5);margin-top:6px;display:block;font-family:'IBM Plex Sans Thai',sans-serif}
-.hdesc{font-size:15px;color:var(--gr-s);line-height:1.75;max-width:480px;margin:20px 0 36px}
-.hcta{display:flex;gap:12px;flex-wrap:wrap}
-.btp{font-family:'SUSE',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;background:var(--e);color:var(--mid);padding:11px 26px;border:none;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;display:inline-block}
-.btp:hover{background:#47f7ff}
-.btg{font-size:12px;font-weight:500;background:transparent;color:var(--gr-s);padding:11px 26px;border:1px solid var(--bd);cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;display:inline-block}
-.btg:hover{border-color:rgba(0,245,255,0.4);color:var(--e)}
-.hst{display:flex;flex-direction:column;gap:14px}
-.stc{padding:22px 26px;position:relative;overflow:hidden}
-.stc::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
-.stc.c1::before{background:var(--e)}.stc.c2::before{background:var(--g)}.stc.c3::before{background:var(--l)}
-.stn{font-family:'SUSE',sans-serif;font-size:48px;font-weight:800;line-height:1;margin-bottom:4px}
-.c1 .stn{color:var(--e)}.c2 .stn{color:var(--g)}.c3 .stn{color:var(--l)}
-.stl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
-.c1 .stl{color:var(--e)}.c2 .stl{color:var(--g)}.c3 .stl{color:var(--l)}
-.std{font-size:12px;color:var(--gr);line-height:1.5}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,17,23,0.9);border-bottom:1px solid var(--bd);backdrop-filter:blur(16px)}
+.nlogo{font-family:'SUSE',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--e);text-transform:uppercase}
+.nbadge{font-size:10px;font-weight:600;letter-spacing:.1em;background:rgba(0,245,255,0.08);color:var(--e);border:1px solid rgba(0,245,255,0.22);padding:4px 14px;border-radius:20px;text-transform:uppercase}
 
-/* ══ EXEC SUMMARY ══ */
-.exec-s{padding:100px 0}
-.eq{padding:36px 44px;position:relative;margin-bottom:36px}
-.eq::before{content:'"';font-family:'SUSE',sans-serif;font-size:110px;font-weight:800;color:var(--e);opacity:.13;position:absolute;top:-18px;left:18px;line-height:1}
-.eqt{font-family:'SUSE',sans-serif;font-size:20px;font-weight:700;color:var(--wh);line-height:1.55;position:relative;z-index:1;padding-left:10px}
-.eqt span{color:var(--e)}
-.ebdy{font-size:14.5px;color:var(--gr-s);line-height:1.8}
+/* CHAPTER LABEL */
+.ch-label{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.ch-num{font-family:'SUSE',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gr)}
+.ch-line{flex:1;height:1px;background:var(--bd);max-width:48px}
 
-/* ══ ECOSYSTEM ══ */
-.eco-s{padding:100px 0}
-.ecog{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.chain{display:flex;flex-direction:column;gap:0}
-.cn{padding:16px 22px;position:relative;border:1px solid var(--bd);border-bottom:none}
-.cn:last-child{border-bottom:1px solid var(--bd)}
-.cn.ac{background:rgba(0,245,255,0.05);border-color:rgba(0,245,255,0.22)}
-.cn.ac2{background:rgba(14,165,189,0.07);border-color:rgba(14,165,189,0.28)}
-.cnn{font-size:9px;font-weight:600;letter-spacing:.15em;color:var(--gr);margin-bottom:3px;text-transform:uppercase}
-.ac .cnn{color:var(--e)}.ac2 .cnn{color:var(--bp)}
-.cnm{font-family:'SUSE',sans-serif;font-size:15px;font-weight:700;color:var(--wh);margin-bottom:2px}
-.cnr{font-size:12px;color:var(--gr)}.ac .cnr{color:rgba(0,245,255,0.7)}.ac2 .cnr{color:rgba(14,165,189,0.8)}
-.carr{text-align:center;font-size:13px;color:var(--gr);padding:5px 0}
-.strl{display:flex;flex-direction:column;gap:12px}
-.sti{display:flex;align-items:flex-start;gap:14px;padding:14px 18px}
-.stic{width:30px;height:30px;border-radius:6px;flex-shrink:0;background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.18);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--e)}
-.stt{font-size:13.5px;color:var(--gr-s);line-height:1.5;padding-top:4px}
+/* SECTION TITLE SYSTEM */
+.s-eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:14px}
+.ec{color:var(--e)}.gc{color:var(--g)}.lc{color:var(--l)}
+.s-title{font-family:'SUSE',sans-serif;font-size:42px;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:var(--wh);margin-bottom:14px}
+.s-title .e{color:var(--e)}.s-title .g{color:var(--g)}.s-title .l{color:var(--l)}
+.s-sub{font-size:15px;color:var(--gr);line-height:1.75;max-width:560px}
 
-/* ══ FINDINGS ══ */
-.find-s{padding:100px 0}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.fc{padding:30px 26px;position:relative;overflow:hidden;transition:border-color .25s}
-.fc:hover{border-color:rgba(0,245,255,0.3)}.fc.gd:hover{border-color:rgba(255,214,10,0.3)}
-.fct{position:absolute;top:0;left:0;right:0;height:2px}
-.fc .fct{background:var(--e)}.fc.gd .fct{background:var(--g)}
-.fcn{font-family:'SUSE',sans-serif;font-size:52px;font-weight:800;line-height:1;margin-bottom:10px;opacity:.2}
-.fc .fcn{color:var(--e)}.fc.gd .fcn{color:var(--g)}
-.fcttl{font-family:'SUSE',sans-serif;font-size:17px;font-weight:700;color:var(--wh);margin-bottom:8px}
-.fcd{font-size:13.5px;color:var(--gr);line-height:1.65}
+/* ══ HERO / COVER ══ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-10%;left:-5%;width:55%;height:70%;background:radial-gradient(circle,rgba(0,245,255,0.07),transparent 65%);filter:blur(60px);pointer-events:none;z-index:0}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center}
+.hero-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--e);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--e)}
+.hero-title{font-family:'SUSE',sans-serif;font-size:62px;font-weight:800;line-height:1.0;letter-spacing:-.025em;margin-bottom:10px}
+.hero-title .e{color:var(--e);display:block}
+.hero-title .dim{font-size:17px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,0.35);display:block;margin-top:10px;font-family:'IBM Plex Sans Thai',sans-serif}
+.hero-desc{font-size:15px;color:var(--grs);line-height:1.8;max-width:500px;margin:22px 0 36px}
+.hero-desc strong{color:var(--e)}
+.btn-e{font-family:'SUSE',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;background:var(--e);color:var(--mid);padding:12px 28px;border:none;cursor:pointer;text-transform:uppercase;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-e:hover{background:#3ff8ff}
 
-/* ══ HIDDEN COST ══ */
-.hc-s{padding:100px 0}
-.hcl{display:grid;grid-template-columns:1fr 1fr;gap:36px}
-.hclist{display:flex;flex-direction:column;gap:10px}
-.hci{display:flex;align-items:center;gap:14px;padding:14px 18px}
-.hcb{width:5px;height:5px;border-radius:50%;background:var(--g);flex-shrink:0}
-.hct{font-size:14px;color:var(--gr-s)}
-.ins{display:flex;flex-direction:column;justify-content:space-between;padding:36px 32px}
-.insl{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:18px}
-.insh{font-family:'SUSE',sans-serif;font-size:26px;font-weight:800;line-height:1.3;color:var(--wh);margin-bottom:16px}
-.insh span{color:var(--g)}
-.insq{font-family:'SUSE',sans-serif;font-size:16px;font-weight:600;color:var(--e);line-height:1.5;padding:16px 20px;background:rgba(0,245,255,0.06);border-left:2px solid var(--e);margin-bottom:20px}
-.insf{font-size:12.5px;color:var(--gr);line-height:1.7;padding-top:16px;border-top:1px solid var(--bd)}
+/* hero right — definition box */
+.def-box{padding:32px 28px;position:relative;overflow:hidden}
+.def-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--e),var(--l))}
+.def-not{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:16px}
+.def-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}
+.def-row:last-child{border-bottom:none}
+.def-x{font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through}
+.def-yes{margin-top:20px;padding:16px 18px;background:rgba(0,245,255,0.06);border-left:2px solid var(--e)}
+.def-yes-lbl{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:6px}
+.def-yes-txt{font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh);line-height:1.4}
 
-/* ══ RECOMMENDATION ══ */
-.rec-s{padding:100px 0}
-.recg{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.rec-left{padding:40px 36px}
-.rec-right{display:flex;flex-direction:column;gap:16px}
-.rec-pill{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);background:var(--e);padding:5px 14px;display:inline-block;margin-bottom:18px}
-.rec-title{font-family:'SUSE',sans-serif;font-size:36px;font-weight:800;color:var(--wh);line-height:1.15;margin-bottom:12px}
-.rec-title span{color:var(--e)}
-.rec-sub{font-size:14px;color:var(--gr-s);line-height:1.7;margin-bottom:24px}
-.rec-vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
-.rec-vs-n{padding:14px 16px;border:1px solid var(--bd);text-align:center}
-.rec-vs-n .rvlbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:6px}
-.rec-vs-n .rvval{font-family:'SUSE',sans-serif;font-size:18px;font-weight:700}
-.rec-vs-n.no .rvval{color:rgba(255,255,255,0.35);text-decoration:line-through}
-.rec-vs-n.yes .rvval{color:var(--e)}
-.agcard{padding:22px 20px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:all .2s}
-.agcard:hover{transform:translateY(-3px);border-color:rgba(0,245,255,0.3)}
-.agcard.gd:hover{border-color:rgba(255,214,10,0.3)}
-.agcard.lm:hover{border-color:rgba(184,243,107,0.3)}
-.agct{position:absolute;top:0;left:0;right:0;height:2px}
-.agcard .agct{background:var(--e)}.agcard.gd .agct{background:var(--g)}.agcard.lm .agct{background:var(--l)}
-.agna{font-family:'SUSE',sans-serif;font-size:16px;font-weight:800;color:var(--wh);margin-bottom:4px}
-.agcard .agna{}.agcard.gd .agna{color:var(--g)}.agcard.lm .agna{color:var(--l)}
-.agro{font-size:12px;color:var(--gr)}
+/* ══ PROBLEM SECTION ══ */
+.prob-s{padding:100px 0}
+.prob-intro{font-size:16px;color:var(--grs);line-height:1.8;max-width:640px;margin-bottom:52px;padding-left:20px;border-left:2px solid var(--e)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.prob-card{padding:40px 32px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:border-color .25s}
+.prob-card:not(:first-child){border-left:none}
+.prob-card:hover{border-color:rgba(0,245,255,0.3)}
+.prob-card.g:hover{border-color:rgba(255,214,10,0.3)}
+.prob-card.l:hover{border-color:rgba(184,243,107,0.3)}
+.prob-top{position:absolute;top:0;left:0;right:0;height:3px}
+.prob-card .prob-top{background:var(--e)}
+.prob-card.g .prob-top{background:var(--g)}
+.prob-card.l .prob-top{background:var(--l)}
+.prob-n{font-family:'SUSE',sans-serif;font-size:60px;font-weight:800;line-height:1;opacity:.15;margin-bottom:16px}
+.prob-card .prob-n{color:var(--e)}
+.prob-card.g .prob-n{color:var(--g)}
+.prob-card.l .prob-n{color:var(--l)}
+.prob-headline{font-family:'SUSE',sans-serif;font-size:20px;font-weight:800;color:var(--wh);margin-bottom:14px;line-height:1.25}
+.prob-card .prob-headline{}
+.prob-card.g .prob-headline{color:var(--g)}
+.prob-card.l .prob-headline{color:var(--l)}
+.prob-body{font-size:13.5px;color:var(--gr);line-height:1.7;margin-bottom:20px}
+.prob-example{padding:14px 16px;font-size:12.5px;color:var(--grs);line-height:1.65;font-style:italic}
+.prob-card .prob-example{background:rgba(0,245,255,0.04);border-left:2px solid rgba(0,245,255,0.3)}
+.prob-card.g .prob-example{background:rgba(255,214,10,0.04);border-left:2px solid rgba(255,214,10,0.3)}
+.prob-card.l .prob-example{background:rgba(184,243,107,0.04);border-left:2px solid rgba(184,243,107,0.3)}
 
-/* ══ ARCHITECTURE ══ */
-.arch-s{padding:100px 0}
-.archd{padding:48px 48px;text-align:center;position:relative}
-.arch-brain{display:inline-block;padding:16px 48px;border:1px solid var(--e);background:rgba(0,245,255,0.07);margin-bottom:32px}
-.arch-brain-txt{font-family:'SUSE',sans-serif;font-size:18px;font-weight:800;color:var(--e);letter-spacing:.06em}
-.arch-brain-sub{font-size:11px;color:rgba(0,245,255,0.6);margin-top:4px}
-.arch-line-v{width:1px;height:40px;background:linear-gradient(to bottom,var(--e),rgba(0,245,255,0.3));margin:0 auto 0}
-.arch-agents{display:flex;justify-content:center;gap:0;align-items:flex-start}
-.arch-branch{display:flex;flex-direction:column;align-items:center;width:220px}
-.arch-connector{display:flex;align-items:center;justify-content:center;position:relative;width:220px;height:40px}
-.arch-connector::before{content:'';position:absolute;top:50%;height:1px;background:rgba(0,245,255,0.3)}
-.arch-connector.l::before{width:50%;right:0}
-.arch-connector.r::before{width:50%;left:0}
-.arch-connector.m{width:200px}
-.arch-connector.m::before{display:none}
-.arch-agent-box{padding:20px 24px;width:180px;text-align:left;position:relative;overflow:hidden}
-.arch-agent-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.arch-agent-box.a1::before{background:var(--e)}
-.arch-agent-box.a2::before{background:var(--g)}
-.arch-agent-box.a3::before{background:var(--l)}
-.abn{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
-.a1 .abn{color:var(--e)}.a2 .abn{color:var(--g)}.a3 .abn{color:var(--l)}
-.abt{font-family:'SUSE',sans-serif;font-size:15px;font-weight:800;color:var(--wh)}
-.abr{font-size:11px;color:var(--gr);margin-top:3px}
-.arch-note{margin-top:32px;padding:14px 24px;display:inline-block;font-size:13px;color:var(--gr-s)}
-.arch-note strong{color:var(--e)}
+/* ══ BIG IDEA ══ */
+.idea-s{padding:100px 0}
+.idea-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.idea-left{}
+.idea-quote{font-family:'SUSE',sans-serif;font-size:26px;font-weight:800;color:var(--wh);line-height:1.4;margin-bottom:24px}
+.idea-quote span{color:var(--e)}
+.idea-body{font-size:14px;color:var(--gr);line-height:1.8}
+.idea-right{display:flex;flex-direction:column;gap:14px}
+.idea-card{padding:20px 22px;border:1px solid var(--bd);position:relative;overflow:hidden;display:flex;align-items:flex-start;gap:16px}
+.idea-card::before{content:'';position:absolute;left:0;top:0;width:3px;height:100%}
+.idea-card.c1::before{background:var(--e)}
+.idea-card.c2::before{background:var(--g)}
+.idea-card.c3::before{background:var(--l)}
+.idea-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.idea-txt-head{font-family:'SUSE',sans-serif;font-size:15px;font-weight:700;color:var(--wh);margin-bottom:4px}
+.idea-txt-body{font-size:12.5px;color:var(--gr);line-height:1.6}
 
-/* ══ AGENT DETAIL ══ */
-.ag-s{padding:80px 0}
-.ag-card{display:grid;grid-template-columns:260px 1fr 360px;border:1px solid var(--bd);overflow:hidden;margin-bottom:28px;transition:border-color .2s}
+/* ══ AGENTS ══ */
+.agents-s{padding:80px 0}
+.ag-card{display:grid;grid-template-columns:240px 1fr 340px;border:1px solid var(--bd);overflow:hidden;margin-bottom:24px;transition:border-color .2s}
 .ag-card:hover{border-color:rgba(0,245,255,0.25)}
 .ag-card.gd:hover{border-color:rgba(255,214,10,0.25)}
 .ag-card.lm:hover{border-color:rgba(184,243,107,0.25)}
-.ag-left{padding:36px 28px;display:flex;flex-direction:column;justify-content:space-between}
+.ag-l{padding:36px 28px;display:flex;flex-direction:column;justify-content:space-between}
 .ag-badge{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;border-radius:3px;display:inline-block;margin-bottom:16px}
-.ag-card .ag-badge{background:rgba(0,245,255,0.1);color:var(--e);border:1px solid rgba(0,245,255,0.22)}
-.ag-card.gd .ag-badge{background:rgba(255,214,10,0.1);color:var(--g);border:1px solid rgba(255,214,10,0.22)}
-.ag-card.lm .ag-badge{background:rgba(184,243,107,0.1);color:var(--l);border:1px solid rgba(184,243,107,0.22)}
-.ag-name{font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);line-height:1.2;margin-bottom:6px}
+.ag-card .ag-badge{background:rgba(0,245,255,0.1);color:var(--e);border:1px solid rgba(0,245,255,0.2)}
+.ag-card.gd .ag-badge{background:rgba(255,214,10,0.1);color:var(--g);border:1px solid rgba(255,214,10,0.2)}
+.ag-card.lm .ag-badge{background:rgba(184,243,107,0.1);color:var(--l);border:1px solid rgba(184,243,107,0.2)}
+.ag-name{font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);line-height:1.2;margin-bottom:5px}
 .ag-role{font-size:12px;color:var(--gr);font-style:italic;margin-bottom:24px}
-.ag-results-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-.ag-card .ag-results-lbl{color:var(--e)}
-.ag-card.gd .ag-results-lbl{color:var(--g)}
-.ag-card.lm .ag-results-lbl{color:var(--l)}
-.ag-result{display:flex;gap:8px;font-size:13px;color:var(--gr-s);padding:4px 0;align-items:flex-start}
+.ag-rl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.ag-card .ag-rl{color:var(--e)}.ag-card.gd .ag-rl{color:var(--g)}.ag-card.lm .ag-rl{color:var(--l)}
+.ag-result{display:flex;gap:8px;font-size:12.5px;color:var(--grs);padding:3px 0;align-items:flex-start}
 .ag-dot{width:4px;height:4px;border-radius:50%;flex-shrink:0;margin-top:8px}
 .ag-card .ag-dot{background:var(--e)}.ag-card.gd .ag-dot{background:var(--g)}.ag-card.lm .ag-dot{background:var(--l)}
-
-.ag-mid{padding:36px 32px;border-left:1px solid var(--bd)}
-.ag-can-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
-.ag-card .ag-can-lbl{color:var(--e)}.ag-card.gd .ag-can-lbl{color:var(--g)}.ag-card.lm .ag-can-lbl{color:var(--l)}
-.ag-caps{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-.ag-cap{padding:10px 14px;border:1px solid var(--bd);font-size:13px;color:var(--gr-s)}
+.ag-m{padding:36px 28px;border-left:1px solid var(--bd)}
+.ag-cl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.ag-card .ag-cl{color:var(--e)}.ag-card.gd .ag-cl{color:var(--g)}.ag-card.lm .ag-cl{color:var(--l)}
+.ag-caps{display:flex;flex-direction:column;gap:8px}
+.ag-cap{padding:9px 13px;border:1px solid var(--bd);font-size:13px;color:var(--grs)}
 .ag-cap.hl{font-weight:600}
-.ag-card .ag-cap.hl{color:var(--e);background:rgba(0,245,255,0.05);border-color:rgba(0,245,255,0.18)}
-.ag-card.gd .ag-cap.hl{color:var(--g);background:rgba(255,214,10,0.05);border-color:rgba(255,214,10,0.18)}
-.ag-card.lm .ag-cap.hl{color:var(--l);background:rgba(184,243,107,0.05);border-color:rgba(184,243,107,0.18)}
-.ag-ex-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:10px}
+.ag-card .ag-cap.hl{color:var(--e);background:rgba(0,245,255,0.04);border-color:rgba(0,245,255,0.18)}
+.ag-card.gd .ag-cap.hl{color:var(--g);background:rgba(255,214,10,0.04);border-color:rgba(255,214,10,0.18)}
+.ag-card.lm .ag-cap.hl{color:var(--l);background:rgba(184,243,107,0.04);border-color:rgba(184,243,107,0.18)}
+.ag-r{padding:20px 18px;border-left:1px solid var(--bd);background:rgba(0,0,0,0.2)}
+.mk-lbl{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.ag-card .mk-lbl{color:var(--e)}.ag-card.gd .mk-lbl{color:var(--g)}.ag-card.lm .mk-lbl{color:var(--l)}
 
-/* ══ MOCKUP PANEL ══ */
-.ag-right{padding:24px 20px;border-left:1px solid var(--bd);background:rgba(0,0,0,0.25)}
-.mk-device{background:var(--mid-soft);border:1px solid var(--bd);border-radius:8px;overflow:hidden}
-.mk-topbar{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd)}
-.mk-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
-.mk-topbar-name{font-size:12px;font-weight:600;color:var(--wh)}
-.mk-topbar-sub{font-size:10px;color:var(--gr)}
-.mk-status{width:6px;height:6px;border-radius:50%;background:#1a7f37;margin-left:auto}
-.mk-body{padding:14px;display:flex;flex-direction:column;gap:8px;min-height:220px}
-.mk-msg{max-width:85%;padding:8px 12px;border-radius:8px;font-size:11.5px;line-height:1.5}
-.mk-msg.u{align-self:flex-end;background:rgba(0,245,255,0.12);border:1px solid rgba(0,245,255,0.2);color:var(--gr-s)}
-.mk-msg.ai{align-self:flex-start;background:rgba(22,27,34,0.9);border:1px solid var(--bd);color:var(--gr-s)}
-.mk-msg .lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.ai .lbl{color:var(--e)}.mk-msg.gd .lbl{color:var(--g)}.mk-msg.lm .lbl{color:var(--l)}
-.mk-msg .ref{font-size:10px;color:var(--gr);margin-top:5px;padding-top:5px;border-top:1px solid var(--bd)}
-/* LINE mockup */
-.ln-top{background:#075e54;padding:10px 14px;display:flex;align-items:center;gap:8px}
-.ln-av{width:28px;height:28px;border-radius:50%;background:#06c755;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
-.ln-nm{font-size:12px;font-weight:600;color:#fff}
-.ln-st{font-size:10px;color:rgba(255,255,255,0.7)}
-.ln-body{background:#e5ddd5;padding:12px;display:flex;flex-direction:column;gap:7px;min-height:220px}
-.ln-msg{max-width:80%;padding:7px 11px;border-radius:6px;font-size:11px;line-height:1.5}
-.ln-msg.c{align-self:flex-start;background:#fff;color:#333;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
-.ln-msg.ai{align-self:flex-start;background:#fff;color:#333;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
-.ln-msg.u{align-self:flex-end;background:#dcf8c6;color:#333;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
-.ln-lbl{font-size:9px;font-weight:700;color:#06c755;margin-bottom:2px;text-transform:uppercase}
-.ln-doc{background:#075e54;color:#fff;padding:6px 10px;border-radius:6px;font-size:10px;margin-top:4px;display:flex;align-items:center;gap:6px}
-/* Dashboard mockup */
-.db-top{padding:10px 14px;background:var(--mid-soft);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px}
-.db-icon{width:26px;height:26px;border-radius:6px;background:rgba(184,243,107,0.15);border:1px solid rgba(184,243,107,0.3);display:flex;align-items:center;justify-content:center;font-size:12px}
-.db-title{font-size:12px;font-weight:700;color:var(--wh)}
-.db-chat{padding:10px;display:flex;flex-direction:column;gap:7px}
-.db-q{align-self:flex-end;background:rgba(184,243,107,0.1);border:1px solid rgba(184,243,107,0.2);color:var(--gr-s);padding:7px 11px;border-radius:6px;font-size:11px;max-width:85%}
-.db-ans{align-self:flex-start;background:rgba(22,27,34,0.9);border:1px solid var(--bd);color:var(--gr-s);padding:10px 12px;border-radius:6px;font-size:11px;max-width:95%;line-height:1.55}
-.db-kpi{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:8px 10px;background:rgba(0,0,0,0.2);border-radius:6px;margin-top:4px}
-.db-kpi-i{padding:7px 10px;background:rgba(184,243,107,0.07);border:1px solid rgba(184,243,107,0.15);border-radius:4px}
-.db-kpi-lbl{font-size:9px;color:var(--gr);text-transform:uppercase;letter-spacing:.08em}
-.db-kpi-val{font-family:'SUSE',sans-serif;font-size:16px;font-weight:800;color:var(--l)}
-.mk-footer{padding:8px 14px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:8px}
-.mk-inp{flex:1;background:rgba(0,0,0,0.3);border:1px solid var(--bd);border-radius:4px;padding:6px 10px;font-size:10px;color:var(--gr);font-family:inherit}
-.mk-send{width:28px;height:28px;background:var(--e);border:none;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--mid)}
-.ln-inp-bar{background:#f0f0f0;padding:8px 10px;display:flex;align-items:center;gap:8px}
-.ln-inp{flex:1;background:#fff;border:none;border-radius:20px;padding:6px 12px;font-size:10px;color:#333;font-family:inherit}
-.ln-snd{width:28px;height:28px;background:#06c755;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:11px}
+/* MOCKUP COMPONENTS */
+.mk-device{background:var(--mid2);border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.mk-bar{padding:9px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd)}
+.mk-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.mk-nm{font-size:11.5px;font-weight:600;color:var(--wh)}
+.mk-st{font-size:10px;color:var(--gr)}
+.mk-online{width:6px;height:6px;border-radius:50%;background:#1a7f37;margin-left:auto}
+.mk-body{padding:12px;display:flex;flex-direction:column;gap:7px;min-height:200px}
+.msg{max-width:86%;padding:8px 12px;border-radius:7px;font-size:11.5px;line-height:1.5}
+.msg.u{align-self:flex-end;background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.18);color:var(--grs)}
+.msg.u.g{background:rgba(255,214,10,0.08);border-color:rgba(255,214,10,0.18)}
+.msg.u.l{background:rgba(184,243,107,0.08);border-color:rgba(184,243,107,0.18)}
+.msg.ai{align-self:flex-start;background:rgba(22,27,34,0.95);border:1px solid var(--bd);color:var(--grs)}
+.msg-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.msg.ai .msg-lbl{color:var(--e)}
+.msg.ai.gd .msg-lbl{color:var(--g)}
+.msg.ai.lm .msg-lbl{color:var(--l)}
+.msg-ref{font-size:10px;color:var(--gr);margin-top:5px;padding-top:5px;border-top:1px solid var(--bd)}
+.mk-inp-row{padding:8px 12px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:8px}
+.mk-inp{flex:1;background:rgba(0,0,0,0.3);border:1px solid var(--bd);border-radius:4px;padding:6px 10px;font-size:10.5px;color:var(--gr);font-family:inherit}
+.mk-send{width:28px;height:28px;border:none;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px}
+.ag-card .mk-send{background:var(--e);color:var(--mid)}
+.ag-card.gd .mk-send{background:var(--g);color:var(--mid)}
+.ag-card.lm .mk-send{background:var(--l);color:var(--mid)}
+/* LINE */
+.ln-top{background:#075e54;padding:9px 14px;display:flex;align-items:center;gap:8px}
+.ln-av{width:26px;height:26px;border-radius:50%;background:#06c755;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.ln-nm{font-size:11.5px;font-weight:600;color:#fff}
+.ln-st{font-size:10px;color:rgba(255,255,255,0.65)}
+.ln-body{background:#e5ddd5;padding:10px;display:flex;flex-direction:column;gap:6px;min-height:200px}
+.lmsg{max-width:82%;padding:7px 11px;border-radius:6px;font-size:11px;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.1)}
+.lmsg.u{align-self:flex-end;background:#dcf8c6;color:#222}
+.lmsg.ai{align-self:flex-start;background:#fff;color:#222}
+.ln-lbl{font-size:9px;font-weight:700;color:#06c755;text-transform:uppercase;margin-bottom:2px}
+.ln-doc{background:#075e54;color:#fff;padding:6px 10px;border-radius:5px;font-size:10px;margin-top:4px;display:flex;align-items:flex-start;gap:6px}
+.ln-inp-bar{background:#f0f0f0;padding:7px 10px;display:flex;align-items:center;gap:8px}
+.ln-inp{flex:1;background:#fff;border:none;border-radius:20px;padding:5px 12px;font-size:10.5px;color:#333;font-family:inherit}
+.ln-snd{width:27px;height:27px;background:#06c755;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:11px}
+/* DASHBOARD */
+.db-bar{padding:9px 14px;background:var(--mid2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px}
+.db-icon{width:24px;height:24px;border-radius:5px;background:rgba(184,243,107,0.12);border:1px solid rgba(184,243,107,0.25);display:flex;align-items:center;justify-content:center;font-size:11px}
+.db-title{font-size:11.5px;font-weight:700;color:var(--wh)}
+.db-body{padding:10px;display:flex;flex-direction:column;gap:6px}
+.db-q{align-self:flex-end;background:rgba(184,243,107,0.08);border:1px solid rgba(184,243,107,0.18);color:var(--grs);padding:7px 11px;border-radius:6px;font-size:11px;max-width:88%}
+.db-ans{align-self:flex-start;background:rgba(22,27,34,0.95);border:1px solid var(--bd);padding:10px 12px;border-radius:6px;font-size:11px;max-width:96%;line-height:1.55;color:var(--grs)}
+.db-kpi{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
+.db-k{padding:6px 8px;background:rgba(184,243,107,0.06);border:1px solid rgba(184,243,107,0.12);border-radius:4px}
+.db-kl{font-size:8.5px;color:var(--gr);text-transform:uppercase;letter-spacing:.06em}
+.db-kv{font-family:'SUSE',sans-serif;font-size:15px;font-weight:800;color:var(--l)}
 
-/* ══ ROADMAP ══ */
-.rm-s{padding:100px 0}
-.rmg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px}
-.rmc{border:1px solid var(--bd);overflow:hidden}
-.rmt{padding:22px 22px 16px;border-bottom:1px solid var(--bd)}
-.rmpr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.rmpb{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:3px}
-.r1 .rmpb{background:rgba(0,245,255,0.1);color:var(--e);border:1px solid rgba(0,245,255,0.22)}
-.r2 .rmpb{background:rgba(255,214,10,0.1);color:var(--g);border:1px solid rgba(255,214,10,0.22)}
-.r3 .rmpb{background:rgba(184,243,107,0.1);color:var(--l);border:1px solid rgba(184,243,107,0.22)}
-.rmpe{font-size:10px;color:var(--gr);letter-spacing:.04em}
-.rmth{font-family:'SUSE',sans-serif;font-size:20px;font-weight:800}
-.r1 .rmth{color:var(--e)}.r2 .rmth{color:var(--g)}.r3 .rmth{color:var(--l)}
-.rmsl{font-size:11px;color:var(--gr);font-style:italic;margin-top:3px}
-.rmb{padding:18px 22px}
-.rmi{display:flex;gap:8px;padding:4px 0;font-size:12.5px;color:var(--gr-s);align-items:flex-start}
-.rmbl{font-size:14px;flex-shrink:0;margin-top:-1px}
-.r1 .rmbl{color:var(--e)}.r2 .rmbl{color:var(--g)}.r3 .rmbl{color:var(--l)}
-.fts{padding:14px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;border:1px solid var(--bd)}
-.ftl{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);flex-shrink:0}
-.ftis{display:flex;gap:10px;flex-wrap:wrap}
-.ftic{font-size:11px;color:var(--gr);padding:3px 10px;border:1px solid var(--bd);border-radius:3px}
-.ftic::before{content:'→ ';color:var(--e)}
+/* ══ HOW WE WORK ══ */
+.how-s{padding:100px 0}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.how-steps{display:flex;flex-direction:column;gap:0}
+.how-step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--bd);position:relative}
+.how-step:last-child{border-bottom:none}
+.how-step-n{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'SUSE',sans-serif;font-size:14px;font-weight:800;flex-shrink:0;border:1px solid}
+.s1 .how-step-n{background:rgba(0,245,255,0.08);border-color:rgba(0,245,255,0.25);color:var(--e)}
+.s2 .how-step-n{background:rgba(255,214,10,0.08);border-color:rgba(255,214,10,0.25);color:var(--g)}
+.s3 .how-step-n{background:rgba(184,243,107,0.08);border-color:rgba(184,243,107,0.25);color:var(--l)}
+.how-step-head{font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh);margin-bottom:6px}
+.how-step-body{font-size:13px;color:var(--gr);line-height:1.65}
+.how-right{padding:36px 32px}
+.how-why-head{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:18px}
+.how-quote{font-family:'SUSE',sans-serif;font-size:18px;font-weight:700;color:var(--wh);line-height:1.5;margin-bottom:20px}
+.how-quote span{color:var(--e)}
+.how-body{font-size:13.5px;color:var(--gr);line-height:1.75}
+.disc-box{margin-top:28px;padding:20px 22px;border:1px solid rgba(0,245,255,0.2);background:rgba(0,245,255,0.04)}
+.disc-tag{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:8px}
+.disc-name{font-family:'SUSE',sans-serif;font-size:18px;font-weight:800;color:var(--wh);margin-bottom:6px}
+.disc-body{font-size:12.5px;color:var(--gr);line-height:1.65}
+.disc-items{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.disc-item{font-size:12.5px;color:var(--grs);display:flex;gap:8px;align-items:flex-start}
+.disc-dot{color:var(--e);flex-shrink:0}
 
-/* ══ INVESTMENT ══ */
-.inv-s{padding:100px 0}
-.pkg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
-.pkc{border:1px solid var(--bd);overflow:hidden;transition:transform .25s,border-color .25s}
-.pkc:hover{transform:translateY(-4px);border-color:rgba(0,245,255,0.28)}
-.pkc.ft{border:2px solid var(--e)}.pkc.ft:hover{border-color:var(--e)}
-.pkrb{background:var(--e);color:var(--mid);text-align:center;padding:5px;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-.pkh{padding:22px 22px 14px;border-bottom:1px solid var(--bd)}
-.pko{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:7px}
-.pka .pko{color:var(--e)}.pkb .pko{color:var(--g)}.pkc2 .pko{color:var(--l)}
-.pkn{font-family:'SUSE',sans-serif;font-size:19px;font-weight:800;color:var(--wh);line-height:1.2;margin-bottom:7px}
-.pks{font-size:12px;color:var(--gr);line-height:1.55}
-.pkpa{padding:18px 22px;border-bottom:1px solid var(--bd)}
-.pkpr{font-family:'SUSE',sans-serif;font-size:34px;font-weight:800;line-height:1}
-.pka .pkpr{color:var(--e)}.pkb .pkpr{color:var(--g)}.pkc2 .pkpr{color:var(--l)}
-.pkpu{font-size:12px;color:var(--gr);margin-top:3px}
-.pkpd{font-size:10.5px;color:var(--gr);margin-top:5px}
-.pkrs{padding:18px 22px}
-.pkri{display:flex;gap:9px;padding:4px 0;font-size:12.5px;color:var(--gr-s);align-items:flex-start}
-.pktk{flex-shrink:0;font-weight:700}
-.pka .pktk{color:var(--e)}.pkb .pktk{color:var(--g)}.pkc2 .pktk{color:var(--l)}
-.pkvision{margin-top:40px;padding:36px 40px;text-align:center}
-.pkv-lbl{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:20px}
-.pkv-flow{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-.pkv-from{font-family:'SUSE',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,0.5)}
-.pkv-arr{font-size:20px;color:var(--e)}
-.pkv-to{font-family:'SUSE',sans-serif;font-size:20px;font-weight:800;color:var(--e)}
-.pkv-desc{font-size:13px;color:var(--gr);max-width:480px;margin:16px auto 0;line-height:1.7}
+/* ══ NEXT STEP ══ */
+.next-s{padding:120px 0;text-align:center;position:relative;overflow:hidden}
+.next-s::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,245,255,0.09),transparent 65%);filter:blur(50px);pointer-events:none}
+.next-title{font-family:'SUSE',sans-serif;font-size:56px;font-weight:800;line-height:1.05;letter-spacing:-.025em;margin-bottom:16px}
+.next-title span{color:var(--e)}
+.next-sub{font-size:16px;color:var(--grs);max-width:440px;margin:0 auto 48px;line-height:1.75}
+.next-box{display:inline-block;padding:32px 40px;border:1px solid rgba(0,245,255,0.2);background:rgba(0,245,255,0.04);margin-bottom:36px;text-align:left;max-width:480px;width:100%}
+.next-box-tag{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--e);margin-bottom:12px}
+.next-box-name{font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);margin-bottom:10px}
+.next-box-body{font-size:13px;color:var(--gr);line-height:1.7;margin-bottom:18px}
+.next-items{display:flex;flex-direction:column;gap:8px}
+.next-item{display:flex;gap:10px;font-size:13px;color:var(--grs);align-items:flex-start}
+.next-item-dot{color:var(--e);flex-shrink:0;font-weight:700}
 
-/* ══ CTA CLOSE ══ */
-.cls-s{padding:120px 0;text-align:center;position:relative;overflow:hidden}
-.cls-s::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(0,245,255,0.1),transparent 65%);filter:blur(40px);pointer-events:none}
-.cls-ttl{font-family:'SUSE',sans-serif;font-size:60px;font-weight:800;line-height:1.05;letter-spacing:-.025em;margin-bottom:16px}
-.cls-ttl span{color:var(--e)}
-.cls-sub{font-size:16px;color:var(--gr-s);max-width:460px;margin:0 auto 44px}
-.psum{display:flex;flex-direction:column;gap:10px;max-width:460px;margin:0 auto 40px}
-.psr{display:flex;align-items:center;justify-content:space-between;padding:13px 22px;border:1px solid var(--bd);background:rgba(255,255,255,0.02)}
-.psr.ft{border:2px solid var(--e)}
-.psrn{font-size:13px;color:var(--gr-s)}
-.psrn strong{color:var(--wh)}
-.psrp{font-family:'SUSE',sans-serif;font-size:19px;font-weight:800}
-.psrp.e{color:var(--e)}.psrp.g{color:var(--g)}.psrp.l{color:var(--l)}
-
-/* ══ FOOTER ══ */
+/* FOOTER */
 footer{border-top:1px solid var(--bd);padding:22px 40px;display:flex;align-items:center;justify-content:space-between}
-.flog{font-family:'SUSE',sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;color:var(--e);text-transform:uppercase}
+.flo{font-family:'SUSE',sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;color:var(--e);text-transform:uppercase}
 .fcp{font-size:11px;color:var(--gr);letter-spacing:.05em}
 
 @media(max-width:768px){
-  nav{padding:12px 20px}.nlinks{display:none}
-  .hero{padding:100px 20px 60px}.hi{grid-template-columns:1fr;gap:36px}.htl{font-size:44px}
+  nav{padding:12px 20px}
+  .hero{padding:100px 20px 60px}
+  .hero-inner{grid-template-columns:1fr;gap:36px}
+  .hero-title{font-size:42px}
   .sw{padding:0 20px}
-  .ecog,.hcl,.recg,.fg,.rmg,.pkg{grid-template-columns:1fr}
-  .ag-card{grid-template-columns:1fr}.ag-right{border-left:none;border-top:1px solid var(--bd)}.ag-mid{border-left:none;border-top:1px solid var(--bd)}
-  .archd{padding:32px 20px}.arch-agents{flex-direction:column;align-items:center}
-  .sttl{font-size:30px}.cls-ttl{font-size:40px}
+  .prob-grid,.idea-grid,.how-grid{grid-template-columns:1fr}
+  .prob-card:not(:first-child){border-left:1px solid var(--bd);border-top:none}
+  .ag-card{grid-template-columns:1fr}
+  .ag-r,.ag-m{border-left:none;border-top:1px solid var(--bd)}
+  .s-title{font-size:30px}
+  .next-title{font-size:38px}
   footer{flex-direction:column;gap:10px;text-align:center}
 }
 </style>
 </head>
-<body class="theme-terminal">
+<body>
 
 <nav>
-  <div class="nlog">PlixPlan</div>
-  <div class="nlinks">
-    <a href="#overview">Overview</a>
-    <a href="#agents">AI Workforce</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#invest">Investment</a>
-  </div>
-  <div class="nbadge">AI Workforce Proposal 2025</div>
+  <div class="nlogo">PlixPlan</div>
+  <div class="nbadge">Metal City · AI Workforce</div>
 </nav>
 
-<!-- ══════════════ HERO ══════════════ -->
-<section class="hero amb gbg" id="top">
-  <div class="hi">
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero gbg">
+  <div class="hero-inner">
     <div>
-      <div class="heb">Metal City 89 &amp; Link Ajia</div>
-      <h1 class="htl">
+      <div class="hero-tag">Metal City 89 &amp; Link Ajia</div>
+      <h1 class="hero-title">
         METAL CITY<br>
         <span class="e">AI WORKFORCE</span>
-        <span class="sub">Building The Next Generation<br>Construction Supply Chain</span>
+        <span class="dim">Building The Next Generation Construction Supply Chain</span>
       </h1>
-      <p class="hdesc">ไม่ใช่ Chatbot ไม่ใช่ Software ไม่ใช่ Dashboard — แต่เป็น <strong style="color:var(--e)">พนักงานดิจิทัล</strong> ที่เข้ามาทำงานร่วมกับทีมงานของคุณ</p>
-      <div class="hcta">
-        <a href="#invest" class="btp">ดู Investment Options</a>
-        <a href="#agents" class="btg">พบ AI Workforce</a>
-      </div>
+      <p class="hero-desc">
+        ไม่ใช่ Chatbot &nbsp;·&nbsp; ไม่ใช่ Software &nbsp;·&nbsp; ไม่ใช่ Dashboard<br>
+        แต่เป็น <strong>พนักงานดิจิทัล</strong> ที่ทำงานร่วมกับทีมของคุณ
+      </p>
+      <a href="#problem" class="btn-e">เริ่มต้น</a>
     </div>
-    <div class="hst">
-      <div class="stc gl c1">
-        <div class="stn">3</div>
-        <div class="stl">AI Agents</div>
-        <div class="std">Knowledge · Sales · Executive — พนักงาน AI ที่ทำงานตลอด 24 ชั่วโมง</div>
-      </div>
-      <div class="stc gl c2">
-        <div class="stn">2</div>
-        <div class="stl">Business Units</div>
-        <div class="std">Metal City 89 & Link Ajia — ห่วงโซ่อุปทานวัสดุก่อสร้างครบวงจร</div>
-      </div>
-      <div class="stc gl c3">
-        <div class="stn">6</div>
-        <div class="stl">Months Roadmap</div>
-        <div class="std">AI Foundation → AI Workforce Starter → AI Workforce Transformation</div>
+    <div class="def-box gls">
+      <div class="def-not">AI Workforce ≠</div>
+      <div class="def-row"><span class="def-x">Chatbot ที่ตอบสคริปต์</span></div>
+      <div class="def-row"><span class="def-x">Software ที่ต้องเรียนใหม่</span></div>
+      <div class="def-row"><span class="def-x">Dashboard ที่ไม่มีใครเปิด</span></div>
+      <div class="def-yes">
+        <div class="def-yes-lbl">AI Workforce คือ</div>
+        <div class="def-yes-txt">ทีมงานดิจิทัลที่รู้เรื่องธุรกิจของคุณ และทำงานได้จริง 24 ชั่วโมง</div>
       </div>
     </div>
   </div>
 </section>
 <div class="sdiv"></div>
 
-<!-- ══════════════ EXEC SUMMARY ══════════════ -->
-<section class="exec-s" id="overview">
+<!-- ══════════════════════════════════════════
+     CHAPTER 1 — YOUR PROBLEM
+══════════════════════════════════════════ -->
+<section class="prob-s" id="problem">
   <div class="sw">
-    <div class="sh fu">
-      <span class="stag">01 · Executive Summary</span>
-      <h2 class="sttl">Building the <span class="e">Metal City AI Workforce</span></h2>
+    <div class="ch-label fu">
+      <span class="ch-num">Chapter 01</span>
+      <div class="ch-line"></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start" class="fu">
-      <div>
-        <div class="eq gl-t">
-          <p class="eqt">"สร้างทีมงาน AI<span> ที่ทำงานร่วมกับบุคลากรปัจจุบัน</span>"</p>
-        </div>
-        <p class="ebdy" style="margin-top:22px">Metal City 89 และ Link Ajia เป็นธุรกิจที่ครอบคลุมห่วงโซ่อุปทานวัสดุก่อสร้าง ตั้งแต่การผลิต การจัดจำหน่าย การขนส่ง และการบริการติดตั้ง</p>
-        <p class="ebdy" style="margin-top:14px">เมื่อธุรกิจเติบโต ปริมาณข้อมูล งานเอกสาร และการประสานงานเพิ่มขึ้นอย่างต่อเนื่อง ส่งผลให้การดำเนินงานเริ่มพึ่งพาประสบการณ์และความรู้ของบุคลากรเฉพาะคน</p>
+    <div class="fu">
+      <span class="s-eyebrow ec">สิ่งที่เราเห็นจากธุรกิจของคุณ</span>
+      <h2 class="s-title">3 ปัญหาที่กำลัง<span class="e">ฉุดการเติบโต</span></h2>
+      <p class="s-sub" style="margin-bottom:48px">ธุรกิจที่เติบโตดีมักเจอจุดเดียวกัน — ระบบตามไม่ทันคน และคนก็เริ่มตามไม่ทันธุรกิจ</p>
+    </div>
+    <div class="prob-grid fu">
+
+      <!-- P1: คนเป็นคอขวด -->
+      <div class="prob-card">
+        <div class="prob-top"></div>
+        <div class="prob-n">01</div>
+        <div class="prob-headline">คนเป็น<br>คอขวด</div>
+        <p class="prob-body">องค์ความรู้สำคัญอยู่กับพนักงานเฉพาะคน ไม่ว่าจะเป็นราคาสินค้า สเปก วิธีติดตั้ง หรือข้อมูลลูกค้า — ถ้าคนนั้นไม่อยู่ งานหยุด</p>
+        <div class="prob-example">"ต้องรอพี่คนนั้นกลับมาก่อน เขารู้เรื่องนี้คนเดียว"</div>
       </div>
-      <div class="gl-s" style="padding:32px 34px;height:100%">
-        <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:18px">Goal of This Project</div>
-        <p style="font-family:'SUSE',sans-serif;font-size:17px;font-weight:700;color:var(--wh);line-height:1.55;margin-bottom:20px">เป้าหมายของโครงการนี้ คือ การสร้าง AI Workforce เพื่อทำงานร่วมกับทีมงานปัจจุบัน ช่วยเพิ่มประสิทธิภาพ ลดภาระงานซ้ำ และรองรับการเติบโตขององค์กรในอนาคต</p>
-        <div style="padding:14px 18px;background:rgba(0,245,255,0.05);border-left:2px solid var(--e)">
-          <p style="font-size:14px;color:var(--e);font-weight:500;line-height:1.6">ช่วยเพิ่มประสิทธิภาพ · ลดภาระงานซ้ำ · รองรับการเติบโต</p>
-        </div>
+
+      <!-- P2: โอกาสหลุดมือ -->
+      <div class="prob-card g">
+        <div class="prob-top"></div>
+        <div class="prob-n">02</div>
+        <div class="prob-headline">โอกาส<br>หลุดมือ</div>
+        <p class="prob-body">ลูกค้าถามมา แต่ทีมขายยุ่ง ออกใบเสนอราคาช้า หรือต้องรอข้อมูลจากหลายคน — คู่แข่งปิดได้ก่อนเสมอ</p>
+        <div class="prob-example">"ลูกค้าขอใบเสนอราคา รอนาน สุดท้ายไปซื้อที่อื่น"</div>
       </div>
+
+      <!-- P3: เจ้าของลงมาทำเอง -->
+      <div class="prob-card l">
+        <div class="prob-top"></div>
+        <div class="prob-n">03</div>
+        <div class="prob-headline">เจ้าของ<br>ลงมาทำเอง</div>
+        <p class="prob-body">ผู้บริหารต้องตอบคำถามประจำวัน ตรวจสอบยอดขาย รวบรวมข้อมูลจากหลายระบบ — แทนที่จะโฟกัสที่การเติบโต</p>
+        <div class="prob-example">"วันนี้ยอดเป็นเท่าไรแล้ว ลูกหนี้มีใครบ้าง"</div>
+      </div>
+
     </div>
   </div>
 </section>
 <div class="sdiv"></div>
 
-<!-- ══════════════ ECOSYSTEM ══════════════ -->
-<section class="eco-s">
+<!-- ══════════════════════════════════════════
+     CHAPTER 2 — THE BIG IDEA
+══════════════════════════════════════════ -->
+<section class="idea-s" id="idea">
   <div class="sw">
-    <div class="sh fu">
-      <span class="stag">02 · Business Understanding</span>
-      <h2 class="sttl">Current Business <span class="e">Ecosystem</span></h2>
+    <div class="ch-label fu">
+      <span class="ch-num">Chapter 02</span>
+      <div class="ch-line"></div>
     </div>
-    <div class="ecog fu">
-      <div>
-        <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:14px">Supply Chain Flow</div>
-        <div class="chain">
-          <div class="cn gl"><div class="cnn">Upstream</div><div class="cnm">ผู้ผลิตวัตถุดิบ</div><div class="cnr">วัตถุดิบและสินค้านำเข้า</div></div>
-          <div class="carr">↓</div>
-          <div class="cn ac2"><div class="cnn">Production</div><div class="cnm">Link Ajia</div><div class="cnr">โรงงานผลิตเมทัลชีทและงานโครงสร้าง</div></div>
-          <div class="carr">↓</div>
-          <div class="cn ac"><div class="cnn">Distribution</div><div class="cnm">Metal City 89</div><div class="cnr">ศูนย์จำหน่ายวัสดุก่อสร้างและเหล็ก</div></div>
-          <div class="carr">↓</div>
-          <div class="cn gl"><div class="cnn">Customer</div><div class="cnm">ผู้รับเหมา</div><div class="cnr">Contractors &amp; Project Teams</div></div>
-          <div class="carr">↓</div>
-          <div class="cn gl"><div class="cnn">End Client</div><div class="cnm">เจ้าของโครงการ</div><div class="cnr">Project Owners</div></div>
-        </div>
+    <div class="idea-grid">
+      <div class="fu">
+        <span class="s-eyebrow ec">วิธีแก้ปัญหา</span>
+        <h2 class="s-title">แทนการ<br>เพิ่ม<span class="e">จำนวนคน</span></h2>
+        <p class="idea-quote" style="margin-top:24px">สร้าง <span>AI Workforce</span> — ทีมงานดิจิทัลที่ทำงานร่วมกับคนปัจจุบัน</p>
+        <p class="idea-body">เราไม่ได้มาแทนที่ทีมงาน แต่มาช่วยให้ทีมงานทำงานได้มากขึ้น โดยไม่เพิ่มภาระ — AI จะรับงานซ้ำๆ ที่กินเวลา เพื่อให้คนได้โฟกัสกับงานที่สร้างมูลค่าจริง</p>
       </div>
-      <div>
-        <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:14px">Strategic Strengths</div>
-        <div class="strl">
-          <div class="sti gl"><div class="stic">◆</div><div class="stt">มีฐานลูกค้าผู้รับเหมาในพื้นที่</div></div>
-          <div class="sti gl"><div class="stic">◆</div><div class="stt">มีโรงงานผลิตในเครือ (Link Ajia)</div></div>
-          <div class="sti gl"><div class="stic">◆</div><div class="stt">มีระบบขนส่งและติดตั้ง</div></div>
-          <div class="sti gl"><div class="stic">◆</div><div class="stt">มีเครือข่ายพันธมิตรสินค้า</div></div>
-          <div class="sti gl" style="border-color:rgba(0,245,255,0.18);background:rgba(0,245,255,0.04)"><div class="stic">★</div><div class="stt" style="color:var(--e);font-weight:600">เป็น One Stop Construction Supply Chain</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
-
-<!-- ══════════════ FINDINGS ══════════════ -->
-<section class="find-s" id="challenges">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">03 · Key Findings From Research</span>
-      <h2 class="sttl">ธุรกิจเติบโต แต่พบ<span class="e">ความท้าทายสำคัญ</span></h2>
-    </div>
-    <div class="fg fu">
-      <div class="fc gl">
-        <div class="fct"></div>
-        <div class="fcn">01</div>
-        <div class="fcttl">Knowledge Dependency</div>
-        <div class="fcd">ข้อมูลสำคัญกระจายอยู่ในพนักงานแต่ละคน — ถ้าคนนั้นไม่อยู่ งานหยุด</div>
-      </div>
-      <div class="fc gd gl">
-        <div class="fct"></div>
-        <div class="fcn">02</div>
-        <div class="fcttl">Sales Bottleneck</div>
-        <div class="fcd">การตอบลูกค้าและออกใบเสนอราคายังใช้แรงงานคนเป็นหลัก — ช้า สูญเสียโอกาส</div>
-      </div>
-      <div class="fc gl">
-        <div class="fct"></div>
-        <div class="fcn">03</div>
-        <div class="fcttl">Management Visibility</div>
-        <div class="fcd">ข้อมูลยอดขาย ลูกค้า และลูกหนี้อยู่หลายระบบ — ผู้บริหารเห็นภาพไม่ครบ</div>
-      </div>
-      <div class="fc gd gl">
-        <div class="fct"></div>
-        <div class="fcn">04</div>
-        <div class="fcttl">Scalability Challenge</div>
-        <div class="fcd">รายได้เพิ่มขึ้นพร้อมกับภาระงานของทีมงาน — เติบโตได้แต่ค่าใช้จ่ายก็โตตาม</div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
-
-<!-- ══════════════ HIDDEN COST ══════════════ -->
-<section class="hc-s">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag g">04 · The Hidden Cost of Growth</span>
-      <h2 class="sttl">ต้นทุนแฝงที่<span class="g">องค์กรกำลังแบกรับ</span></h2>
-    </div>
-    <div class="hcl fu">
-      <div>
-        <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:14px">วันนี้องค์กรกำลังเผชิญ</div>
-        <div class="hclist">
-          <div class="hci gl"><div class="hcb"></div><div class="hct">พนักงานตอบคำถามซ้ำจำนวนมาก</div></div>
-          <div class="hci gl"><div class="hcb"></div><div class="hct">ค้นหาข้อมูลสินค้าจากหลายแหล่ง</div></div>
-          <div class="hci gl"><div class="hcb"></div><div class="hct">ใช้เวลาทำใบเสนอราคา</div></div>
-          <div class="hci gl"><div class="hcb"></div><div class="hct">ผู้บริหารต้องตอบคำถามประจำวันเอง</div></div>
-          <div class="hci gl"><div class="hcb"></div><div class="hct">การตัดสินใจใช้ข้อมูลไม่ครบถ้วน</div></div>
-        </div>
-      </div>
-      <div class="ins gl-t">
-        <div>
-          <div class="insl">คำถามสำคัญ</div>
-          <div class="insq">"ธุรกิจจะเติบโตต่อได้อย่างไร โดยไม่ต้องเพิ่มจำนวนคนในอัตราเดียวกับรายได้"</div>
-          <div class="insh">คำตอบคือ<br><span>AI Workforce</span></div>
-        </div>
-        <div class="insf">แทนการเพิ่มจำนวนพนักงาน — สร้างทีมงาน AI ที่ทำงานร่วมกับบุคลากรปัจจุบัน ทำงานได้ตลอด 24 ชั่วโมง ไม่เหนื่อย ไม่ลืม ไม่ลาออก</div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
-
-<!-- ══════════════ RECOMMENDATION ══════════════ -->
-<section class="rec-s">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">05 · Our Recommendation</span>
-      <h2 class="sttl">Build An <span class="e">AI Workforce</span></h2>
-    </div>
-    <div class="recg fu">
-      <div class="rec-left gl-s">
-        <div class="rec-pill">Our Recommendation</div>
-        <div class="rec-title">แทนการเพิ่ม<span>จำนวนพนักงาน</span></div>
-        <p class="rec-sub">สร้างทีมงาน AI ที่ทำงานร่วมกับบุคลากรปัจจุบัน ประกอบด้วย 3 Agents โดยเริ่มจาก Agent ที่สร้างผลกระทบทางธุรกิจสูงที่สุดก่อน</p>
-        <div class="rec-vs">
-          <div class="rec-vs-n no"><div class="rvlbl">Traditional</div><div class="rvval">+คน</div></div>
-          <div class="rec-vs-n yes"><div class="rvlbl">AI Workforce</div><div class="rvval">+AI Agents</div></div>
-        </div>
-      </div>
-      <div class="rec-right">
-        <div class="agcard gl">
-          <div class="agct"></div>
-          <div class="agna">Knowledge Agent</div>
-          <div class="agro">AI ผู้เชี่ยวชาญประจำองค์กร — ตอบทุกคำถามเกี่ยวกับสินค้าและ SOP</div>
-        </div>
-        <div class="agcard gd gl">
-          <div class="agct"></div>
-          <div class="agna">Sales Agent</div>
-          <div class="agro">AI ผู้ช่วยฝ่ายขาย — ตอบลูกค้า 24 ชั่วโมง เช็คสต็อก ออกใบเสนอราคา</div>
-        </div>
-        <div class="agcard lm gl">
-          <div class="agct"></div>
-          <div class="agna">Executive Agent</div>
-          <div class="agro">AI สำหรับผู้บริหาร — สรุปยอดขาย ลูกค้า ลูกหนี้ พร้อม Insight</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
-
-<!-- ══════════════ ARCHITECTURE ══════════════ -->
-<section class="arch-s">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">06 · AI Workforce Architecture</span>
-      <h2 class="sttl"><span class="e">AI Brain</span> เดียว ทำงานร่วมกัน</h2>
-      <p class="ssub">AI ทุกตัวใช้ข้อมูลจากฐานความรู้เดียวกัน ทำให้ข้อมูลเป็นมาตรฐานทั้งองค์กร</p>
-    </div>
-    <div class="archd gl-s fu">
-      <div class="arch-brain gl-t" style="border-radius:0">
-        <div class="arch-brain-txt">Metal City AI Brain</div>
-        <div class="arch-brain-sub">Shared Knowledge Base · Unified Data · Organization Memory</div>
-      </div>
-      <div class="arch-line-v"></div>
-      <div class="arch-agents">
-        <div class="arch-branch">
-          <div style="width:1px;height:30px;background:linear-gradient(to bottom,rgba(0,245,255,0.3),var(--e));margin:0 auto"></div>
-          <div class="arch-agent-box gl a1">
-            <div class="abn">Agent 01</div>
-            <div class="abt">Knowledge</div>
-            <div class="abr">พนักงาน + ทีมงาน</div>
+      <div class="idea-right fu">
+        <div class="idea-card c1 gls">
+          <div class="idea-icon">🧠</div>
+          <div>
+            <div class="idea-txt-head">Knowledge Agent</div>
+            <div class="idea-txt-body">AI ผู้เชี่ยวชาญประจำองค์กร — รู้ทุกอย่างเกี่ยวกับสินค้า ราคา SOP และลูกค้า พร้อมตอบทันที</div>
           </div>
         </div>
-        <div style="width:60px;height:1px;background:rgba(0,245,255,0.2);margin-top:46px;flex-shrink:0"></div>
-        <div class="arch-branch">
-          <div style="width:1px;height:30px;background:linear-gradient(to bottom,rgba(255,214,10,0.3),var(--g));margin:0 auto"></div>
-          <div class="arch-agent-box gl a2">
-            <div class="abn">Agent 02</div>
-            <div class="abt">Sales</div>
-            <div class="abr">ลูกค้า ผ่าน LINE</div>
+        <div class="idea-card c2 gls">
+          <div class="idea-icon">💬</div>
+          <div>
+            <div class="idea-txt-head">Sales Agent</div>
+            <div class="idea-txt-body">AI ผู้ช่วยฝ่ายขาย — ตอบลูกค้า 24 ชั่วโมง เช็คสต็อก และออกใบเสนอราคาผ่าน LINE ได้เลย</div>
           </div>
         </div>
-        <div style="width:60px;height:1px;background:rgba(0,245,255,0.2);margin-top:46px;flex-shrink:0"></div>
-        <div class="arch-branch">
-          <div style="width:1px;height:30px;background:linear-gradient(to bottom,rgba(184,243,107,0.3),var(--l));margin:0 auto"></div>
-          <div class="arch-agent-box gl a3">
-            <div class="abn">Agent 03</div>
-            <div class="abt">Executive</div>
-            <div class="abr">ผู้บริหาร มือถือ</div>
+        <div class="idea-card c3 gls">
+          <div class="idea-icon">📊</div>
+          <div>
+            <div class="idea-txt-head">Executive Agent</div>
+            <div class="idea-txt-body">AI สำหรับเจ้าของ — สรุปยอดขาย ลูกหนี้ และ Insight ธุรกิจ ถามได้ทันทีบนมือถือ</div>
           </div>
         </div>
       </div>
-      <p class="arch-note gl" style="margin-top:28px;border-radius:0">ข้อมูลทุกอย่างอยู่ใน <strong>ฐานความรู้เดียวกัน</strong> — ไม่ว่าจะถามจาก Agent ไหน คำตอบมาจากแหล่งเดิม</p>
     </div>
   </div>
 </section>
 <div class="sdiv"></div>
 
-<!-- ══════════════ AGENTS ══════════════ -->
-<section class="ag-s" id="agents">
+<!-- ══════════════════════════════════════════
+     CHAPTER 3 — MEET YOUR TEAM
+══════════════════════════════════════════ -->
+<section class="agents-s" id="agents">
   <div class="sw">
-    <div class="sh fu">
-      <span class="stag">07–09 · AI Workforce Members</span>
-      <h2 class="sttl">พบกับ 3 <span class="e">พนักงาน AI</span> ของคุณ</h2>
+    <div class="ch-label fu">
+      <span class="ch-num">Chapter 03</span>
+      <div class="ch-line"></div>
+    </div>
+    <div class="fu" style="margin-bottom:48px">
+      <span class="s-eyebrow ec">พบกับทีม AI ของคุณ</span>
+      <h2 class="s-title">3 <span class="e">พนักงาน AI</span> ที่จะเข้ามาทำงานกับคุณ</h2>
     </div>
 
-    <!-- AGENT 1: KNOWLEDGE -->
-    <div class="ag-card gl fu">
-      <div class="ag-left gl-s">
+    <!-- AGENT 1 -->
+    <div class="ag-card fu">
+      <div class="ag-l gls">
         <div>
           <div class="ag-badge">Agent #1</div>
           <div class="ag-name">Knowledge Agent</div>
           <div class="ag-role">AI ผู้เชี่ยวชาญประจำองค์กร</div>
         </div>
         <div>
-          <div class="ag-results-lbl">ผลลัพธ์</div>
+          <div class="ag-rl">ผลลัพธ์</div>
           <div class="ag-result"><div class="ag-dot"></div>ลดเวลาค้นหาข้อมูล</div>
           <div class="ag-result"><div class="ag-dot"></div>ลดการพึ่งพาพนักงานหลัก</div>
           <div class="ag-result"><div class="ag-dot"></div>เพิ่มความเร็วในการเรียนรู้งาน</div>
         </div>
       </div>
-      <div class="ag-mid">
-        <div class="ag-can-lbl">สามารถตอบคำถามเกี่ยวกับ</div>
+      <div class="ag-m">
+        <div class="ag-cl">ตอบคำถามได้เรื่อง</div>
         <div class="ag-caps">
-          <div class="ag-cap">ข้อมูลสินค้า</div>
-          <div class="ag-cap">สเปกสินค้า</div>
-          <div class="ag-cap">SOP &amp; ขั้นตอนการทำงาน</div>
-          <div class="ag-cap">วิธีติดตั้ง</div>
+          <div class="ag-cap">ข้อมูลสินค้าและสเปก</div>
+          <div class="ag-cap">ราคาและโปรโมชั่น</div>
+          <div class="ag-cap">SOP &amp; วิธีติดตั้ง</div>
           <div class="ag-cap">ข้อมูลลูกค้า</div>
           <div class="ag-cap hl">ประวัติการขายและการแก้ปัญหา</div>
         </div>
       </div>
-      <div class="ag-right">
-        <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:12px">Mockup · Knowledge Agent</div>
+      <div class="ag-r">
+        <div class="mk-lbl">ตัวอย่างการใช้งาน</div>
         <div class="mk-device">
-          <div class="mk-topbar">
-            <div class="mk-avatar" style="background:rgba(0,245,255,0.15);color:var(--e)">AI</div>
-            <div><div class="mk-topbar-name">Metal City AI</div><div class="mk-topbar-sub">Knowledge Agent</div></div>
-            <div class="mk-status"></div>
+          <div class="mk-bar">
+            <div class="mk-av" style="background:rgba(0,245,255,0.12);color:var(--e)">AI</div>
+            <div><div class="mk-nm">Metal City AI</div><div class="mk-st">Knowledge Agent</div></div>
+            <div class="mk-online"></div>
           </div>
           <div class="mk-body">
-            <div class="mk-msg u">สมาร์ทบอร์ด 16 มม. ใช้โครงห่างเท่าไร?</div>
-            <div class="mk-msg ai">
-              <div class="lbl">Knowledge Agent</div>
-              สมาร์ทบอร์ด 16 มม. แนะนำใช้โครงเหล็กห่าง <strong style="color:var(--e)">60 ซม.</strong> ในแนวตั้ง และ <strong style="color:var(--e)">120 ซม.</strong> ในแนวนอน สำหรับผนังทั่วไป
-              <div class="ref">📄 อ้างอิง: คู่มือติดตั้งสมาร์ทบอร์ด รุ่น SB-16 · หน้า 12</div>
+            <div class="msg u">สมาร์ทบอร์ด 16 มม. ใช้โครงห่างเท่าไร?</div>
+            <div class="msg ai">
+              <div class="msg-lbl">Knowledge Agent</div>
+              โครงเหล็กห่าง <strong style="color:var(--e)">60 ซม.</strong> แนวตั้ง และ <strong style="color:var(--e)">120 ซม.</strong> แนวนอน สำหรับผนังทั่วไป
+              <div class="msg-ref">📄 คู่มือติดตั้ง SB-16 · หน้า 12</div>
             </div>
-            <div class="mk-msg u">ถ้าเป็นห้องน้ำล่ะ?</div>
-            <div class="mk-msg ai">
-              <div class="lbl">Knowledge Agent</div>
-              ห้องน้ำแนะนำ <strong style="color:var(--e)">สมาร์ทบอร์ดกันน้ำ</strong> และลดระยะโครงเป็น 40 ซม. เพื่อรับน้ำหนักได้ดีขึ้น
+            <div class="msg u">ถ้าเป็นห้องน้ำล่ะ?</div>
+            <div class="msg ai">
+              <div class="msg-lbl">Knowledge Agent</div>
+              แนะนำ <strong style="color:var(--e)">สมาร์ทบอร์ดกันน้ำ</strong> และลดระยะโครงเป็น 40 ซม.
             </div>
           </div>
-          <div class="mk-footer">
-            <input class="mk-inp" placeholder="ถามข้อมูลสินค้า SOP หรือขั้นตอนการทำงาน..." readonly>
+          <div class="mk-inp-row">
+            <input class="mk-inp" placeholder="ถามข้อมูลสินค้า SOP หรือลูกค้า..." readonly>
             <button class="mk-send">↑</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- AGENT 2: SALES -->
-    <div class="ag-card gd gl fu">
-      <div class="ag-left gl-s">
+    <!-- AGENT 2 -->
+    <div class="ag-card gd fu">
+      <div class="ag-l gls">
         <div>
           <div class="ag-badge">Agent #2</div>
           <div class="ag-name">Sales Agent</div>
-          <div class="ag-role">AI ผู้ช่วยฝ่ายขาย — ผ่าน LINE</div>
+          <div class="ag-role">AI ผู้ช่วยฝ่ายขาย · ผ่าน LINE</div>
         </div>
         <div>
-          <div class="ag-results-lbl">ผลลัพธ์</div>
-          <div class="ag-result"><div class="ag-dot"></div>ตอบลูกค้าเร็วขึ้น</div>
+          <div class="ag-rl">ผลลัพธ์</div>
+          <div class="ag-result"><div class="ag-dot"></div>ตอบลูกค้าได้เร็วขึ้น</div>
           <div class="ag-result"><div class="ag-dot"></div>เพิ่มโอกาสปิดการขาย</div>
           <div class="ag-result"><div class="ag-dot"></div>ลดภาระทีมขาย</div>
         </div>
       </div>
-      <div class="ag-mid">
-        <div class="ag-can-lbl">สามารถ</div>
+      <div class="ag-m">
+        <div class="ag-cl">สามารถ</div>
         <div class="ag-caps">
           <div class="ag-cap">ตอบลูกค้า 24 ชั่วโมง</div>
-          <div class="ag-cap">เช็คราคา</div>
-          <div class="ag-cap">เช็คสต็อก</div>
+          <div class="ag-cap">เช็คราคาและสต็อก</div>
           <div class="ag-cap">แนะนำสินค้า</div>
-          <div class="ag-cap hl">สร้างใบเสนอราคาเบื้องต้น</div>
+          <div class="ag-cap hl">สร้างใบเสนอราคาส่งทันที</div>
         </div>
       </div>
-      <div class="ag-right">
-        <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);margin-bottom:12px">Mockup · Sales Agent on LINE</div>
+      <div class="ag-r">
+        <div class="mk-lbl">ตัวอย่างบน LINE</div>
         <div class="mk-device">
           <div class="ln-top">
             <div class="ln-av">MC</div>
             <div><div class="ln-nm">Metal City 89</div><div class="ln-st">Online · ตอบทันที</div></div>
           </div>
           <div class="ln-body">
-            <div class="ln-msg c"><div class="ln-lbl">ลูกค้า</div>เหล็กกล่อง 2×4 มีของไหม</div>
-            <div class="ln-msg ai">
+            <div class="lmsg u">เหล็กกล่อง 2×4 มีของไหมครับ</div>
+            <div class="lmsg ai">
               <div class="ln-lbl">Sales Agent</div>
-              มีสินค้า <strong>126 เส้น</strong> พร้อมส่ง<br>ราคา <strong>820 บาท/เส้น</strong>
+              มีครับ <strong>126 เส้น</strong> พร้อมส่ง<br>ราคา <strong>820 บาท/เส้น</strong>
             </div>
-            <div class="ln-msg c">ขอใบเสนอราคา 50 เส้นหน่อยครับ</div>
-            <div class="ln-msg ai">
+            <div class="lmsg u">ขอใบเสนอราคา 50 เส้นหน่อยครับ</div>
+            <div class="lmsg ai">
               <div class="ln-lbl">Sales Agent</div>
-              ใบเสนอราคาพร้อมแล้วครับ
-              <div class="ln-doc">📄 QT-2025-0847 · เหล็กกล่อง 2×4 × 50 เส้น<br><strong>รวม 41,000 บาท</strong> (ยังไม่รวม VAT)</div>
+              ได้เลยครับ
+              <div class="ln-doc">📄 QT-2025-0847<br>เหล็กกล่อง 2×4 × 50 เส้น<br><strong>รวม 41,000 บาท</strong></div>
             </div>
           </div>
           <div class="ln-inp-bar">
@@ -720,54 +503,53 @@ footer{border-top:1px solid var(--bd);padding:22px 40px;display:flex;align-items
       </div>
     </div>
 
-    <!-- AGENT 3: EXECUTIVE -->
-    <div class="ag-card lm gl fu">
-      <div class="ag-left gl-s">
+    <!-- AGENT 3 -->
+    <div class="ag-card lm fu">
+      <div class="ag-l gls">
         <div>
           <div class="ag-badge">Agent #3</div>
           <div class="ag-name">Executive Agent</div>
-          <div class="ag-role">AI สำหรับผู้บริหาร — บนมือถือ</div>
+          <div class="ag-role">AI สำหรับเจ้าของ · บนมือถือ</div>
         </div>
         <div>
-          <div class="ag-results-lbl">ผลลัพธ์</div>
+          <div class="ag-rl">ผลลัพธ์</div>
           <div class="ag-result"><div class="ag-dot"></div>ตัดสินใจเร็วขึ้น</div>
           <div class="ag-result"><div class="ag-dot"></div>เห็นภาพธุรกิจชัดขึ้น</div>
-          <div class="ag-result"><div class="ag-dot"></div>ลดเวลารวบรวมรายงาน</div>
+          <div class="ag-result"><div class="ag-dot"></div>ไม่ต้องรวบรวมข้อมูลเอง</div>
         </div>
       </div>
-      <div class="ag-mid">
-        <div class="ag-can-lbl">สามารถสรุปข้อมูล</div>
+      <div class="ag-m">
+        <div class="ag-cl">สรุปข้อมูลได้</div>
         <div class="ag-caps">
-          <div class="ag-cap">ยอดขาย</div>
-          <div class="ag-cap">ลูกค้าหลัก</div>
-          <div class="ag-cap">สินค้าขายดี</div>
-          <div class="ag-cap">ลูกหนี้การค้า</div>
-          <div class="ag-cap hl">สินค้าค้างสต็อก + Insight</div>
+          <div class="ag-cap">ยอดขายและออเดอร์</div>
+          <div class="ag-cap">ลูกค้าหลักและลูกหนี้</div>
+          <div class="ag-cap">สินค้าขายดีและค้างสต็อก</div>
+          <div class="ag-cap hl">Insight และสัญญาณเตือน</div>
         </div>
       </div>
-      <div class="ag-right">
-        <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--l);margin-bottom:12px">Mockup · Executive Agent on Mobile</div>
+      <div class="ag-r">
+        <div class="mk-lbl">ตัวอย่างบนมือถือ</div>
         <div class="mk-device">
-          <div class="db-top">
+          <div class="db-bar">
             <div class="db-icon">📊</div>
-            <div><div class="db-title">Metal City Executive</div></div>
-            <div class="mk-status" style="margin-left:auto;background:var(--l)"></div>
+            <div class="db-title">Metal City Executive</div>
+            <div class="mk-online" style="background:var(--l);margin-left:auto"></div>
           </div>
-          <div class="db-chat">
+          <div class="db-body">
             <div class="db-q">ยอดขายสัปดาห์นี้เป็นอย่างไร</div>
             <div class="db-ans">
               <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--l);margin-bottom:8px">Executive Agent</div>
-              สัปดาห์นี้ยอดขายรวม <strong style="color:var(--l)">฿ 2.4M</strong> เพิ่มขึ้น 12% จากสัปดาห์ก่อน
+              สัปดาห์นี้ <strong style="color:var(--l)">฿ 2.4M</strong> เพิ่ม 12% จากสัปดาห์ก่อน
               <div class="db-kpi">
-                <div class="db-kpi-i"><div class="db-kpi-lbl">ยอดขาย</div><div class="db-kpi-val">2.4M</div></div>
-                <div class="db-kpi-i"><div class="db-kpi-lbl">ออเดอร์</div><div class="db-kpi-val">38</div></div>
-                <div class="db-kpi-i"><div class="db-kpi-lbl">ลูกหนี้</div><div class="db-kpi-val" style="color:var(--g)">890K</div></div>
-                <div class="db-kpi-i"><div class="db-kpi-lbl">สต็อกต่ำ</div><div class="db-kpi-val" style="color:var(--pk)">5 SKU</div></div>
+                <div class="db-k"><div class="db-kl">ยอดขาย</div><div class="db-kv">2.4M</div></div>
+                <div class="db-k"><div class="db-kl">ออเดอร์</div><div class="db-kv">38</div></div>
+                <div class="db-k"><div class="db-kl">ลูกหนี้</div><div class="db-kv" style="color:var(--g)">890K</div></div>
+                <div class="db-k"><div class="db-kl">สต็อกต่ำ</div><div class="db-kv" style="color:var(--pk)">5 SKU</div></div>
               </div>
               <div style="font-size:11px;color:var(--gr);margin-top:8px">⚠️ เหล็กกล่อง 2×4 เหลือ 18 เส้น — ควรสั่งเพิ่ม</div>
             </div>
           </div>
-          <div class="mk-footer">
+          <div class="mk-inp-row">
             <input class="mk-inp" placeholder="ถามข้อมูลธุรกิจ ยอดขาย หรือ insight..." readonly>
             <button class="mk-send" style="background:var(--l)">↑</button>
           </div>
@@ -779,556 +561,88 @@ footer{border-top:1px solid var(--bd);padding:22px 40px;display:flex;align-items
 </section>
 <div class="sdiv"></div>
 
-<!-- ══════════════ ROADMAP ══════════════ -->
-<section class="rm-s" id="roadmap">
+<!-- ══════════════════════════════════════════
+     CHAPTER 4 — HOW WE WORK
+══════════════════════════════════════════ -->
+<section class="how-s" id="how">
   <div class="sw">
-    <div class="sh fu">
-      <span class="stag">10 · Transformation Roadmap</span>
-      <h2 class="sttl">Roadmap สู่ <span class="e">AI-Powered Business</span></h2>
+    <div class="ch-label fu">
+      <span class="ch-num">Chapter 04</span>
+      <div class="ch-line"></div>
     </div>
-    <div class="rmg fu">
-      <div class="rmc r1 gl">
-        <div class="rmt">
-          <div class="rmpr"><span class="rmpb">Phase 1</span><span class="rmpe">เดือน 1–2</span></div>
-          <div class="rmth">AI Foundation</div>
-          <div class="rmsl">Knowledge Agent</div>
-        </div>
-        <div class="rmb">
-          <div class="rmi"><span class="rmbl">›</span>AI Knowledge Hub</div>
-          <div class="rmi"><span class="rmbl">›</span>Product Knowledge Database</div>
-          <div class="rmi"><span class="rmbl">›</span>FAQ &amp; SOP Knowledge Center</div>
-          <div class="rmi"><span class="rmbl">›</span>User Training</div>
-        </div>
-      </div>
-      <div class="rmc r2 gl">
-        <div class="rmt">
-          <div class="rmpr"><span class="rmpb">Phase 2</span><span class="rmpe">เดือน 2–4</span></div>
-          <div class="rmth">AI Workforce Starter</div>
-          <div class="rmsl">Knowledge + Sales Agent</div>
-        </div>
-        <div class="rmb">
-          <div class="rmi"><span class="rmbl">›</span>AI Sales Agent</div>
-          <div class="rmi"><span class="rmbl">›</span>LINE AI Integration</div>
-          <div class="rmi"><span class="rmbl">›</span>Product Recommendation Engine</div>
-          <div class="rmi"><span class="rmbl">›</span>Quotation Assistant</div>
-          <div class="rmi"><span class="rmbl">›</span>Customer Interaction Tracking</div>
-        </div>
-      </div>
-      <div class="rmc r3 gl">
-        <div class="rmt">
-          <div class="rmpr"><span class="rmpb">Phase 3</span><span class="rmpe">เดือน 4–6</span></div>
-          <div class="rmth">AI Workforce Transformation</div>
-          <div class="rmsl">Knowledge + Sales + Executive Agent</div>
-        </div>
-        <div class="rmb">
-          <div class="rmi"><span class="rmbl">›</span>Executive Agent</div>
-          <div class="rmi"><span class="rmbl">›</span>Sales &amp; Customer Analytics</div>
-          <div class="rmi"><span class="rmbl">›</span>Inventory Analytics</div>
-          <div class="rmi"><span class="rmbl">›</span>Management Reporting</div>
-          <div class="rmi"><span class="rmbl">›</span>Monthly Optimization Session</div>
+    <div class="how-grid">
+      <div class="fu">
+        <span class="s-eyebrow ec">วิธีที่เราทำงานร่วมกัน</span>
+        <h2 class="s-title" style="margin-bottom:36px">เราเริ่มจาก<br><span class="e">เข้าใจธุรกิจ</span><br>ก่อนสร้าง AI</h2>
+        <div class="how-steps">
+          <div class="how-step s1">
+            <div class="how-step-n">1</div>
+            <div>
+              <div class="how-step-head">AI Discovery &amp; Blueprint</div>
+              <div class="how-step-body">สัมภาษณ์ทีมงาน วิเคราะห์ workflow ค้นหา pain point จริง แล้วออกแบบ AI ที่ตอบโจทย์ธุรกิจโดยเฉพาะ — ไม่ใช่ AI ทั่วไป</div>
+            </div>
+          </div>
+          <div class="how-step s2">
+            <div class="how-step-n">2</div>
+            <div>
+              <div class="how-step-head">AI Workforce Starter</div>
+              <div class="how-step-body">สร้าง Knowledge Agent + Sales Agent พร้อม LINE OA Integration อบรมทีมงาน และ support จนถึง Go-Live</div>
+            </div>
+          </div>
+          <div class="how-step s3">
+            <div class="how-step-n">3</div>
+            <div>
+              <div class="how-step-head">Executive Intelligence</div>
+              <div class="how-step-body">สร้าง Executive Agent + Dashboard สำหรับเจ้าของ เห็นภาพธุรกิจ Real-Time ตัดสินใจได้เร็วขึ้น</div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="fts gl fu">
-      <span class="ftl">Vision Future</span>
-      <div class="ftis">
-        <span class="ftic">AI CRM</span>
-        <span class="ftic">Inventory Forecast</span>
-        <span class="ftic">BOQ Automation</span>
-        <span class="ftic">Credit Risk Analysis</span>
-        <span class="ftic">Factory Intelligence (Link Ajia)</span>
+      <div class="fu">
+        <div class="how-right gls">
+          <div class="how-why-head">ทำไมต้องเริ่มจาก Discovery</div>
+          <div class="how-quote">AI ที่ดีไม่ใช่การ<span>ติดตั้งเครื่องมือ</span><br>แต่คือการออกแบบ<span>วิธีทำงานใหม่</span></div>
+          <div class="how-body">ธุรกิจวัสดุก่อสร้างแต่ละเจ้ามีกระบวนการและลูกค้าที่ต่างกัน — AI ที่ทำงานได้จริงต้องเข้าใจธุรกิจของคุณโดยเฉพาะ ไม่ใช่ copy มาจากที่อื่น</div>
+          <div class="disc-box">
+            <div class="disc-tag">เริ่มต้นด้วย</div>
+            <div class="disc-name">AI Discovery &amp; Blueprint</div>
+            <div class="disc-body">ทำความเข้าใจธุรกิจของคุณก่อน แล้วค่อยออกแบบ AI ที่เหมาะสม</div>
+            <div class="disc-items">
+              <div class="disc-item"><span class="disc-dot">›</span>Business &amp; Process Discovery</div>
+              <div class="disc-item"><span class="disc-dot">›</span>Pain Point &amp; Opportunity Analysis</div>
+              <div class="disc-item"><span class="disc-dot">›</span>AI Workforce Blueprint</div>
+              <div class="disc-item"><span class="disc-dot">›</span>Implementation Roadmap</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 <div class="sdiv"></div>
 
-<!-- ══════════════ INVESTMENT ══════════════ -->
-<section class="inv-s" id="invest">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">10 · Roadmap &amp; Investment</span>
-      <h2 class="sttl">Choose Your <span class="e">AI Workforce Path</span></h2>
-      <p class="ssub">เริ่มจาก Agent ที่สร้างผลกระทบทางธุรกิจสูงที่สุดก่อน แล้วค่อยขยายไปยัง AI Workforce เต็มรูปแบบ</p>
-    </div>
-    <div class="pkg fu">
-      <div class="pkc pka">
-        <div class="pkh gl-s" style="padding-top:22px">
-          <div class="pko">Option A · AI Foundation</div>
-          <div class="pkn">Knowledge Agent</div>
-          <div class="pks">สำหรับองค์กรที่ต้องการจัดการองค์ความรู้และลดการพึ่งพาบุคลากรเฉพาะคน</div>
-        </div>
-        <div class="pkpa gl">
-          <div class="pkpr">250,000</div>
-          <div class="pkpu">บาท</div>
-          <div class="pkpd">ระยะเวลา 4–6 สัปดาห์</div>
-        </div>
-        <div class="pkrs gl">
-          <div class="pkri"><span class="pktk">✓</span>ข้อมูลไม่กระจาย</div>
-          <div class="pkri"><span class="pktk">✓</span>ลดการพึ่งพาพนักงานหลัก</div>
-          <div class="pkri"><span class="pktk">✓</span>พนักงานค้นหาข้อมูลได้เร็วขึ้น</div>
-        </div>
-      </div>
-      <div class="pkc pkb ft">
-        <div class="pkrb">★ Recommended</div>
-        <div class="pkh gl-s">
-          <div class="pko">Option B · AI Workforce Starter</div>
-          <div class="pkn">Knowledge + Sales Agent</div>
-          <div class="pks">สำหรับองค์กรที่ต้องการเพิ่มประสิทธิภาพการขายและลดภาระทีมงาน</div>
-        </div>
-        <div class="pkpa gl">
-          <div class="pkpr">490,000</div>
-          <div class="pkpu">บาท</div>
-          <div class="pkpd">ระยะเวลา 8–12 สัปดาห์</div>
-        </div>
-        <div class="pkrs gl">
-          <div class="pkri"><span class="pktk">✓</span>ตอบลูกค้าเร็วขึ้น</div>
-          <div class="pkri"><span class="pktk">✓</span>ลดเวลาทำใบเสนอราคา</div>
-          <div class="pkri"><span class="pktk">✓</span>เพิ่มโอกาสปิดการขาย</div>
-          <div class="pkri"><span class="pktk">✓</span>ลดภาระทีมขาย</div>
-        </div>
-      </div>
-      <div class="pkc pkc2">
-        <div class="pkh gl-s" style="padding-top:22px">
-          <div class="pko">Option C · AI Workforce Transformation</div>
-          <div class="pkn">Knowledge + Sales + Executive Agent</div>
-          <div class="pks">สำหรับองค์กรที่ต้องการ AI Workforce ครบทั้ง 3 Agents</div>
-        </div>
-        <div class="pkpa gl">
-          <div class="pkpr">890,000</div>
-          <div class="pkpu">บาท</div>
-          <div class="pkpd">ระยะเวลา 4–6 เดือน</div>
-        </div>
-        <div class="pkrs gl">
-          <div class="pkri"><span class="pktk">✓</span>มองเห็นภาพธุรกิจแบบ Real-Time</div>
-          <div class="pkri"><span class="pktk">✓</span>บริหารลูกค้าได้ดีขึ้น</div>
-          <div class="pkri"><span class="pktk">✓</span>ลดความเสี่ยงด้านสต็อก</div>
-          <div class="pkri"><span class="pktk">✓</span>เพิ่มประสิทธิภาพการตัดสินใจ</div>
-        </div>
-      </div>
-    </div>
-    <div class="pkvision gl-s fu">
-      <div class="pkv-lbl">Vision</div>
-      <div class="pkv-flow">
-        <span class="pkv-from">Construction Supply Chain</span>
-        <span class="pkv-arr">→</span>
-        <span class="pkv-to">AI-Powered Construction Supply Chain</span>
-      </div>
-      <p class="pkv-desc">ที่สามารถเติบโตได้โดยใช้ข้อมูล ความรู้ และ AI เป็นแรงขับเคลื่อนหลักขององค์กร</p>
-    </div>
-  </div>
-</section>
-<div class="sdiv"></div>
-
-<!-- ══════════════ CTA CLOSE ══════════════ -->
-<section class="cls-s amb">
+<!-- ══════════════════════════════════════════
+     CHAPTER 5 — NEXT STEP
+══════════════════════════════════════════ -->
+<section class="next-s" id="next">
   <div class="sw" style="position:relative;z-index:1">
     <div class="fu">
-      <h2 class="cls-ttl">พร้อม<span>เริ่มต้น</span>?</h2>
-      <p class="cls-sub">เลือก Option ที่เหมาะกับความพร้อมขององค์กร และนัดหมาย Discovery Workshop ได้เลย</p>
-    </div>
-    <div class="psum fu">
-      <div class="psr gl"><span class="psrn"><strong>Option A</strong> · AI Foundation</span><span class="psrp e">250,000 ฿</span></div>
-      <div class="psr gl ft"><span class="psrn"><strong>Option B</strong> · AI Workforce Starter ★</span><span class="psrp g">490,000 ฿</span></div>
-      <div class="psr gl"><span class="psrn"><strong>Option C</strong> · AI Workforce Transformation</span><span class="psrp l">890,000 ฿</span></div>
+      <div class="ch-label" style="justify-content:center">
+        <span class="ch-num">Chapter 05</span>
+        <div class="ch-line"></div>
+      </div>
+      <h2 class="next-title">ขั้นต่อไป<br><span>ง่ายมาก</span></h2>
+      <p class="next-sub">เริ่มต้นด้วยการทำความเข้าใจธุรกิจของคุณก่อน — แล้วค่อยตัดสินใจ</p>
     </div>
     <div class="fu" style="display:flex;justify-content:center">
-      <div class="gl-t" style="padding:18px 30px;text-align:center;max-width:480px">
-        <p style="font-size:14px;color:var(--gr-s);line-height:1.7">ทุก Option เริ่มต้นด้วย <strong style="color:var(--e)">Discovery Workshop</strong><br>เพื่อเข้าใจธุรกิจก่อนออกแบบระบบ AI</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════ CONCEPT ══════════════ -->
-<div class="sdiv"></div>
-<section class="exec-s" id="concept" style="padding:100px 0">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">แนวคิดโครงการ</span>
-      <h2 class="sttl">โจทย์จริงของ<span class="e">Metal City</span></h2>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start" class="fu">
-      <div class="gl-t" style="padding:40px 40px">
-        <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--e);margin-bottom:20px">Core Problem</div>
-        <div style="font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);line-height:1.35;margin-bottom:24px">การเติบโตของธุรกิจที่เริ่ม<span style="color:var(--e)">พึ่งพาคนมากกว่าระบบ</span></div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--bd)"><div style="width:5px;height:5px;border-radius:50%;background:var(--e);flex-shrink:0"></div><span style="font-size:13.5px;color:var(--gr-s)">ข้อมูลเพิ่มขึ้น</span></div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--bd)"><div style="width:5px;height:5px;border-radius:50%;background:var(--e);flex-shrink:0"></div><span style="font-size:13.5px;color:var(--gr-s)">ลูกค้าเพิ่มขึ้น</span></div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--bd)"><div style="width:5px;height:5px;border-radius:50%;background:var(--e);flex-shrink:0"></div><span style="font-size:13.5px;color:var(--gr-s)">สินค้าเพิ่มขึ้น</span></div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--bd)"><div style="width:5px;height:5px;border-radius:50%;background:var(--e);flex-shrink:0"></div><span style="font-size:13.5px;color:var(--gr-s)">งานเอกสารเพิ่มขึ้น</span></div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--bd)"><div style="width:5px;height:5px;border-radius:50%;background:var(--e);flex-shrink:0"></div><span style="font-size:13.5px;color:var(--gr-s)">การประสานงานเพิ่มขึ้น</span></div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="gl-s" style="padding:28px 28px">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);margin-bottom:12px">ผลที่ตามมา</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:17px;font-weight:700;color:var(--wh);line-height:1.5">บุคลากรสำคัญกลายเป็น<span style="color:var(--g)">คอขวด</span>ขององค์กร</div>
-        </div>
-        <div class="gl-s" style="padding:28px 28px">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:12px">Solution</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:17px;font-weight:700;color:var(--wh);line-height:1.5;margin-bottom:14px">สร้าง <span style="color:var(--e)">AI Workforce</span> — ทีมงานดิจิทัลที่ช่วยสนับสนุนการทำงานของทีมปัจจุบัน</div>
-          <div style="font-size:13px;color:var(--gr);line-height:1.7">โดยเริ่มจากส่วนที่สร้างผลกระทบต่อธุรกิจมากที่สุดก่อน</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════ WHY THIS APPROACH ══════════════ -->
-<div class="sdiv"></div>
-<section style="padding:100px 0">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">Why This Approach</span>
-      <h2 class="sttl">เราเชื่อว่า AI ที่ดีคือ<span class="e">การออกแบบวิธีทำงานใหม่</span></h2>
-      <p class="ssub">ไม่ใช่การติดตั้งเครื่องมือ — แต่คือการเข้าใจธุรกิจก่อนสร้างระบบ</p>
-    </div>
-    <div class="fu" style="display:flex;align-items:stretch;justify-content:center;gap:0;flex-wrap:wrap">
-      <!-- Steps -->
-      <style>
-        .why-step{display:flex;flex-direction:column;align-items:center;text-align:center;width:160px}
-        .why-circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px;border:2px solid}
-        .why-label{font-size:13px;font-weight:600;color:var(--wh);line-height:1.4}
-        .why-arr{display:flex;align-items:center;padding-top:0;margin:0 4px;color:var(--e);font-size:20px;opacity:.5;margin-bottom:44px}
-      </style>
-      <div class="why-step">
-        <div class="why-circle" style="background:rgba(0,245,255,0.08);border-color:rgba(0,245,255,0.3);color:var(--e)">🔍</div>
-        <div class="why-label">เข้าใจ<br>ธุรกิจ</div>
-      </div>
-      <div class="why-arr">→</div>
-      <div class="why-step">
-        <div class="why-circle" style="background:rgba(255,214,10,0.08);border-color:rgba(255,214,10,0.3);color:var(--g)">🧩</div>
-        <div class="why-label">วิเคราะห์<br>ปัญหา</div>
-      </div>
-      <div class="why-arr">→</div>
-      <div class="why-step">
-        <div class="why-circle" style="background:rgba(0,245,255,0.08);border-color:rgba(0,245,255,0.3);color:var(--e)">🗺️</div>
-        <div class="why-label">ออกแบบ<br>Workflow</div>
-      </div>
-      <div class="why-arr">→</div>
-      <div class="why-step">
-        <div class="why-circle" style="background:rgba(184,243,107,0.08);border-color:rgba(184,243,107,0.3);color:var(--l)">🤖</div>
-        <div class="why-label">สร้าง<br>AI Agent</div>
-      </div>
-      <div class="why-arr">→</div>
-      <div class="why-step">
-        <div class="why-circle" style="background:rgba(255,214,10,0.08);border-color:rgba(255,214,10,0.3);color:var(--g)">📈</div>
-        <div class="why-label">วัดผลลัพธ์<br>ทางธุรกิจ</div>
-      </div>
-    </div>
-    <div class="fu" style="margin-top:32px;text-align:center">
-      <div class="gl-t" style="display:inline-block;padding:16px 32px;max-width:540px">
-        <p style="font-size:14px;color:var(--gr-s);line-height:1.7">เพื่อให้ AI กลายเป็นส่วนหนึ่งของการเติบโตขององค์กร<strong style="color:var(--e)">อย่างแท้จริง</strong></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════ 3 PHASES DETAIL ══════════════ -->
-<div class="sdiv"></div>
-<section style="padding:100px 0" id="phases">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">วิธีดำเนินโครงการ</span>
-      <h2 class="sttl">3 Phases สู่ <span class="e">AI Workforce</span></h2>
-      <p class="ssub">แทนที่จะเริ่มจากการพัฒนาระบบทันที เราดำเนินงานเป็นลำดับขั้นเพื่อให้ AI ตอบโจทย์ธุรกิจจริง</p>
-    </div>
-
-    <!-- PHASE 1 -->
-    <div class="fu" style="margin-bottom:24px">
-      <div style="display:grid;grid-template-columns:280px 1fr;border:1px solid var(--bd);overflow:hidden">
-        <div class="gl-s" style="padding:40px 32px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--bd)">
-          <div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:10px;background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.22);padding:4px 10px;display:inline-block">Phase 1</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:24px;font-weight:800;color:var(--e);line-height:1.2;margin:14px 0 6px">AI Discovery<br>&amp; Blueprint</div>
-            <div style="font-size:12px;color:var(--gr);font-style:italic;margin-bottom:20px">ระยะเวลา 2–3 สัปดาห์</div>
-            <div style="font-size:13px;color:var(--gr-s);line-height:1.7">ทำความเข้าใจธุรกิจก่อนออกแบบ AI — เพื่อให้มั่นใจว่าทุก Agent ที่สร้างขึ้นตอบโจทย์จริง</div>
-          </div>
-          <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--bd)">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:6px">Investment</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:32px;font-weight:800;color:var(--e)">99,000</div>
-            <div style="font-size:12px;color:var(--gr)">บาท</div>
-          </div>
-        </div>
-        <div style="padding:40px 40px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px">
-            <!-- Business Discovery -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--e)"></div>
-              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:10px">Business Discovery</div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <div style="font-size:12.5px;color:var(--gr-s)">· สัมภาษณ์ผู้บริหาร</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· สัมภาษณ์ฝ่ายขาย</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· สัมภาษณ์ฝ่ายบัญชี</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· สัมภาษณ์ฝ่ายจัดส่ง</div>
-              </div>
-            </div>
-            <!-- Process Mapping -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--e)"></div>
-              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:10px">Process Mapping</div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <div style="font-size:12.5px;color:var(--gr-s)">· การขายและเสนอราคา</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· การจัดส่ง</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· การติดตามลูกค้า</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· การบริหารข้อมูล</div>
-              </div>
-            </div>
-            <!-- Pain Point -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--g)"></div>
-              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:10px">Pain Point Analysis</div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <div style="font-size:12.5px;color:var(--gr-s)">· งานซ้ำซ้อน</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· คอขวด</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· การสูญเสียโอกาส</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· ความเสี่ยงด้านข้อมูล</div>
-              </div>
-            </div>
-            <!-- AI Opportunity -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--g)"></div>
-              <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:10px">AI Opportunity Assessment</div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <div style="font-size:12.5px;color:var(--gr-s)">· Agent ใดสร้างก่อน</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· Agent ใด ROI สูงสุด</div>
-                <div style="font-size:12.5px;color:var(--gr-s)">· สิ่งที่ทำได้ทันที</div>
-              </div>
-            </div>
-          </div>
-          <!-- Deliverables -->
-          <div style="padding:16px 20px;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.15)">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:10px">Deliverables</div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px">
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Business Analysis Report</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Workflow Mapping</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Pain Point Analysis</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">AI Opportunity Matrix</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">AI Workforce Blueprint</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Implementation Roadmap</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PHASE 2 -->
-    <div class="fu" style="margin-bottom:24px">
-      <div style="display:grid;grid-template-columns:280px 1fr;border:1px solid rgba(255,214,10,0.2);overflow:hidden">
-        <div class="gl-s" style="padding:40px 32px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(255,214,10,0.15)">
-          <div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);background:rgba(255,214,10,0.1);border:1px solid rgba(255,214,10,0.22);padding:4px 10px;display:inline-block">Phase 2</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:24px;font-weight:800;color:var(--g);line-height:1.2;margin:14px 0 6px">AI Workforce<br>Starter</div>
-            <div style="font-size:12px;color:var(--gr);font-style:italic;margin-bottom:20px">ระยะเวลา 8–12 สัปดาห์</div>
-            <div style="font-size:13px;color:var(--gr-s);line-height:1.7">สร้าง Knowledge Agent + Sales Agent พร้อม LINE OA Integration และ User Training</div>
-          </div>
-          <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--bd)">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:6px">Investment</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:32px;font-weight:800;color:var(--g)">390,000</div>
-            <div style="font-size:12px;color:var(--gr)">บาท</div>
-          </div>
-        </div>
-        <div style="padding:40px 40px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-            <!-- Agent 01 -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--e)"></div>
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:6px">Agent 01</div>
-              <div style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:800;color:var(--wh);margin-bottom:10px">Knowledge Agent</div>
-              <div style="display:flex;flex-direction:column;gap:5px">
-                <div style="font-size:12px;color:var(--gr-s)">· สินค้า ราคา สเปก</div>
-                <div style="font-size:12px;color:var(--gr-s)">· SOP &amp; FAQ</div>
-                <div style="font-size:12px;color:var(--gr-s)">· ข้อมูลภายในองค์กร</div>
-              </div>
-            </div>
-            <!-- Agent 02 -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--g)"></div>
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:6px">Agent 02</div>
-              <div style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:800;color:var(--wh);margin-bottom:10px">Sales Agent</div>
-              <div style="display:flex;flex-direction:column;gap:5px">
-                <div style="font-size:12px;color:var(--gr-s)">· ตอบลูกค้า เช็คราคา</div>
-                <div style="font-size:12px;color:var(--gr-s)">· แนะนำสินค้า</div>
-                <div style="font-size:12px;color:var(--gr-s)">· สร้างใบเสนอราคา</div>
-              </div>
-            </div>
-            <!-- LINE OA -->
-            <div style="padding:20px 18px;border:1px solid rgba(6,199,85,0.25);background:rgba(6,199,85,0.04);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:#06c755"></div>
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#06c755;margin-bottom:6px">LINE OA Integration</div>
-              <div style="font-size:12.5px;color:var(--gr-s);line-height:1.65">เชื่อมต่อกับ LINE Official Account เพื่อให้ลูกค้าและพนักงานใช้งานได้จากช่องทางเดิม</div>
-            </div>
-            <!-- Training -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--l)"></div>
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:6px">User Training</div>
-              <div style="display:flex;flex-direction:column;gap:5px">
-                <div style="font-size:12px;color:var(--gr-s)">· ฝ่ายขาย</div>
-                <div style="font-size:12px;color:var(--gr-s)">· ผู้จัดการ</div>
-                <div style="font-size:12px;color:var(--gr-s)">· ผู้บริหาร</div>
-              </div>
-            </div>
-          </div>
-          <div style="padding:16px 20px;background:rgba(255,214,10,0.04);border:1px solid rgba(255,214,10,0.15)">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--g);margin-bottom:10px">Deliverables</div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px">
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">AI Knowledge Agent</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">AI Sales Agent</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Product Knowledge Base</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">LINE OA Integration</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">User Training</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Go-Live Support</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PHASE 3 -->
-    <div class="fu">
-      <div style="display:grid;grid-template-columns:280px 1fr;border:1px solid rgba(184,243,107,0.2);overflow:hidden">
-        <div class="gl-s" style="padding:40px 32px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(184,243,107,0.15)">
-          <div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--l);background:rgba(184,243,107,0.1);border:1px solid rgba(184,243,107,0.22);padding:4px 10px;display:inline-block">Phase 3</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:24px;font-weight:800;color:var(--l);line-height:1.2;margin:14px 0 6px">Executive<br>Intelligence</div>
-            <div style="font-size:12px;color:var(--gr);font-style:italic;margin-bottom:20px">ระยะเวลา 4–6 สัปดาห์</div>
-            <div style="font-size:13px;color:var(--gr-s);line-height:1.7">Executive Agent + Dashboard สำหรับผู้บริหาร เห็นภาพธุรกิจ Real-Time ตัดสินใจได้เร็วขึ้น</div>
-          </div>
-          <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--bd)">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:6px">Investment</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:32px;font-weight:800;color:var(--l)">290,000</div>
-            <div style="font-size:12px;color:var(--gr)">บาท</div>
-          </div>
-        </div>
-        <div style="padding:40px 40px">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-            <!-- Agent 03 -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--l)"></div>
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:6px">Agent 03</div>
-              <div style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:800;color:var(--wh);margin-bottom:10px">Executive Agent</div>
-              <div style="display:flex;flex-direction:column;gap:5px">
-                <div style="font-size:12px;color:var(--gr-s)">· ยอดขาย &amp; ลูกค้าหลัก</div>
-                <div style="font-size:12px;color:var(--gr-s)">· สินค้าขายดี</div>
-                <div style="font-size:12px;color:var(--gr-s)">· ลูกหนี้ &amp; โอกาสธุรกิจ</div>
-              </div>
-            </div>
-            <!-- Dashboard -->
-            <div style="padding:20px 18px;border:1px solid var(--bd);position:relative;overflow:hidden">
-              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--l)"></div>
-              <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:6px">Executive Dashboard</div>
-              <div style="display:flex;flex-direction:column;gap:5px">
-                <div style="font-size:12px;color:var(--gr-s)">· Sales Overview</div>
-                <div style="font-size:12px;color:var(--gr-s)">· Customer Overview</div>
-                <div style="font-size:12px;color:var(--gr-s)">· Product Overview</div>
-                <div style="font-size:12px;color:var(--gr-s)">· Business Summary</div>
-              </div>
-            </div>
-          </div>
-          <div style="padding:16px 20px;background:rgba(184,243,107,0.04);border:1px solid rgba(184,243,107,0.15)">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--l);margin-bottom:10px">Deliverables</div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px">
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Executive Agent</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Executive Dashboard</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">KPI Structure</span>
-              <span style="font-size:11px;color:var(--gr-s);background:rgba(255,255,255,0.05);border:1px solid var(--bd);padding:4px 10px">Management Reporting</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════ INVESTMENT SUMMARY ══════════════ -->
-<div class="sdiv"></div>
-<section style="padding:100px 0" id="summary">
-  <div class="sw">
-    <div class="sh fu">
-      <span class="stag">Project Investment Summary</span>
-      <h2 class="sttl">สรุป<span class="e">งบประมาณโครงการ</span></h2>
-    </div>
-
-    <!-- Phase summary table -->
-    <div class="fu" style="margin-bottom:32px">
-      <div style="border:1px solid var(--bd);overflow:hidden">
-        <!-- header -->
-        <div style="display:grid;grid-template-columns:1fr 140px;padding:14px 24px;background:rgba(255,255,255,0.03);border-bottom:1px solid var(--bd)">
-          <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr)">Phase</div>
-          <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);text-align:right">Investment</div>
-        </div>
-        <!-- rows -->
-        <div style="display:grid;grid-template-columns:1fr 140px;padding:20px 24px;border-bottom:1px solid var(--bd);align-items:center">
-          <div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--e);margin-bottom:4px">Phase 1</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh)">AI Discovery &amp; Blueprint</div>
-          </div>
-          <div style="font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--e);text-align:right">99,000</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 140px;padding:20px 24px;border-bottom:1px solid var(--bd);align-items:center">
-          <div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:4px">Phase 2</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh)">AI Workforce Starter</div>
-          </div>
-          <div style="font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--g);text-align:right">390,000</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 140px;padding:20px 24px;border-bottom:1px solid var(--bd);align-items:center">
-          <div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:4px">Phase 3</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh)">Executive Intelligence</div>
-          </div>
-          <div style="font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--l);text-align:right">290,000</div>
-        </div>
-        <!-- total -->
-        <div style="display:grid;grid-template-columns:1fr 140px;padding:22px 24px;background:rgba(0,245,255,0.05);border-top:2px solid rgba(0,245,255,0.2);align-items:center">
-          <div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gr);margin-bottom:4px">Total Transformation Value</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:18px;font-weight:800;color:var(--wh)">ครบทั้ง 3 Phases</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-family:'SUSE',sans-serif;font-size:30px;font-weight:800;color:var(--e)">779,000</div>
-            <div style="font-size:12px;color:var(--gr)">บาท</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Monthly Support -->
-    <div class="sh fu" style="margin-top:60px;margin-bottom:32px">
-      <span class="stag l">Monthly Support Plans</span>
-      <h2 class="sttl">AI Workforce <span class="l">Care Plans</span></h2>
-      <p class="ssub">หลัง Go-Live — ดูแลให้ AI Workforce ทำงานได้ดีขึ้นทุกเดือน</p>
-    </div>
-
-    <div class="fu" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-      <!-- Care -->
-      <div style="border:1px solid var(--bd);overflow:hidden">
-        <div class="gl-s" style="padding:28px 28px;border-bottom:1px solid var(--bd)">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e);margin-bottom:10px">Plan A</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);margin-bottom:4px">AI Workforce Care</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:30px;font-weight:800;color:var(--e)">15,000 <span style="font-size:14px;font-weight:400;color:var(--gr)">บาท / เดือน</span></div>
-        </div>
-        <div style="padding:24px 28px;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--e);font-weight:700;flex-shrink:0">✓</span>Prompt Optimization</div>
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--e);font-weight:700;flex-shrink:0">✓</span>Knowledge Update</div>
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--e);font-weight:700;flex-shrink:0">✓</span>Performance Monitoring</div>
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--e);font-weight:700;flex-shrink:0">✓</span>Technical Support</div>
-        </div>
-      </div>
-      <!-- Growth -->
-      <div style="border:2px solid rgba(184,243,107,0.3);overflow:hidden">
-        <div class="gl-s" style="padding:28px 28px;border-bottom:1px solid rgba(184,243,107,0.15)">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--l);margin-bottom:10px">Plan B</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;color:var(--wh);margin-bottom:4px">AI Workforce Growth</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:30px;font-weight:800;color:var(--l)">25,000 <span style="font-size:14px;font-weight:400;color:var(--gr)">บาท / เดือน</span></div>
-        </div>
-        <div style="padding:24px 28px;display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--l);font-weight:700;flex-shrink:0">✓</span>ทุกบริการใน Care Plan</div>
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--l);font-weight:700;flex-shrink:0">✓</span>Monthly Business Review</div>
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--l);font-weight:700;flex-shrink:0">✓</span>Workflow Optimization</div>
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--l);font-weight:700;flex-shrink:0">✓</span>Knowledge Expansion</div>
-          <div style="display:flex;gap:10px;font-size:13.5px;color:var(--gr-s);align-items:flex-start"><span style="color:var(--l);font-weight:700;flex-shrink:0">✓</span>New Agent Enhancement</div>
+      <div class="next-box">
+        <div class="next-box-tag">First Step</div>
+        <div class="next-box-name">AI Discovery &amp; Blueprint</div>
+        <div class="next-box-body">นัดคุยเพื่อทำความเข้าใจธุรกิจของคุณ วิเคราะห์ pain point จริง และออกแบบ AI Workforce ที่เหมาะสม</div>
+        <div class="next-items">
+          <div class="next-item"><span class="next-item-dot">✓</span>ไม่ต้องตัดสินใจอะไรตอนนี้</div>
+          <div class="next-item"><span class="next-item-dot">✓</span>ได้ Blueprint ก่อนลงทุน</div>
+          <div class="next-item"><span class="next-item-dot">✓</span>รู้ชัดว่า AI จะช่วยธุรกิจได้จริงแค่ไหน</div>
         </div>
       </div>
     </div>
@@ -1336,14 +650,14 @@ footer{border-top:1px solid var(--bd);padding:22px 40px;display:flex;align-items
 </section>
 
 <footer>
-  <div class="flog">PlixPlan × Metal City 89</div>
-  <div class="fcp">METAL CITY AI WORKFORCE PROPOSAL · 2025 · CONFIDENTIAL</div>
+  <div class="flo">PlixPlan × Metal City 89</div>
+  <div class="fcp">AI WORKFORCE PROPOSAL · 2025 · CONFIDENTIAL</div>
 </footer>
 
 <script>
 const ob=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
-    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*60);ob.unobserve(e.target)}
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*70);ob.unobserve(e.target)}
   })
 },{threshold:.08});
 document.querySelectorAll('.fu').forEach(el=>ob.observe(el));

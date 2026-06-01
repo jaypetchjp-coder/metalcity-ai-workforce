@@ -641,227 +641,698 @@ footer{border-top:1px solid var(--bd);padding:20px 40px;display:flex;align-items
 </div><!-- /tab-2 -->
 
 <!-- ═══════════════════════════════════════════
-     TAB 3 — AI WORKFORCE
+     TAB 3 — AI WORKFORCE (VISUAL VERSION)
+     + Photo/Mockup  + Data Visualization
 ════════════════════════════════════════════ -->
 <div class="tab-panel" id="tab-3">
 
-  <!-- Hero -->
-  <section class="t3-hero gbg">
-    <div class="sw">
-      <div class="t3-hero-inner">
+<!-- ── ADDITIONAL STYLES FOR TAB 3 ── -->
+<style>
+/* ── HERO V2 ── */
+.t3v-hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:60px 0;position:relative;overflow:hidden;
+  background:var(--bg);
+}
+.t3v-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 50%,rgba(184,243,107,0.07),transparent),
+    radial-gradient(ellipse 40% 60% at 80% 30%,rgba(0,245,255,0.05),transparent);
+}
+/* animated grid lines */
+.t3v-hero-grid{
+  position:absolute;inset:0;z-index:0;opacity:.3;
+  background-image:
+    linear-gradient(rgba(184,243,107,0.06)1px,transparent 1px),
+    linear-gradient(90deg,rgba(184,243,107,0.06)1px,transparent 1px);
+  background-size:48px 48px;
+  animation:gridMove 20s linear infinite;
+}
+@keyframes gridMove{to{background-position:48px 48px}}
+.t3v-hero-inner{
+  max-width:1100px;margin:0 auto;width:100%;
+  position:relative;z-index:1;padding:0 40px;
+  display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center;
+}
+.t3v-tag{
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--l);display:flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.t3v-tag::before{content:'';width:28px;height:1px;background:var(--l);}
+.t3v-h1{
+  font-family:'SUSE',sans-serif;font-size:62px;font-weight:800;
+  line-height:1.0;letter-spacing:-.025em;margin-bottom:10px;color:var(--wh);
+}
+.t3v-h1 .l{color:var(--l);display:block}
+.t3v-desc{font-size:15px;color:var(--grs);line-height:1.8;max-width:480px;margin:18px 0 0}
+.t3v-desc strong{color:var(--l)}
+
+/* NOT/IS box with animation */
+.t3v-notis{border:1px solid rgba(184,243,107,0.2);background:rgba(22,27,34,0.8);padding:0;overflow:hidden}
+.t3v-not{padding:20px 22px;border-bottom:1px solid rgba(184,243,107,0.12)}
+.t3v-not-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:10px}
+.t3v-not-item{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.28);text-decoration:line-through}
+.t3v-not-item::before{content:'×';font-weight:700;color:rgba(255,100,100,0.5);flex-shrink:0}
+.t3v-is{padding:20px 22px;background:rgba(184,243,107,0.06)}
+.t3v-is-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--l);margin-bottom:8px}
+.t3v-is-txt{font-family:'SUSE',sans-serif;font-size:16px;font-weight:700;color:var(--wh);line-height:1.5}
+/* pulse dot */
+.t3v-pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--l);margin-right:8px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* ── PROBLEM SECTION v2 ── */
+.t3v-prob-sec{padding:80px 0;background:var(--bg)}
+.t3v-prob-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:56px}
+.t3v-pc{padding:40px 32px;border:1px solid var(--bd);position:relative;overflow:hidden;transition:all .25s}
+.t3v-pc:not(:first-child){border-left:none}
+.t3v-pc:hover{background:rgba(255,255,255,0.02)}
+.t3v-pc-glow{position:absolute;top:0;left:0;right:0;height:3px}
+.t3v-pc.c1 .t3v-pc-glow{background:var(--e)}
+.t3v-pc.c2 .t3v-pc-glow{background:var(--g)}
+.t3v-pc.c3 .t3v-pc-glow{background:var(--l)}
+.t3v-pc-n{font-family:'SUSE',sans-serif;font-size:72px;font-weight:800;line-height:1;opacity:.12;margin-bottom:16px}
+.t3v-pc.c1 .t3v-pc-n{color:var(--e)}.t3v-pc.c2 .t3v-pc-n{color:var(--g)}.t3v-pc.c3 .t3v-pc-n{color:var(--l)}
+.t3v-pc-head{font-family:'SUSE',sans-serif;font-size:20px;font-weight:800;color:var(--wh);margin-bottom:12px;line-height:1.25}
+.t3v-pc.c2 .t3v-pc-head{color:var(--g)}.t3v-pc.c3 .t3v-pc-head{color:var(--l)}
+.t3v-pc-body{font-size:13.5px;color:var(--gr);line-height:1.7;margin-bottom:18px}
+.t3v-pc-quote{padding:12px 14px;font-size:12px;color:var(--grs);font-style:italic;line-height:1.6}
+.t3v-pc.c1 .t3v-pc-quote{background:rgba(0,245,255,0.04);border-left:2px solid rgba(0,245,255,0.25)}
+.t3v-pc.c2 .t3v-pc-quote{background:rgba(255,214,10,0.04);border-left:2px solid rgba(255,214,10,0.25)}
+.t3v-pc.c3 .t3v-pc-quote{background:rgba(184,243,107,0.04);border-left:2px solid rgba(184,243,107,0.25)}
+
+/* ── DATA VIZ: BEFORE/AFTER BARS ── */
+.t3v-viz-sec{padding:80px 0;background:rgba(22,27,34,0.4);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.t3v-viz-title{font-family:'SUSE',sans-serif;font-size:36px;font-weight:800;color:var(--wh);margin-bottom:8px}
+.t3v-viz-sub{font-size:14px;color:var(--gr);margin-bottom:48px}
+.t3v-viz-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-bottom:40px}
+.t3v-viz-card{padding:28px 24px;border:1px solid var(--bd);background:rgba(13,17,23,0.6)}
+.t3v-viz-card-label{font-size:12px;font-weight:700;color:var(--gr);margin-bottom:20px;letter-spacing:.04em}
+.t3v-bar-row{margin-bottom:14px}
+.t3v-bar-label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px}
+.t3v-bar-lbl-txt{color:var(--gr)}
+.t3v-bar-lbl-val{font-family:'SUSE',sans-serif;font-weight:700}
+.t3v-bar-track{height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+.t3v-bar-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.before-color{background:rgba(255,255,255,0.15)}
+.after-e{background:linear-gradient(to right,var(--e),rgba(0,245,255,0.6))}
+.after-g{background:linear-gradient(to right,var(--g),rgba(255,214,10,0.6))}
+.after-l{background:linear-gradient(to right,var(--l),rgba(184,243,107,0.6))}
+.t3v-viz-lbl-before{color:var(--gr)}.t3v-viz-lbl-after-e{color:var(--e)}.t3v-viz-lbl-after-g{color:var(--g)}.t3v-viz-lbl-after-l{color:var(--l)}
+
+/* big stat row */
+.t3v-stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);overflow:hidden}
+.t3v-stat{padding:28px 24px;background:var(--bg);text-align:center}
+.t3v-stat-n{font-family:'SUSE',sans-serif;font-size:44px;font-weight:800;line-height:1;margin-bottom:6px}
+.t3v-stat-lbl{font-size:12px;color:var(--gr);line-height:1.5}
+
+/* ── AGENTS SECTION v2: PHONE MOCKUP FULL ── */
+.t3v-agents-sec{padding:80px 0}
+.t3v-ag{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--bd);overflow:hidden;margin-bottom:24px}
+.t3v-ag.rev{direction:rtl}.t3v-ag.rev>*{direction:ltr}
+.t3v-ag-info{padding:44px 40px;background:rgba(13,17,23,0.5);display:flex;flex-direction:column;justify-content:space-between}
+.t3v-ag-badge{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;border-radius:3px;display:inline-block;margin-bottom:18px}
+.t3v-ag-name{font-family:'SUSE',sans-serif;font-size:30px;font-weight:800;color:var(--wh);line-height:1.15;margin-bottom:6px}
+.t3v-ag-role{font-size:13px;color:var(--gr);font-style:italic;margin-bottom:24px}
+.t3v-ag-pts{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.t3v-ag-pt{display:flex;gap:12px;align-items:flex-start}
+.t3v-ag-pt-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.t3v-ag-pt-txt{font-size:13.5px;color:var(--grs);line-height:1.55;padding-top:6px}
+.t3v-ag-result{padding:16px 18px;border-top:1px solid var(--bd)}
+.t3v-ag-result-lbl{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.t3v-ag-result-items{display:flex;flex-direction:column;gap:6px}
+.t3v-ag-result-item{font-size:13px;color:var(--grs);display:flex;gap:8px;align-items:center}
+
+/* PHONE MOCKUP */
+.t3v-ag-mock{padding:32px 28px;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center}
+.phone-frame{
+  width:260px;background:#1a1a2e;border-radius:32px;overflow:hidden;
+  border:6px solid #2a2a4a;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,0.06),inset 0 1px 0 rgba(255,255,255,0.08);
+  position:relative;
+}
+.phone-notch{width:80px;height:22px;background:#0d0d1a;border-radius:0 0 14px 14px;margin:0 auto;position:relative;z-index:2}
+.phone-screen{background:#0d1117;min-height:440px;display:flex;flex-direction:column}
+/* status bar */
+.ph-status{display:flex;align-items:center;justify-content:space-between;padding:6px 14px;background:rgba(0,0,0,0.3)}
+.ph-time{font-size:9px;font-weight:700;color:rgba(255,255,255,0.7)}
+.ph-icons{display:flex;gap:4px;align-items:center}
+.ph-icon{width:10px;height:6px;border-radius:1px;background:rgba(255,255,255,0.5)}
+.ph-icon.sig{width:6px;background:rgba(255,255,255,0.5)}
+/* LINE header */
+.ph-ln-head{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#075e54}
+.ph-ln-av{width:30px;height:30px;border-radius:50%;background:#06c755;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.ph-ln-nm{font-size:12px;font-weight:700;color:#fff}
+.ph-ln-st{font-size:9px;color:rgba(255,255,255,0.65)}
+.ph-back{font-size:16px;color:rgba(255,255,255,0.8);margin-right:4px;cursor:pointer}
+/* chat area */
+.ph-chat{background:#e5ddd5;flex:1;padding:10px;display:flex;flex-direction:column;gap:7px;min-height:320px}
+.ph-msg{max-width:82%;padding:7px 11px;border-radius:8px;font-size:10.5px;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.ph-msg.u{align-self:flex-end;background:#dcf8c6;color:#1a1a1a}
+.ph-msg.ai{align-self:flex-start;background:#fff;color:#1a1a1a}
+.ph-msg-lbl{font-size:8px;font-weight:700;color:#06c755;text-transform:uppercase;margin-bottom:2px}
+.ph-doc{display:flex;align-items:center;gap:6px;background:#075e54;color:#fff;padding:6px 9px;border-radius:5px;font-size:9.5px;margin-top:4px}
+.ph-time-stamp{font-size:8px;color:rgba(0,0,0,0.35);text-align:center;margin:2px 0}
+/* knowledge phone */
+.ph-kb-head{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(0,245,255,0.1);border-bottom:1px solid rgba(0,245,255,0.15)}
+.ph-kb-av{width:30px;height:30px;border-radius:8px;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--e);flex-shrink:0}
+.ph-kb-nm{font-size:12px;font-weight:700;color:var(--wh)}
+.ph-kb-st{font-size:9px;color:var(--gr)}
+.ph-kb-chat{background:var(--bg2);flex:1;padding:10px;display:flex;flex-direction:column;gap:7px;min-height:320px}
+.ph-km{max-width:85%;padding:8px 11px;border-radius:7px;font-size:10.5px;line-height:1.5}
+.ph-km.u{align-self:flex-end;background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.18);color:var(--grs)}
+.ph-km.ai{align-self:flex-start;background:rgba(22,27,34,0.95);border:1px solid var(--bd);color:var(--grs)}
+.ph-km-lbl{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--e);margin-bottom:3px}
+.ph-km-ref{font-size:9px;color:var(--gr);margin-top:4px;padding-top:4px;border-top:1px solid var(--bd)}
+/* exec phone */
+.ph-ex-head{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(184,243,107,0.08);border-bottom:1px solid rgba(184,243,107,0.15)}
+.ph-ex-icon{width:30px;height:30px;border-radius:8px;background:rgba(184,243,107,0.12);border:1px solid rgba(184,243,107,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.ph-ex-nm{font-size:12px;font-weight:700;color:var(--wh)}
+.ph-ex-chat{background:var(--bg2);flex:1;padding:10px;display:flex;flex-direction:column;gap:7px;min-height:320px}
+.ph-em{max-width:88%;padding:8px 11px;border-radius:7px;font-size:10.5px;line-height:1.5}
+.ph-em.u{align-self:flex-end;background:rgba(184,243,107,0.08);border:1px solid rgba(184,243,107,0.18);color:var(--grs)}
+.ph-em.ai{align-self:flex-start;background:rgba(22,27,34,0.95);border:1px solid var(--bd);color:var(--grs)}
+.ph-em-lbl{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--l);margin-bottom:3px}
+.ph-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
+.ph-kpi-item{padding:5px 7px;background:rgba(184,243,107,0.07);border:1px solid rgba(184,243,107,0.12);border-radius:4px}
+.ph-kpi-lbl{font-size:7.5px;color:var(--gr);text-transform:uppercase;letter-spacing:.04em}
+.ph-kpi-val{font-family:'SUSE',sans-serif;font-size:14px;font-weight:800;color:var(--l)}
+.ph-warn{font-size:9.5px;color:var(--gr);margin-top:6px;padding:5px 7px;background:rgba(255,123,184,0.06);border:1px solid rgba(255,123,184,0.12);border-radius:4px}
+/* phone input */
+.ph-inp-bar{padding:7px 10px;border-top:1px solid var(--bd);display:flex;gap:7px;align-items:center;background:rgba(0,0,0,0.3)}
+.ph-inp{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:5px 11px;font-size:9.5px;color:var(--gr);font-family:inherit}
+.ph-snd{width:26px;height:26px;border:none;border-radius:50%;cursor:pointer;color:var(--bg);font-size:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+/* LINE input */
+.ph-ln-inp-bar{padding:7px 10px;background:#f0f0f0;display:flex;gap:7px;align-items:center}
+.ph-ln-inp{flex:1;background:#fff;border:none;border-radius:20px;padding:5px 11px;font-size:9.5px;color:#333;font-family:inherit}
+.ph-ln-snd{width:26px;height:26px;background:#06c755;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:10px;flex-shrink:0}
+
+/* ── DATA VIZ: TIMELINE ── */
+.t3v-timeline-sec{padding:80px 0;background:rgba(22,27,34,0.3)}
+.t3v-tl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;position:relative;margin-top:40px}
+.t3v-tl::before{content:'';position:absolute;top:32px;left:16.5%;right:16.5%;height:2px;background:linear-gradient(to right,var(--e),var(--g),var(--l));z-index:0}
+.t3v-tl-step{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
+.t3v-tl-dot{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'SUSE',sans-serif;font-size:22px;font-weight:800;margin-bottom:16px;border:2px solid;position:relative}
+.t3v-tl-step:nth-child(1) .t3v-tl-dot{background:rgba(0,245,255,0.1);border-color:var(--e);color:var(--e)}
+.t3v-tl-step:nth-child(2) .t3v-tl-dot{background:rgba(255,214,10,0.1);border-color:var(--g);color:var(--g)}
+.t3v-tl-step:nth-child(3) .t3v-tl-dot{background:rgba(184,243,107,0.1);border-color:var(--l);color:var(--l)}
+.t3v-tl-tag{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.t3v-tl-step:nth-child(1) .t3v-tl-tag{color:var(--e)}
+.t3v-tl-step:nth-child(2) .t3v-tl-tag{color:var(--g)}
+.t3v-tl-step:nth-child(3) .t3v-tl-tag{color:var(--l)}
+.t3v-tl-name{font-family:'SUSE',sans-serif;font-size:18px;font-weight:800;color:var(--wh);margin-bottom:8px}
+.t3v-tl-period{font-size:11px;color:var(--gr);margin-bottom:14px;font-style:italic}
+.t3v-tl-items{border:1px solid var(--bd);padding:16px 16px;text-align:left;width:100%;background:rgba(13,17,23,0.5)}
+.t3v-tl-item{font-size:12px;color:var(--grs);padding:4px 0;display:flex;gap:8px;align-items:flex-start}
+
+/* ── NEXT STEP v2 ── */
+.t3v-cta{padding:100px 0;text-align:center;position:relative;overflow:hidden;background:var(--bg)}
+.t3v-cta::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(184,243,107,0.08),transparent 65%);filter:blur(60px);pointer-events:none}
+.t3v-cta-title{font-family:'SUSE',sans-serif;font-size:56px;font-weight:800;line-height:1.05;letter-spacing:-.025em;margin-bottom:14px}
+.t3v-cta-title span{color:var(--l)}
+.t3v-cta-sub{font-size:16px;color:var(--grs);max-width:440px;margin:0 auto 48px;line-height:1.75}
+.t3v-cta-box{display:inline-block;padding:36px 44px;border:1px solid rgba(184,243,107,0.25);background:rgba(184,243,107,0.04);text-align:left;max-width:480px;width:100%;position:relative;z-index:1}
+.t3v-cta-box-tag{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--l);margin-bottom:12px}
+.t3v-cta-box-name{font-family:'SUSE',sans-serif;font-size:24px;font-weight:800;color:var(--wh);margin-bottom:10px}
+.t3v-cta-checks{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.t3v-cta-check{display:flex;gap:10px;font-size:14px;color:var(--grs);align-items:flex-start}
+.t3v-cta-check-icon{color:var(--l);font-weight:700;flex-shrink:0;font-size:15px}
+
+@media(max-width:768px){
+  .t3v-hero-inner,.t3v-ag{grid-template-columns:1fr}
+  .t3v-ag.rev{direction:ltr}
+  .t3v-h1{font-size:40px}
+  .t3v-prob-grid,.t3v-viz-grid,.t3v-stat-row,.t3v-tl{grid-template-columns:1fr}
+  .t3v-tl::before{display:none}
+  .phone-frame{width:220px}
+}
+</style>
+
+<!-- ────────────────────
+     HERO
+──────────────────── -->
+<section class="t3v-hero">
+  <div class="t3v-hero-bg"></div>
+  <div class="t3v-hero-grid"></div>
+  <div class="t3v-hero-inner">
+    <div>
+      <div class="t3v-tag">Metal City 89 &amp; Link Ajia · Pattani</div>
+      <h1 class="t3v-h1">
+        METAL CITY<br>
+        <span class="l">AI WORKFORCE</span>
+      </h1>
+      <p class="t3v-desc">
+        ไม่ใช่ Chatbot ไม่ใช่ Software ไม่ใช่ Dashboard<br>
+        แต่เป็น <strong>พนักงานดิจิทัล</strong> ที่ทำงานร่วมกับทีมของคุณ ตลอด 24 ชั่วโมง
+      </p>
+      <!-- mini stat pills -->
+      <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap">
+        <div style="padding:8px 16px;border:1px solid rgba(0,245,255,0.2);background:rgba(0,245,255,0.06);font-size:12px;color:var(--e);font-weight:600">Knowledge Agent</div>
+        <div style="padding:8px 16px;border:1px solid rgba(255,214,10,0.2);background:rgba(255,214,10,0.06);font-size:12px;color:var(--g);font-weight:600">Sales Agent</div>
+        <div style="padding:8px 16px;border:1px solid rgba(184,243,107,0.2);background:rgba(184,243,107,0.06);font-size:12px;color:var(--l);font-weight:600">Executive Agent</div>
+      </div>
+    </div>
+    <div class="t3v-notis">
+      <div class="t3v-not">
+        <div class="t3v-not-lbl">AI Workforce ไม่ใช่</div>
+        <div class="t3v-not-item">บอทตอบคำถามสำเร็จรูป</div>
+        <div class="t3v-not-item">โปรแกรมที่ต้องส่งคนไปอบรม</div>
+        <div class="t3v-not-item">หน้าจอ dashboard ที่ไม่มีใครเปิด</div>
+      </div>
+      <div class="t3v-is">
+        <div class="t3v-is-lbl"><span class="t3v-pulse"></span>แต่คือ</div>
+        <div class="t3v-is-txt">ทีมงานดิจิทัลที่รู้จักธุรกิจของคุณ และทำงานให้ได้จริงตลอด 24 ชั่วโมง</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="sdiv"></div>
+
+<!-- ────────────────────
+     PROBLEMS
+──────────────────── -->
+<section class="t3v-prob-sec">
+  <div class="sw">
+    <div class="ch-lbl fu"><span class="ch-n">สิ่งที่เราเห็นจากธุรกิจของคุณ</span><div class="ch-line"></div></div>
+    <div class="fu" style="margin-bottom:40px">
+      <h2 class="h1">3 ปัญหาที่กำลัง<span class="l">ทำให้โตได้ไม่เต็มที่</span></h2>
+    </div>
+    <div class="t3v-prob-grid fu">
+      <div class="t3v-pc c1">
+        <div class="t3v-pc-glow"></div>
+        <div class="t3v-pc-n">01</div>
+        <div class="t3v-pc-head">ความรู้อยู่กับคนคนเดียว</div>
+        <div class="t3v-pc-body">ราคา สเปก วิธีติดตั้ง ข้อมูลลูกค้า — ทุกอย่างอยู่ในหัวพนักงานคนเก่ง ถ้าวันไหนเขาไม่อยู่ ทุกอย่างหยุด</div>
+        <div class="t3v-pc-quote">"ต้องรอพี่คนนั้นกลับมาก่อน เขารู้เรื่องนี้คนเดียว"</div>
+      </div>
+      <div class="t3v-pc c2">
+        <div class="t3v-pc-glow"></div>
+        <div class="t3v-pc-n">02</div>
+        <div class="t3v-pc-head">ลูกค้าถาม แต่ตอบไม่ทัน</div>
+        <div class="t3v-pc-body">ลูกค้าทักมา ทีมขายยุ่ง ออกใบเสนอราคาช้า ระหว่างรอ ลูกค้าก็โทรหาร้านอื่นแล้ว</div>
+        <div class="t3v-pc-quote">"ลูกค้าขอใบเสนอราคา รอนาน สุดท้ายไปซื้อที่อื่น"</div>
+      </div>
+      <div class="t3v-pc c3">
+        <div class="t3v-pc-glow"></div>
+        <div class="t3v-pc-n">03</div>
+        <div class="t3v-pc-head">เจ้าของต้องลงมาทำเอง</div>
+        <div class="t3v-pc-body">อยากรู้ยอดขายวันนี้ ต้องโทรถาม อยากรู้ว่าใครค้างจ่าย ต้องนั่งรวบรวมข้อมูลเอง</div>
+        <div class="t3v-pc-quote">"วันนี้ยอดเป็นเท่าไรแล้ว ลูกหนี้มีใครบ้าง"</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="sdiv"></div>
+
+<!-- ────────────────────
+     DATA VIZ: BEFORE / AFTER
+──────────────────── -->
+<section class="t3v-viz-sec">
+  <div class="sw">
+    <div class="ch-lbl fu"><span class="ch-n">ก่อนและหลัง AI Workforce</span><div class="ch-line"></div></div>
+    <div class="fu">
+      <h2 class="t3v-viz-title">ตัวเลขที่เปลี่ยนไป</h2>
+      <p class="t3v-viz-sub">เมื่อระบบทำงานแทนการจำ</p>
+    </div>
+    <div class="t3v-viz-grid fu" id="viz-bars">
+
+      <!-- Card 1: Speed -->
+      <div class="t3v-viz-card">
+        <div class="t3v-viz-card-label">⚡ ความเร็วในการตอบลูกค้า</div>
+        <div class="t3v-bar-row">
+          <div class="t3v-bar-label">
+            <span class="t3v-bar-lbl-txt t3v-viz-lbl-before">ก่อน — รอทีมขายว่าง</span>
+            <span class="t3v-bar-lbl-val" style="color:var(--gr)">2–4 ชม.</span>
+          </div>
+          <div class="t3v-bar-track"><div class="t3v-bar-fill before-color" style="width:85%"></div></div>
+        </div>
+        <div class="t3v-bar-row">
+          <div class="t3v-bar-label">
+            <span class="t3v-bar-lbl-txt t3v-viz-lbl-after-e">หลัง — AI ตอบทันที</span>
+            <span class="t3v-bar-lbl-val t3v-viz-lbl-after-e">&lt; 1 นาที</span>
+          </div>
+          <div class="t3v-bar-track"><div class="t3v-bar-fill after-e" style="width:8%"></div></div>
+        </div>
+        <div style="margin-top:16px;padding:12px 14px;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.15)">
+          <div style="font-family:'SUSE',sans-serif;font-size:28px;font-weight:800;color:var(--e)">×15</div>
+          <div style="font-size:11px;color:var(--gr)">เร็วขึ้น</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Quotation -->
+      <div class="t3v-viz-card">
+        <div class="t3v-viz-card-label">📄 เวลาออกใบเสนอราคา</div>
+        <div class="t3v-bar-row">
+          <div class="t3v-bar-label">
+            <span class="t3v-bar-lbl-txt t3v-viz-lbl-before">ก่อน — รวบรวมราคาเอง</span>
+            <span class="t3v-bar-lbl-val" style="color:var(--gr)">30–60 นาที</span>
+          </div>
+          <div class="t3v-bar-track"><div class="t3v-bar-fill before-color" style="width:90%"></div></div>
+        </div>
+        <div class="t3v-bar-row">
+          <div class="t3v-bar-label">
+            <span class="t3v-bar-lbl-txt t3v-viz-lbl-after-g">หลัง — AI draft ให้</span>
+            <span class="t3v-bar-lbl-val t3v-viz-lbl-after-g">3–5 นาที</span>
+          </div>
+          <div class="t3v-bar-track"><div class="t3v-bar-fill after-g" style="width:10%"></div></div>
+        </div>
+        <div style="margin-top:16px;padding:12px 14px;background:rgba(255,214,10,0.05);border:1px solid rgba(255,214,10,0.15)">
+          <div style="font-family:'SUSE',sans-serif;font-size:28px;font-weight:800;color:var(--g)">×10</div>
+          <div style="font-size:11px;color:var(--gr)">เร็วขึ้น</div>
+        </div>
+      </div>
+
+      <!-- Card 3: Owner time -->
+      <div class="t3v-viz-card">
+        <div class="t3v-viz-card-label">⏰ เวลาเจ้าของรวบรวมข้อมูล</div>
+        <div class="t3v-bar-row">
+          <div class="t3v-bar-label">
+            <span class="t3v-bar-lbl-txt t3v-viz-lbl-before">ก่อน — รวบรวมเอง</span>
+            <span class="t3v-bar-lbl-val" style="color:var(--gr)">1–2 ชม./วัน</span>
+          </div>
+          <div class="t3v-bar-track"><div class="t3v-bar-fill before-color" style="width:80%"></div></div>
+        </div>
+        <div class="t3v-bar-row">
+          <div class="t3v-bar-label">
+            <span class="t3v-bar-lbl-txt t3v-viz-lbl-after-l">หลัง — ถาม AI ได้เลย</span>
+            <span class="t3v-bar-lbl-val t3v-viz-lbl-after-l">&lt; 5 นาที</span>
+          </div>
+          <div class="t3v-bar-track"><div class="t3v-bar-fill after-l" style="width:6%"></div></div>
+        </div>
+        <div style="margin-top:16px;padding:12px 14px;background:rgba(184,243,107,0.05);border:1px solid rgba(184,243,107,0.15)">
+          <div style="font-family:'SUSE',sans-serif;font-size:28px;font-weight:800;color:var(--l)">×24</div>
+          <div style="font-size:11px;color:var(--gr)">ประหยัดเวลา</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Big stat row -->
+    <div class="t3v-stat-row fu">
+      <div class="t3v-stat">
+        <div class="t3v-stat-n" style="color:var(--e)">3</div>
+        <div class="t3v-stat-lbl">AI Agents<br>ทำงานพร้อมกัน</div>
+      </div>
+      <div class="t3v-stat">
+        <div class="t3v-stat-n" style="color:var(--g)">24/7</div>
+        <div class="t3v-stat-lbl">ตอบลูกค้าได้<br>ตลอดเวลา</div>
+      </div>
+      <div class="t3v-stat">
+        <div class="t3v-stat-n" style="color:var(--l)">0</div>
+        <div class="t3v-stat-lbl">วันหยุด<br>ลาป่วย ลาพักร้อน</div>
+      </div>
+      <div class="t3v-stat">
+        <div class="t3v-stat-n" style="color:var(--pk)">∞</div>
+        <div class="t3v-stat-lbl">ความรู้<br>ที่สะสมได้ไม่จำกัด</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="sdiv"></div>
+
+<!-- ────────────────────
+     AGENTS + PHONE MOCKUPS
+──────────────────── -->
+<section class="t3v-agents-sec">
+  <div class="sw">
+    <div class="ch-lbl fu"><span class="ch-n">พบกับทีม AI ของคุณ</span><div class="ch-line"></div></div>
+    <div class="fu" style="margin-bottom:48px"><h2 class="h1">3 <span class="l">พนักงาน AI</span> ที่จะเข้ามาทำงานกับคุณ</h2></div>
+
+    <!-- AGENT 1: KNOWLEDGE -->
+    <div class="t3v-ag fu" style="border-color:rgba(0,245,255,0.2)">
+      <div class="t3v-ag-info">
         <div>
-          <div class="t1-tag" style="color:var(--l)">Metal City 89 &amp; Link Ajia</div>
-          <h1 class="t1-title">METAL CITY<br><span class="l">AI WORKFORCE</span></h1>
-          <p class="t1-sub">ไม่ใช่ Chatbot &nbsp;·&nbsp; ไม่ใช่ Software &nbsp;·&nbsp; ไม่ใช่ Dashboard<br>แต่เป็น <strong style="color:var(--l)">พนักงานดิจิทัล</strong> ที่ทำงานร่วมกับทีมของคุณ</p>
-        </div>
-        <div class="gls" style="padding:28px 24px">
-          <div style="font-size:12px;color:var(--gr);margin-bottom:14px">AI Workforce ไม่ใช่</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
-            <div style="font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through">บอทตอบคำถามสำเร็จรูป</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through">โปรแกรมที่ต้องส่งคนไปอบรมใหม่</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.3);text-decoration:line-through">หน้าจอ dashboard ที่ไม่มีใครเปิดดู</div>
+          <div class="t3v-ag-badge" style="background:rgba(0,245,255,0.1);color:var(--e);border:1px solid rgba(0,245,255,0.2)">Agent #1</div>
+          <div class="t3v-ag-name">Knowledge<br>Agent</div>
+          <div class="t3v-ag-role">คนรู้ทุกอย่างในร้าน ถามได้ทุกเรื่อง</div>
+          <div class="t3v-ag-pts">
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.18)">📦</div>
+              <div class="t3v-ag-pt-txt">รู้ข้อมูลสินค้าทุกรายการ — ขนาด สเปก วิธีใช้ วิธีติดตั้ง</div>
+            </div>
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.18)">💰</div>
+              <div class="t3v-ag-pt-txt">บอกราคาและโปรโมชั่นแต่ละลูกค้าได้ทันที</div>
+            </div>
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.18)">📋</div>
+              <div class="t3v-ag-pt-txt">จำ SOP และประวัติปัญหาที่เคยแก้ไว้ พนักงานใหม่เรียนรู้งานได้เร็วขึ้น</div>
+            </div>
           </div>
-          <div style="padding:14px 16px;background:rgba(184,243,107,0.06);border-left:2px solid var(--l)">
-            <div style="font-size:11px;font-weight:700;color:var(--l);margin-bottom:5px">แต่คือ</div>
-            <div style="font-size:13.5px;font-weight:600;color:var(--wh);line-height:1.55">ทีมงานดิจิทัลที่รู้จักธุรกิจของคุณ และทำงานให้คุณได้ตลอด 24 ชั่วโมง</div>
+        </div>
+        <div class="t3v-ag-result" style="border-color:rgba(0,245,255,0.12)">
+          <div class="t3v-ag-result-lbl" style="color:var(--e)">ผลที่เห็นได้</div>
+          <div class="t3v-ag-result-items">
+            <div class="t3v-ag-result-item"><span style="color:var(--e)">✓</span>หาข้อมูลเจอเร็วขึ้น ไม่ต้องรอ</div>
+            <div class="t3v-ag-result-item"><span style="color:var(--e)">✓</span>ไม่ต้องพึ่งคนคนเดียวอีกต่อไป</div>
+            <div class="t3v-ag-result-item"><span style="color:var(--e)">✓</span>พนักงานใหม่เรียนรู้งานได้เร็วขึ้น</div>
+          </div>
+        </div>
+      </div>
+      <div class="t3v-ag-mock">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ph-status"><span class="ph-time">9:41</span><div class="ph-icons"><div class="ph-icon sig"></div><div class="ph-icon"></div><div class="ph-icon" style="width:14px;height:6px;border:1px solid rgba(255,255,255,0.5);border-radius:1px;position:relative"><div style="position:absolute;right:1px;top:1px;bottom:1px;width:8px;background:rgba(255,255,255,0.5);border-radius:1px"></div></div></div></div>
+            <div class="ph-kb-head">
+              <div class="ph-kb-av">AI</div>
+              <div><div class="ph-kb-nm">Metal City AI</div><div class="ph-kb-st">Knowledge Agent · Online</div></div>
+            </div>
+            <div class="ph-kb-chat">
+              <div class="ph-km u">สมาร์ทบอร์ด 16 มม. ใช้โครงห่างเท่าไร?</div>
+              <div class="ph-km ai">
+                <div class="ph-km-lbl">Knowledge Agent</div>
+                โครงเหล็กห่าง <strong style="color:var(--e)">60 ซม.</strong> แนวตั้ง และ <strong style="color:var(--e)">120 ซม.</strong> แนวนอน สำหรับผนังทั่วไปครับ
+                <div class="ph-km-ref">📄 คู่มือ SB-16 · หน้า 12</div>
+              </div>
+              <div class="ph-km u">ถ้าเป็นห้องน้ำล่ะ?</div>
+              <div class="ph-km ai">
+                <div class="ph-km-lbl">Knowledge Agent</div>
+                แนะนำ <strong style="color:var(--e)">สมาร์ทบอร์ดกันน้ำ</strong> และลดระยะโครงเป็น 40 ซม. เพื่อรับน้ำหนักได้ดีขึ้นครับ
+              </div>
+            </div>
+            <div class="ph-inp-bar"><input class="ph-inp" placeholder="ถามได้เลย..." readonly><button class="ph-snd" style="background:var(--e)">↑</button></div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <div class="sdiv"></div>
 
-  <!-- Chapter 1: Problems -->
-  <section class="sec" id="t3-problem">
-    <div class="sw">
-      <div class="ch-lbl fu"><span class="ch-n">สิ่งที่เราเห็นจากธุรกิจของคุณ</span><div class="ch-line"></div></div>
-      <div class="fu" style="margin-bottom:32px">
-        <h2 class="h1">3 ปัญหาที่กำลัง<span class="l">ทำให้โตได้ไม่เต็มที่</span></h2>
-      </div>
-      <div class="t3-prob fu">
-        <div class="t3-pc c1"><div class="t3-pc-top"></div><div class="t3-pc-n">01</div><div class="t3-headline">ความรู้อยู่กับคนคนเดียว</div><div class="t3-body">ราคา สเปก วิธีติดตั้ง ข้อมูลลูกค้า — ทุกอย่างอยู่ในหัวพนักงานคนเก่ง ถ้าวันไหนเขาไม่อยู่ ทุกอย่างหยุด</div><div class="t3-quote">"ต้องรอพี่คนนั้นกลับมาก่อน เขารู้เรื่องนี้คนเดียว"</div></div>
-        <div class="t3-pc c2"><div class="t3-pc-top"></div><div class="t3-pc-n">02</div><div class="t3-headline">ลูกค้าถาม แต่ตอบไม่ทัน</div><div class="t3-body">ลูกค้าทักมา ทีมขายยุ่ง ออกใบเสนอราคาช้า ระหว่างรอ ลูกค้าก็โทรหาร้านอื่นแล้ว</div><div class="t3-quote">"ลูกค้าขอใบเสนอราคา รอนาน สุดท้ายไปซื้อที่อื่น"</div></div>
-        <div class="t3-pc c3"><div class="t3-pc-top"></div><div class="t3-pc-n">03</div><div class="t3-headline">เจ้าของต้องลงมาทำเอง</div><div class="t3-body">อยากรู้ยอดขายวันนี้ ต้องโทรถาม อยากรู้ว่าใครค้างจ่าย ต้องนั่งรวบรวมข้อมูลเอง เวลาหายไปกับเรื่องพวกนี้ทุกวัน</div><div class="t3-quote">"วันนี้ยอดเป็นเท่าไรแล้ว ลูกหนี้มีใครบ้าง"</div></div>
-      </div>
-    </div>
-  </section>
-  <div class="sdiv"></div>
-
-  <!-- Chapter 2: Big Idea -->
-  <section class="sec">
-    <div class="sw">
-      <div class="ch-lbl fu"><span class="ch-n">วิธีแก้ปัญหา</span><div class="ch-line"></div></div>
-      <div class="grid2 fu" style="align-items:center;gap:48px">
+    <!-- AGENT 2: SALES (reversed) -->
+    <div class="t3v-ag rev fu" style="border-color:rgba(255,214,10,0.2)">
+      <div class="t3v-ag-info">
         <div>
-          <h2 class="h1" style="margin-bottom:20px">ไม่ต้องจ้างคนเพิ่ม<br><span class="l">แค่เพิ่มทีม AI</span></h2>
-          <p style="font-size:16px;font-weight:700;color:var(--wh);line-height:1.55;margin-bottom:16px">สร้าง <span style="color:var(--l)">AI Workforce</span> — ทีมงานดิจิทัลที่เข้ามาช่วยทีมที่มีอยู่แล้ว ไม่ใช่มาแทนที่</p>
-          <p class="body-text">งานซ้ำๆ ที่กินเวลาทุกวัน — ให้ AI รับไปทำแทน แล้วคนในทีมก็ได้ทำงานที่สำคัญกว่า</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="card" style="padding:18px 20px;display:flex;gap:14px;align-items:flex-start"><div style="font-size:20px;flex-shrink:0">🧠</div><div><div class="h3" style="font-size:14px;color:var(--e)">Knowledge Agent</div><div style="font-size:12.5px;color:var(--gr);margin-top:3px;line-height:1.6">จำข้อมูลสินค้า ราคา และวิธีการทำงานทุกอย่าง — พนักงานถามได้ตลอด ตอบได้ทันที</div></div></div>
-          <div class="card" style="padding:18px 20px;display:flex;gap:14px;align-items:flex-start"><div style="font-size:20px;flex-shrink:0">💬</div><div><div class="h3" style="font-size:14px;color:var(--g)">Sales Agent</div><div style="font-size:12.5px;color:var(--gr);margin-top:3px;line-height:1.6">คุยกับลูกค้าทาง LINE ได้ตลอด 24 ชั่วโมง เช็คของ บอกราคา ออกใบเสนอราคาได้เลย</div></div></div>
-          <div class="card" style="padding:18px 20px;display:flex;gap:14px;align-items:flex-start"><div style="font-size:20px;flex-shrink:0">📊</div><div><div class="h3" style="font-size:14px;color:var(--l)">Executive Agent</div><div style="font-size:12.5px;color:var(--gr);margin-top:3px;line-height:1.6">เจ้าของถามยอดขาย ลูกหนี้ หรือของที่ขายดีได้เลยบนมือถือ ไม่ต้องรอให้ใครรวบรวมให้</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="sdiv"></div>
-
-  <!-- Chapter 3: Agents + Mockups -->
-  <section class="sec">
-    <div class="sw">
-      <div class="ch-lbl fu"><span class="ch-n">พบกับทีม AI ของคุณ</span><div class="ch-line"></div></div>
-      <div class="fu" style="margin-bottom:40px"><h2 class="h1">3 <span class="l">พนักงาน AI</span> ที่จะเข้ามาทำงานกับคุณ</h2></div>
-
-      <!-- Agent 1 -->
-      <div class="t3-ag fu">
-        <div class="t3-al gls">
-          <div><div class="badge badge-e" style="margin-bottom:14px">Agent #1</div><div class="h3">Knowledge Agent</div><div style="font-size:12px;color:var(--gr);font-style:italic;margin:4px 0 20px">คนรู้ทุกอย่างในร้าน ถามได้ทุกเรื่อง</div></div>
-          <div><div style="font-size:11px;font-weight:700;color:var(--e);margin-bottom:8px">ผลที่เห็นได้</div><div class="row"><div class="dot-e"></div>หาข้อมูลเจอเร็วขึ้น ไม่ต้องรอ</div><div class="row"><div class="dot-e"></div>ไม่ต้องพึ่งคนคนเดียวอีกต่อไป</div><div class="row"><div class="dot-e"></div>พนักงานใหม่เรียนรู้งานได้เร็วขึ้น</div></div>
-        </div>
-        <div class="t3-am">
-          <div style="font-size:11px;font-weight:700;color:var(--e);margin-bottom:12px">ถามได้เรื่อง</div>
-          <div style="display:flex;flex-direction:column;gap:7px">
-            <div class="row"><div class="dot-e"></div>ข้อมูลสินค้าและขนาด</div>
-            <div class="row"><div class="dot-e"></div>ราคาและโปรโมชั่น</div>
-            <div class="row"><div class="dot-e"></div>วิธีติดตั้งและขั้นตอนงาน</div>
-            <div class="row"><div class="dot-e"></div>ข้อมูลลูกค้า</div>
-            <div style="padding:8px 12px;background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.18);font-size:13px;font-weight:600;color:var(--e)">ประวัติการขายและปัญหาที่เคยแก้ไว้</div>
+          <div class="t3v-ag-badge" style="background:rgba(255,214,10,0.1);color:var(--g);border:1px solid rgba(255,214,10,0.2)">Agent #2</div>
+          <div class="t3v-ag-name">Sales<br>Agent</div>
+          <div class="t3v-ag-role">คุยกับลูกค้าทาง LINE แทนทีมขาย ตลอด 24 ชั่วโมง</div>
+          <div class="t3v-ag-pts">
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(255,214,10,0.08);border:1px solid rgba(255,214,10,0.18)">💬</div>
+              <div class="t3v-ag-pt-txt">รับแชท ตอบคำถาม บอกราคา เช็คของในสต็อกได้ทันที</div>
+            </div>
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(255,214,10,0.08);border:1px solid rgba(255,214,10,0.18)">📄</div>
+              <div class="t3v-ag-pt-txt">ออกใบเสนอราคาส่งให้ลูกค้าได้เลย ไม่ต้องรอทีมขาย</div>
+            </div>
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(255,214,10,0.08);border:1px solid rgba(255,214,10,0.18)">🛒</div>
+              <div class="t3v-ag-pt-txt">แนะนำสินค้าที่เหมาะกับงานของลูกค้าแต่ละคน</div>
+            </div>
           </div>
         </div>
-        <div class="t3-ar">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--e);margin-bottom:10px">ดูตัวอย่าง</div>
-          <div class="mk">
-            <div class="mk-bar"><div class="mk-av" style="background:rgba(0,245,255,0.12);color:var(--e)">AI</div><div><div class="mk-nm">Metal City AI</div><div class="mk-st">Knowledge Agent</div></div><div class="mk-on"></div></div>
-            <div class="mk-body">
-              <div class="msg u">สมาร์ทบอร์ด 16 มม. ใช้โครงห่างเท่าไร?</div>
-              <div class="msg ai"><div class="msg-lbl">Knowledge Agent</div>โครงเหล็กห่าง <strong style="color:var(--e)">60 ซม.</strong> แนวตั้ง และ <strong style="color:var(--e)">120 ซม.</strong> แนวนอน สำหรับผนังทั่วไปครับ<div class="msg-ref">📄 คู่มือติดตั้ง SB-16 · หน้า 12</div></div>
-              <div class="msg u">ถ้าเป็นห้องน้ำล่ะ?</div>
-              <div class="msg ai"><div class="msg-lbl">Knowledge Agent</div>แนะนำใช้ <strong style="color:var(--e)">สมาร์ทบอร์ดกันน้ำ</strong> และลดระยะโครงเป็น 40 ซม. เพื่อรับน้ำหนักได้ดีขึ้นครับ</div>
-            </div>
-            <div class="mk-inp-row"><input class="mk-inp" placeholder="ถามได้เลย — สินค้า ราคา วิธีติดตั้ง..." readonly><button class="mk-send">↑</button></div>
+        <div class="t3v-ag-result" style="border-color:rgba(255,214,10,0.12)">
+          <div class="t3v-ag-result-lbl" style="color:var(--g)">ผลที่เห็นได้</div>
+          <div class="t3v-ag-result-items">
+            <div class="t3v-ag-result-item"><span style="color:var(--g)">✓</span>ลูกค้าได้คำตอบเร็ว ไม่ต้องรอ</div>
+            <div class="t3v-ag-result-item"><span style="color:var(--g)">✓</span>ปิดการขายได้มากขึ้น</div>
+            <div class="t3v-ag-result-item"><span style="color:var(--g)">✓</span>ทีมขายมีเวลาดูแลลูกค้าสำคัญ</div>
           </div>
         </div>
       </div>
-
-      <!-- Agent 2 -->
-      <div class="t3-ag gd fu">
-        <div class="t3-al gls">
-          <div><div class="badge badge-g" style="margin-bottom:14px">Agent #2</div><div class="h3">Sales Agent</div><div style="font-size:12px;color:var(--gr);font-style:italic;margin:4px 0 20px">คุยกับลูกค้าแทนทีมขายได้ตลอด 24 ชั่วโมง</div></div>
-          <div><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:8px">ผลที่เห็นได้</div><div class="row"><div class="dot-g"></div>ลูกค้าได้คำตอบเร็ว ไม่ต้องรอ</div><div class="row"><div class="dot-g"></div>ปิดการขายได้มากขึ้น</div><div class="row"><div class="dot-g"></div>ทีมขายมีเวลาดูแลลูกค้าสำคัญ</div></div>
-        </div>
-        <div class="t3-am">
-          <div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:12px">ทำได้</div>
-          <div style="display:flex;flex-direction:column;gap:7px">
-            <div class="row"><div class="dot-g"></div>คุยกับลูกค้าทาง LINE ได้ตลอด</div>
-            <div class="row"><div class="dot-g"></div>บอกราคาและเช็คของในสต็อก</div>
-            <div class="row"><div class="dot-g"></div>แนะนำสินค้าที่เหมาะกับงาน</div>
-            <div style="padding:8px 12px;background:rgba(255,214,10,0.05);border:1px solid rgba(255,214,10,0.18);font-size:13px;font-weight:600;color:var(--g)">ออกใบเสนอราคาส่งให้ลูกค้าได้ทันที</div>
-          </div>
-        </div>
-        <div class="t3-ar">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:10px">ดูตัวอย่างบน LINE</div>
-          <div class="mk">
-            <div class="ln-top"><div class="ln-av">MC</div><div><div class="ln-nm">Metal City 89</div><div class="ln-st">Online · ตอบทันที</div></div></div>
-            <div class="ln-body">
-              <div class="lm u">เหล็กกล่อง 2×4 มีของไหมครับ</div>
-              <div class="lm ai"><div class="ln-lbl">Sales Agent</div>มีครับ <strong>126 เส้น</strong> พร้อมส่ง ราคา <strong>820 บาท/เส้น</strong></div>
-              <div class="lm u">ขอใบเสนอราคา 50 เส้นหน่อยครับ</div>
-              <div class="lm ai"><div class="ln-lbl">Sales Agent</div>ได้เลยครับ<div class="ln-doc">📄 QT-2025-0847 · เหล็กกล่อง 2×4 × 50 เส้น · <strong>41,000 บาท</strong></div></div>
+      <div class="t3v-ag-mock" style="background:rgba(7,94,84,0.15)">
+        <div class="phone-frame" style="border-color:#1a3a35">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" style="background:#0d1f1c">
+            <div class="ph-status"><span class="ph-time">9:41</span><div class="ph-icons"><div class="ph-icon sig"></div><div class="ph-icon"></div><div class="ph-icon" style="width:14px;height:6px;border:1px solid rgba(255,255,255,0.5);border-radius:1px;position:relative"><div style="position:absolute;right:1px;top:1px;bottom:1px;width:8px;background:rgba(255,255,255,0.5);border-radius:1px"></div></div></div></div>
+            <div class="ph-ln-head">
+              <span class="ph-back">‹</span>
+              <div class="ph-ln-av">MC</div>
+              <div><div class="ph-ln-nm">Metal City 89</div><div class="ph-ln-st">Online · ตอบทันที</div></div>
             </div>
-            <div class="ln-inp-bar"><input class="ln-inp" placeholder="พิมพ์ข้อความ..." readonly><button class="ln-snd">↑</button></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Agent 3 -->
-      <div class="t3-ag lm fu">
-        <div class="t3-al gls">
-          <div><div class="badge badge-l" style="margin-bottom:14px">Agent #3</div><div class="h3">Executive Agent</div><div style="font-size:12px;color:var(--gr);font-style:italic;margin:4px 0 20px">เจ้าของถามได้ตลอด ไม่ต้องรอให้ใครรวบรวมให้</div></div>
-          <div><div style="font-size:11px;font-weight:700;color:var(--l);margin-bottom:8px">ผลที่เห็นได้</div><div class="row"><div class="dot-l"></div>รู้ตัวเลขทุกวัน ไม่ต้องถาม</div><div class="row"><div class="dot-l"></div>เห็นปัญหาก่อนมันลุกลาม</div><div class="row"><div class="dot-l"></div>ตัดสินใจได้เร็วขึ้น</div></div>
-        </div>
-        <div class="t3-am">
-          <div style="font-size:11px;font-weight:700;color:var(--l);margin-bottom:12px">ถามได้เรื่อง</div>
-          <div style="display:flex;flex-direction:column;gap:7px">
-            <div class="row"><div class="dot-l"></div>ยอดขายและออเดอร์วันนี้</div>
-            <div class="row"><div class="dot-l"></div>ลูกค้าหลักและใครค้างจ่ายอยู่</div>
-            <div class="row"><div class="dot-l"></div>ของที่ขายดีและของที่จมในโกดัง</div>
-            <div style="padding:8px 12px;background:rgba(184,243,107,0.05);border:1px solid rgba(184,243,107,0.18);font-size:13px;font-weight:600;color:var(--l)">สัญญาณเตือนก่อนที่ปัญหาจะเกิด</div>
-          </div>
-        </div>
-        <div class="t3-ar">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--l);margin-bottom:10px">ดูตัวอย่างบนมือถือ</div>
-          <div class="mk">
-            <div class="db-bar"><div class="db-icon">📊</div><div class="db-title">Metal City Executive</div><div class="mk-on" style="background:var(--l);margin-left:auto"></div></div>
-            <div class="db-body">
-              <div class="db-q">ยอดขายสัปดาห์นี้เป็นอย่างไร</div>
-              <div class="db-ans"><div style="font-size:8.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--l);margin-bottom:6px">Executive Agent</div>สัปดาห์นี้ <strong style="color:var(--l)">฿ 2.4M</strong> เพิ่มขึ้น 12% จากสัปดาห์ที่แล้วครับ<div class="db-kpi"><div class="db-k"><div class="db-kl">ยอดขาย</div><div class="db-kv">2.4M</div></div><div class="db-k"><div class="db-kl">ออเดอร์</div><div class="db-kv">38</div></div><div class="db-k"><div class="db-kl">ลูกหนี้</div><div class="db-kv" style="color:var(--g)">890K</div></div><div class="db-k"><div class="db-kl">สต็อกต่ำ</div><div class="db-kv" style="color:var(--pk)">5 SKU</div></div></div><div style="font-size:10.5px;color:var(--gr);margin-top:6px">⚠️ เหล็กกล่อง 2×4 เหลือ 18 เส้น — ควรสั่งเพิ่ม</div></div>
+            <div class="ph-chat">
+              <div class="ph-time-stamp">วันนี้ 9:38</div>
+              <div class="ph-msg u">เหล็กกล่อง 2×4 มีของไหมครับ</div>
+              <div class="ph-msg ai">
+                <div class="ph-msg-lbl">Sales Agent</div>
+                มีครับ <strong>126 เส้น</strong> พร้อมส่ง<br>ราคา <strong>820 บาท/เส้น</strong>
+              </div>
+              <div class="ph-msg u">ขอใบเสนอราคา 50 เส้นหน่อยครับ</div>
+              <div class="ph-msg ai">
+                <div class="ph-msg-lbl">Sales Agent</div>
+                ได้เลยครับ
+                <div class="ph-doc">📄 QT-2025-0847<br>เหล็กกล่อง 2×4 × 50 เส้น<br><strong>รวม 41,000 บาท</strong></div>
+              </div>
             </div>
-            <div class="mk-inp-row"><input class="mk-inp" placeholder="ถามยอดขาย ลูกหนี้ หรือสต็อกได้เลย..." readonly><button class="mk-send" style="background:var(--l)">↑</button></div>
+            <div class="ph-ln-inp-bar"><input class="ph-ln-inp" placeholder="พิมพ์ข้อความ..." readonly><button class="ph-ln-snd">↑</button></div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <div class="sdiv"></div>
 
-  <!-- Chapter 4: How We Work -->
-  <section class="sec">
-    <div class="sw">
-      <div class="ch-lbl fu"><span class="ch-n">วิธีที่เราทำงานร่วมกัน</span><div class="ch-line"></div></div>
-      <div class="how-grid fu">
+    <!-- AGENT 3: EXECUTIVE -->
+    <div class="t3v-ag fu" style="border-color:rgba(184,243,107,0.2)">
+      <div class="t3v-ag-info">
         <div>
-          <h2 class="h1" style="margin-bottom:32px">เราคุยกับทีมก่อน<br><span class="l">แล้วค่อยสร้าง AI</span></h2>
-          <div class="how-steps">
-            <div class="how-step hs1"><div class="hs-n">1</div><div><div class="hs-head">เข้าใจธุรกิจก่อน</div><div class="hs-body">คุยกับทีมงานทุกฝ่าย ดูว่างานไหนเสียเวลา งานไหนมีปัญหา แล้วค่อยออกแบบ AI ที่เหมาะกับร้านของคุณ ไม่ใช่ copy มาจากที่อื่น</div></div></div>
-            <div class="how-step hs2"><div class="hs-n">2</div><div><div class="hs-head">สร้าง AI ให้ทีมขาย</div><div class="hs-body">ติดตั้ง Knowledge Agent และ Sales Agent เชื่อมกับ LINE ของร้าน อบรมทีมงาน และอยู่ดูแลจนทุกคนใช้งานได้จริง</div></div></div>
-            <div class="how-step hs3"><div class="hs-n">3</div><div><div class="hs-head">สร้าง AI ให้เจ้าของ</div><div class="hs-body">ติดตั้ง Executive Agent ให้เจ้าของดูตัวเลขได้เองบนมือถือ ยอดขาย ลูกหนี้ สต็อก — รู้หมดโดยไม่ต้องถามใคร</div></div></div>
-          </div>
-        </div>
-        <div class="gls" style="padding:32px 28px">
-          <div style="font-size:12px;font-weight:700;color:var(--l);margin-bottom:16px">ทำไมต้องคุยก่อน ไม่ลงมือเลย?</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:18px;font-weight:700;color:var(--wh);line-height:1.5;margin-bottom:16px">AI ที่ดีต้อง<span style="color:var(--l)">รู้จักร้านคุณ</span><br>ไม่ใช่แค่<span style="color:var(--l)">ติดตั้งแล้วปล่อยทิ้ง</span></div>
-          <p class="body-text" style="margin-bottom:24px">ร้านเหล็กแต่ละร้านมีสินค้า ลูกค้า และวิธีทำงานที่ต่างกัน — AI ที่ทำงานได้จริงต้องถูกสร้างมาเพื่อร้านนั้นโดยเฉพาะ</p>
-          <div style="padding:18px 20px;border:1px solid rgba(184,243,107,0.2);background:rgba(184,243,107,0.04)">
-            <div style="font-size:11px;font-weight:700;color:var(--l);margin-bottom:8px">เริ่มต้นด้วย</div>
-            <div style="font-family:'SUSE',sans-serif;font-size:17px;font-weight:800;color:var(--wh);margin-bottom:10px">AI Discovery &amp; Blueprint</div>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div class="row"><span style="color:var(--l)">›</span>คุยกับทีมทุกฝ่าย ดูงานจริง</div>
-              <div class="row"><span style="color:var(--l)">›</span>หาว่างานไหนเสียเวลามากที่สุด</div>
-              <div class="row"><span style="color:var(--l)">›</span>ออกแบบ AI Workforce ให้เหมาะกับร้าน</div>
-              <div class="row"><span style="color:var(--l)">›</span>วางแผนการทำงานเป็นขั้นตอนชัดเจน</div>
+          <div class="t3v-ag-badge" style="background:rgba(184,243,107,0.1);color:var(--l);border:1px solid rgba(184,243,107,0.2)">Agent #3</div>
+          <div class="t3v-ag-name">Executive<br>Agent</div>
+          <div class="t3v-ag-role">เจ้าของถามได้ตลอด ไม่ต้องรอให้ใครรวบรวมให้</div>
+          <div class="t3v-ag-pts">
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(184,243,107,0.08);border:1px solid rgba(184,243,107,0.18)">📊</div>
+              <div class="t3v-ag-pt-txt">ถามยอดขาย ออเดอร์ กำไรได้เลยบนมือถือ ทุกที่ทุกเวลา</div>
+            </div>
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(184,243,107,0.08);border:1px solid rgba(184,243,107,0.18)">⚠️</div>
+              <div class="t3v-ag-pt-txt">แจ้งเตือนก่อนเกิดปัญหา — สต็อกใกล้หมด ลูกหนี้เกินกำหนด</div>
+            </div>
+            <div class="t3v-ag-pt">
+              <div class="t3v-ag-pt-icon" style="background:rgba(184,243,107,0.08);border:1px solid rgba(184,243,107,0.18)">💡</div>
+              <div class="t3v-ag-pt-txt">สรุป Insight ให้เจ้าของตัดสินใจได้เร็ว ไม่ต้องนั่งดูรายงาน</div>
             </div>
           </div>
         </div>
+        <div class="t3v-ag-result" style="border-color:rgba(184,243,107,0.12)">
+          <div class="t3v-ag-result-lbl" style="color:var(--l)">ผลที่เห็นได้</div>
+          <div class="t3v-ag-result-items">
+            <div class="t3v-ag-result-item"><span style="color:var(--l)">✓</span>รู้ตัวเลขทุกวัน ไม่ต้องถาม</div>
+            <div class="t3v-ag-result-item"><span style="color:var(--l)">✓</span>เห็นปัญหาก่อนมันลุกลาม</div>
+            <div class="t3v-ag-result-item"><span style="color:var(--l)">✓</span>ตัดสินใจได้เร็วขึ้น</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-  <div class="sdiv"></div>
-
-  <!-- Chapter 5: Next Step -->
-  <section class="next-s">
-    <div class="sw" style="position:relative;z-index:1">
-      <div class="fu">
-        <div class="ch-lbl" style="justify-content:center"><span class="ch-n">ขั้นต่อไป</span><div class="ch-line"></div></div>
-        <h2 class="h1" style="font-size:52px;text-align:center;margin-bottom:14px">เริ่มต้น<span class="l">ง่ายมาก</span></h2>
-        <p class="lead" style="text-align:center;margin:0 auto 40px">นัดคุยก่อน ดูว่า AI จะช่วยร้านของคุณได้จริงไหม แล้วค่อยตัดสินใจ</p>
-      </div>
-      <div class="fu" style="display:flex;justify-content:center">
-        <div style="padding:32px 36px;border:1px solid rgba(184,243,107,0.2);background:rgba(184,243,107,0.04);max-width:460px;width:100%;text-align:left">
-          <div style="font-size:11px;font-weight:700;color:var(--l);margin-bottom:10px">ก้าวแรก</div>
-          <div style="font-family:'SUSE',sans-serif;font-size:20px;font-weight:800;color:var(--wh);margin-bottom:10px">AI Discovery &amp; Blueprint</div>
-          <p style="font-size:13px;color:var(--gr);line-height:1.7;margin-bottom:18px">นัดคุยเพื่อดูธุรกิจของคุณ หาว่างานไหนเสียเวลา แล้วออกแบบ AI ที่เหมาะกับร้านจริงๆ</p>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div class="row"><span style="color:var(--l);font-weight:700">✓</span>ยังไม่ต้องตัดสินใจซื้ออะไรทั้งนั้น</div>
-            <div class="row"><span style="color:var(--l);font-weight:700">✓</span>ได้แผนงานชัดเจนก่อนลงทุน</div>
-            <div class="row"><span style="color:var(--l);font-weight:700">✓</span>รู้ว่า AI จะช่วยร้านได้จริงแค่ไหน</div>
+      <div class="t3v-ag-mock" style="background:rgba(184,243,107,0.04)">
+        <div class="phone-frame" style="border-color:#2a3a2a">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ph-status"><span class="ph-time">9:41</span><div class="ph-icons"><div class="ph-icon sig"></div><div class="ph-icon"></div><div class="ph-icon" style="width:14px;height:6px;border:1px solid rgba(255,255,255,0.5);border-radius:1px;position:relative"><div style="position:absolute;right:1px;top:1px;bottom:1px;width:8px;background:rgba(255,255,255,0.5);border-radius:1px"></div></div></div></div>
+            <div class="ph-ex-head">
+              <div class="ph-ex-icon">📊</div>
+              <div><div class="ph-ex-nm">Metal City Executive</div><div style="font-size:9px;color:var(--l)">● Live</div></div>
+            </div>
+            <div class="ph-ex-chat">
+              <div class="ph-em u">ยอดขายสัปดาห์นี้เป็นอย่างไร</div>
+              <div class="ph-em ai">
+                <div class="ph-em-lbl">Executive Agent</div>
+                สัปดาห์นี้ <strong style="color:var(--l)">฿ 2.4M</strong> เพิ่มขึ้น 12% จากสัปดาห์ที่แล้วครับ
+                <div class="ph-kpi-grid">
+                  <div class="ph-kpi-item"><div class="ph-kpi-lbl">ยอดขาย</div><div class="ph-kpi-val">2.4M</div></div>
+                  <div class="ph-kpi-item"><div class="ph-kpi-lbl">ออเดอร์</div><div class="ph-kpi-val">38</div></div>
+                  <div class="ph-kpi-item"><div class="ph-kpi-lbl">ลูกหนี้</div><div class="ph-kpi-val" style="color:var(--g)">890K</div></div>
+                  <div class="ph-kpi-item"><div class="ph-kpi-lbl">สต็อกต่ำ</div><div class="ph-kpi-val" style="color:var(--pk)">5 SKU</div></div>
+                </div>
+                <div class="ph-warn">⚠️ เหล็กกล่อง 2×4 เหลือ 18 เส้น — ควรสั่งเพิ่ม</div>
+              </div>
+            </div>
+            <div class="ph-inp-bar"><input class="ph-inp" placeholder="ถามยอดขาย ลูกหนี้ หรือสต็อก..." readonly><button class="ph-snd" style="background:var(--l)">↑</button></div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+<div class="sdiv"></div>
+
+<!-- ────────────────────
+     TIMELINE / HOW WE WORK
+──────────────────── -->
+<section class="t3v-timeline-sec">
+  <div class="sw">
+    <div class="ch-lbl fu"><span class="ch-n">วิธีที่เราทำงานร่วมกัน</span><div class="ch-line"></div></div>
+    <div class="fu">
+      <h2 class="h1" style="margin-bottom:8px">เราคุยกับทีมก่อน<span class="l"> แล้วค่อยสร้าง AI</span></h2>
+      <p class="lead" style="margin-bottom:0">ร้านเหล็กแต่ละร้านมีสินค้า ลูกค้า และวิธีทำงานที่ต่างกัน — AI ที่ดีต้องถูกสร้างมาเพื่อร้านนั้นโดยเฉพาะ</p>
+    </div>
+    <div class="t3v-tl fu">
+      <div class="t3v-tl-step">
+        <div class="t3v-tl-dot">1</div>
+        <div class="t3v-tl-tag">ก้าวแรก · 2–3 สัปดาห์</div>
+        <div class="t3v-tl-name">เข้าใจธุรกิจก่อน</div>
+        <div class="t3v-tl-period">AI Discovery &amp; Blueprint</div>
+        <div class="t3v-tl-items">
+          <div class="t3v-tl-item"><span style="color:var(--e)">›</span>คุยกับทีมงานทุกฝ่าย</div>
+          <div class="t3v-tl-item"><span style="color:var(--e)">›</span>หาว่างานไหนเสียเวลามาก</div>
+          <div class="t3v-tl-item"><span style="color:var(--e)">›</span>ออกแบบ AI ให้เหมาะกับร้าน</div>
+          <div class="t3v-tl-item"><span style="color:var(--e)">›</span>วางแผนขั้นตอนชัดเจน</div>
+        </div>
+      </div>
+      <div class="t3v-tl-step">
+        <div class="t3v-tl-dot">2</div>
+        <div class="t3v-tl-tag">ขั้นสอง · 8–12 สัปดาห์</div>
+        <div class="t3v-tl-name">สร้าง AI ให้ทีมขาย</div>
+        <div class="t3v-tl-period">AI Workforce Starter</div>
+        <div class="t3v-tl-items">
+          <div class="t3v-tl-item"><span style="color:var(--g)">›</span>Knowledge Agent</div>
+          <div class="t3v-tl-item"><span style="color:var(--g)">›</span>Sales Agent ทาง LINE</div>
+          <div class="t3v-tl-item"><span style="color:var(--g)">›</span>อบรมทีมงานให้ใช้งานได้</div>
+          <div class="t3v-tl-item"><span style="color:var(--g)">›</span>อยู่ดูแลจน Go-Live</div>
+        </div>
+      </div>
+      <div class="t3v-tl-step">
+        <div class="t3v-tl-dot">3</div>
+        <div class="t3v-tl-tag">ขั้นสาม · 4–6 สัปดาห์</div>
+        <div class="t3v-tl-name">สร้าง AI ให้เจ้าของ</div>
+        <div class="t3v-tl-period">Executive Intelligence</div>
+        <div class="t3v-tl-items">
+          <div class="t3v-tl-item"><span style="color:var(--l)">›</span>Executive Agent บนมือถือ</div>
+          <div class="t3v-tl-item"><span style="color:var(--l)">›</span>Dashboard ภาพรวมธุรกิจ</div>
+          <div class="t3v-tl-item"><span style="color:var(--l)">›</span>ระบบแจ้งเตือนก่อนเกิดปัญหา</div>
+          <div class="t3v-tl-item"><span style="color:var(--l)">›</span>รีวิวและปรับ AI ทุกเดือน</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="sdiv"></div>
+
+<!-- ────────────────────
+     NEXT STEP CTA
+──────────────────── -->
+<section class="t3v-cta">
+  <div class="sw" style="position:relative;z-index:1">
+    <div class="fu">
+      <h2 class="t3v-cta-title">เริ่มต้น<span>ง่ายมาก</span></h2>
+      <p class="t3v-cta-sub">นัดคุยก่อน ดูว่า AI จะช่วยร้านของคุณได้จริงไหม แล้วค่อยตัดสินใจ</p>
+    </div>
+    <div class="fu" style="display:flex;justify-content:center">
+      <div class="t3v-cta-box">
+        <div class="t3v-cta-box-tag">ก้าวแรก</div>
+        <div class="t3v-cta-box-name">AI Discovery &amp; Blueprint</div>
+        <p style="font-size:13.5px;color:var(--gr);line-height:1.7">นัดคุยเพื่อดูธุรกิจของคุณ หาว่างานไหนเสียเวลา แล้วออกแบบ AI ที่เหมาะกับร้านจริงๆ</p>
+        <div class="t3v-cta-checks">
+          <div class="t3v-cta-check"><span class="t3v-cta-check-icon">✓</span>ยังไม่ต้องตัดสินใจซื้ออะไรทั้งนั้น</div>
+          <div class="t3v-cta-check"><span class="t3v-cta-check-icon">✓</span>ได้แผนงานชัดเจนก่อนลงทุน</div>
+          <div class="t3v-cta-check"><span class="t3v-cta-check-icon">✓</span>รู้ว่า AI จะช่วยร้านได้จริงแค่ไหน</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 </div><!-- /tab-3 -->
+
+<script>
+// Animate bars on scroll into view
+const vizSection = document.getElementById('viz-bars');
+if(vizSection){
+  const barOb = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        // bars animate via CSS transitions already set
+        barOb.unobserve(e.target);
+      }
+    });
+  },{threshold:0.3});
+  barOb.observe(vizSection);
+}
+</script>
+
 
 <footer>
   <div class="flo">PlixPlan × Metal City 89</div>
